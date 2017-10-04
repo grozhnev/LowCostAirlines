@@ -8,7 +8,7 @@
 
     <version>1.0-SNAPSHOT</version>
     <name>EJC tasks</name>
-    <url>https://github.com/klysov/EJC</url>
+    <url>https://github.com/grozhnev/LowCostAirlines</url>
 
     <build>
         <sourceDirectory>${pom.basedir}/src/main/java</sourceDirectory>
