@@ -1,47 +1,45 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <groupId>com.github.EJC</groupId>
+    <artifactId>EJC</artifactId>
 
-    <groupId>com.epam.lab.sept2017.java.group4</groupId>
-    <artifactId>LowCostAirlines</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <name>EJC tasks</name>
+    <url>https://github.com/klysov/EJC</url>
 
     <build>
+        <sourceDirectory>${pom.basedir}/src/main/java</sourceDirectory>
+        <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
             </plugin>
         </plugins>
-
     </build>
 
     <dependencies>
-        <!-- http://junit.org/junit5/docs/current/user-guide/#overview-java-versions -->
+
         <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-launcher</artifactId>
-            <version>1.0.1</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
         </dependency>
 
-        <!-- http://logging.apache.org/log4j/2.x/maven-artifacts.html -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
+            <artifactId>log4j</artifactId>
             <version>2.9.1</version>
+            <type>pom</type>
         </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.9.1</version>
-        </dependency>
+
     </dependencies>
-
 </project>
