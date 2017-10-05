@@ -11,8 +11,7 @@ public class MainServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        PrintWriter out = resp.getWriter();
-        out.print("<h1>LowCostAirlines</h1>");
+        req.getRequestDispatcher("mainpage.jsp").forward(req, resp);
 
     }
 }
