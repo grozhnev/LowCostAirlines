@@ -26,7 +26,7 @@ CREATE TABLE Airport
    PRIMARY KEY (idAirport)
 );
 
-CREATE TABLE Customer
+CREATE TABLE Customerы
 (
    idCustomer           INT NOT NULL AUTO_INCREMENT,
    isAdmin              BOOL NOT NULL,   

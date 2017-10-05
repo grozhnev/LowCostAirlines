@@ -15,5 +15,4 @@ public class MainServlet extends HttpServlet {
         out.print("<h1>LowCostAirlines</h1>");
 
     }
-
 }
