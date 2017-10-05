@@ -4,6 +4,6 @@
         <title>LowCostAirlines</title>
     </head>
     <body>
-        <h1>get rekt</h1>
+        <h1>get rekt ${name}</h1>
     </body>
 </html>
