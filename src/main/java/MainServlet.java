@@ -1,3 +1,6 @@
+import dao.AirportDaoImpl;
+import dao.PlaneDaoImpl;
+import entities.Airport;
 import services.ConnectionFactory;
 
 import javax.servlet.ServletException;
@@ -21,8 +24,12 @@ public class MainServlet extends HttpServlet {
             throws ServletException, IOException {
 
         Connection connection = ConnectionFactory.getConnection();
+        AirportDaoImpl airport = new AirportDaoImpl();
+        PlaneDaoImpl plane = new PlaneDaoImpl();
         try {
             req.setAttribute("metadata", connection.getMetaData());
+            req.setAttribute("airports", airport.getAllAirports());
+            req.setAttribute("planes", plane.getAllPlanes());
             req.getRequestDispatcher("mainpage.jsp").forward(req, resp);
         } catch (SQLException e) {
             req.setAttribute("error", e.getErrorCode());
