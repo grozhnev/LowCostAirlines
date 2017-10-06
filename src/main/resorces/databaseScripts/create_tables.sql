@@ -40,8 +40,8 @@ CREATE TABLE Flight
 (
    idFlight             INT NOT NULL AUTO_INCREMENT,
    DateTime             DATETIME(6) NOT NULL,   
-   Airport_Source       INT NOT NULL,
-   Airport_Destination  INT NOT NULL,
+   Airport_Departure    VARCHAR(45) NOT NULL,
+   Airport_Arrival      VARCHAR(45) NOT NULL,
    idPlane              INT NOT NULL,
    PRIMARY KEY (idFlight)
 );

@@ -23,6 +23,12 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat9-maven-plugin</artifactId>
+                <version>RELEASE</version>
+            </plugin>
+
         </plugins>
     </build>
 
