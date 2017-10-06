@@ -3,10 +3,8 @@ package dao;
 import entities.Plane;
 import services.ConnectionFactory;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -16,28 +14,26 @@ import java.util.Set;
 public class PlaneDaoImpl implements PlaneDao {
     @Override
     public Plane extractPlaneFromResultSet(ResultSet rs) throws SQLException {
-        User user = new User();
-        user.setId( rs.getInt("id") );
-        user.setName( rs.getString("name") );
-        user.setPass( rs.getString("pass") );
-        user.setAge( rs.getInt("age") );
-        return user;
+        Plane plane = new Plane();
+        plane.setIdPlane( rs.getInt("idPlane") );
+        plane.setMaxLoad( rs.getInt("MaxLoad") );
+        plane.setCurrentLoad( rs.getInt("CurrentLoad") );
+        return plane;
     }
 
     @Override
     public Set<Plane> getAllPlanes() {
-        Connector connector = new Connector();
-        Connection connection = connector.getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM user");
-            Set users = new HashSet();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Plane");
+            Set<Plane> planes = new HashSet<>();
             while(rs.next())
             {
-                User user = extractUserFromResultSet(rs);
-                users.add(user);
+                Plane plane = extractPlaneFromResultSet(rs);
+                planes.add(plane);
             }
-            return users;
+            return planes;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -49,14 +45,10 @@ public class PlaneDaoImpl implements PlaneDao {
         Connection connection = ConnectionFactory.getConnection();
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE id=" + id);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Plane WHERE idPlane=" + id);
             if(rs.next())
             {
-                Plane plane = new Plane();
-                plane.setId( rs.getInt("id") );
-                plane.setName( rs.getString("name") );
-                plane.setPass( rs.getString("pass") );
-                plane.setAge( rs.getInt("age") );
+                Plane plane = extractPlaneFromResultSet(rs);
                 return plane;
             }
         } catch (SQLException ex) {
@@ -67,13 +59,12 @@ public class PlaneDaoImpl implements PlaneDao {
 
     @Override
     public boolean insertPlane(Plane plane) {
-        Connector connector = new Connector();
-        Connection connection = connector.getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO user VALUES (NULL, ?, ?, ?)");
-            ps.setString(1, user.getName());
-            ps.setString(2, user.getPass());
-            ps.setInt(3, user.getAge());
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO Plane VALUES (?, ?, ?)");
+            ps.setInt(1, plane.getIdPlane());
+            ps.setInt(2, plane.getMaxLoad());
+            ps.setInt(3, plane.getCurrentLoad());
             int i = ps.executeUpdate();
             if(i == 1) {
                 return true;
@@ -86,14 +77,12 @@ public class PlaneDaoImpl implements PlaneDao {
 
     @Override
     public boolean updatePlane(Plane plane) {
-        Connector connector = new Connector();
-        Connection connection = connector.getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("UPDATE user SET name=?, pass=?, age=? WHERE id=?");
-            ps.setString(1, user.getName());
-            ps.setString(2, user.getPass());
-            ps.setInt(3, user.getAge());
-            ps.setInt(4, user.getId());
+            PreparedStatement ps = connection.prepareStatement("UPDATE Plane SET MaxLoad=?, CurrentLoad=? WHERE idPlane=?");
+            ps.setInt(1, plane.getIdPlane());
+            ps.setInt(2, plane.getMaxLoad());
+            ps.setInt(3, plane.getCurrentLoad());
             int i = ps.executeUpdate();
             if(i == 1) {
                 return true;
@@ -106,11 +95,10 @@ public class PlaneDaoImpl implements PlaneDao {
 
     @Override
     public boolean deletePlane(Plane plane) {
-        Connector connector = new Connector();
-        Connection connection = connector.getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
             Statement stmt = connection.createStatement();
-            int i = stmt.executeUpdate("DELETE FROM user WHERE id=" + id);
+            int i = stmt.executeUpdate("DELETE FROM Plane WHERE idPlane=" + plane.getIdPlane());
             if(i == 1) {
                 return true;
             }
@@ -118,6 +106,5 @@ public class PlaneDaoImpl implements PlaneDao {
             ex.printStackTrace();
         }
         return false;
-    }
     }
 }

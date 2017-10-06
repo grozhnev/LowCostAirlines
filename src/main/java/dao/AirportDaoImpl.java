@@ -60,10 +60,9 @@ public class AirportDaoImpl implements AirportDao{
     public boolean insertAirport(Airport airport) {
         Connection connection = ConnectionFactory.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO Airport VALUES (NULL, ?, ?, ?)");
-            ps.setString(1, user.getName());
-            ps.setString(2, user.getPass());
-            ps.setInt(3, user.getAge());
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO Airport VALUES (?, ?)");
+            ps.setInt(1, airport.getIdAirport());
+            ps.setString(2, airport.getName());
             int i = ps.executeUpdate();
             if(i == 1) {
                 return true;
@@ -76,14 +75,11 @@ public class AirportDaoImpl implements AirportDao{
 
     @Override
     public boolean updateAirport(Airport airport) {
-        Connector connector = new Connector();
-        Connection connection = connector.getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
-            PreparedStatement ps = connection.prepareStatement("UPDATE user SET name=?, pass=?, age=? WHERE id=?");
-            ps.setString(1, user.getName());
-            ps.setString(2, user.getPass());
-            ps.setInt(3, user.getAge());
-            ps.setInt(4, user.getId());
+            PreparedStatement ps = connection.prepareStatement("UPDATE Airport SET Name=? WHERE idAirport=?");
+            ps.setString(1, airport.getName());
+            ps.setInt(2, airport.getIdAirport());
             int i = ps.executeUpdate();
             if(i == 1) {
                 return true;
@@ -96,11 +92,10 @@ public class AirportDaoImpl implements AirportDao{
 
     @Override
     public boolean deleteAirport(Airport airport) {
-        Connector connector = new Connector();
-        Connection connection = connector.getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         try {
             Statement stmt = connection.createStatement();
-            int i = stmt.executeUpdate("DELETE FROM user WHERE id=" + id);
+            int i = stmt.executeUpdate("DELETE FROM Airport WHERE idAirport=" + airport.getIdAirport());
             if(i == 1) {
                 return true;
             }
@@ -108,6 +103,5 @@ public class AirportDaoImpl implements AirportDao{
             ex.printStackTrace();
         }
         return false;
-    }
     }
 }
