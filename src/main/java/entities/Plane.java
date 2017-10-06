@@ -1,16 +1,28 @@
 package entities;
 
+/**
+ * Plane entity implementation
+ * @author klysov
+ */
 public class Plane {
-    private int planeId;
+    private int idPlane;
     private int maxLoad;
     private int currentLoad;
 
-    public int getPlaneId() {
-        return planeId;
+    public Plane() {}
+
+    public Plane(int idPlane, int maxLoad, int currentLoad) {
+        this.idPlane = idPlane;
+        this.maxLoad = maxLoad;
+        this.currentLoad = currentLoad;
     }
 
-    public void setPlaneId(int planeId) {
-        this.planeId = planeId;
+    public int getIdPlane() {
+        return idPlane;
+    }
+
+    public void setIdPlane(int idPlane) {
+        this.idPlane = idPlane;
     }
 
     public int getMaxLoad() {
@@ -32,7 +44,7 @@ public class Plane {
     @Override
     public String toString() {
         return "Plane{" +
-                "planeId=" + planeId +
+                "planeId=" + idPlane +
                 ", maxLoad=" + maxLoad +
                 ", currentLoad=" + currentLoad +
                 '}';
