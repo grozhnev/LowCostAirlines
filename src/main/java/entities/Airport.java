@@ -1,15 +1,27 @@
 package entities;
 
+/**
+ * Airport entity implementation
+ * @author klysov
+ */
 public class Airport {
-    private int airportId;
+    private int idAirport;
     private String Name;
 
-    public int getAirportId() {
-        return airportId;
+    public Airport() {
     }
 
-    public void setAirportId(int airportId) {
-        this.airportId = airportId;
+    public Airport(int idAirport, String name) {
+        this.idAirport = idAirport;
+        Name = name;
+    }
+
+    public int getIdAirport() {
+        return idAirport;
+    }
+
+    public void setIdAirport(int idAirport) {
+        this.idAirport = idAirport;
     }
 
     public String getName() {
@@ -23,7 +35,7 @@ public class Airport {
     @Override
     public String toString() {
         return "Airport{" +
-                "airportId=" + airportId +
+                "airportId=" + idAirport +
                 ", Name='" + Name + '\'' +
                 '}';
     }
