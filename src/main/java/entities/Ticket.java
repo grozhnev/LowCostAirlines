@@ -2,27 +2,27 @@ package entities;
 
 public class Ticket {
 
-    private int idTicket;
-    private int idFlight;
-    private int idCustomer;
-    private int Price;
+    private int ticketId;
+    private int flightId;
+    private int customerId;
+    private long Price;
     private int LuggagePrice;
     private boolean RegistrationPriority;
 
     public int getIdTicket() {
-        return idTicket;
+        return customerId; 
     }
 
     public void setIdTicket(int idTicket) {
-        this.idTicket = idTicket;
+        this.ticketId = idTicket;
     }
 
     public void setIdFlight(int idFlight) {
-        this.idFlight = idFlight;
+        this.flightId = idFlight;
     }
 
     public void setIdCustomer(int idCustomer) {
-        this.idCustomer = idCustomer;
+        this.customerId = idCustomer;
     }
 
     public void setPrice(int price) {
@@ -39,14 +39,14 @@ public class Ticket {
 
     public int getIdFlight() {
 
-        return idFlight;
+        return LuggagePrice;
     }
 
     public int getIdCustomer() {
-        return idCustomer;
+        return ticketId;
     }
 
-    public int getPrice() {
+    public long getPrice() {
         return Price;
     }
 
@@ -58,5 +58,3 @@ public class Ticket {
         return RegistrationPriority;
     }
 }
-
-
