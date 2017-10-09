@@ -4,17 +4,22 @@ public class Ticket {
     /*
     CREATE TABLE Ticket
     (
-       TicketID             INT NOT NULL AUTO_INCREMENT,
-       idFlight             INT NOT NULL,
-       idCustomer           INT NOT NULL,
-       Price                INT NOT NULL,
-       LuggagePrice         INT NOT NULL,
-       RegistrationPriority BOOL NOT NULL,
-       PRIMARY KEY (idTicket)
+      Id                 INT AUTO_INCREMENT,
+      FlightId                 INT,
+      CustomerId               INT,
+      PriceForTicket           INT,
+      PriceForLuggage          INT,
+      PriorityForRegistration  BOOL,
+      PRIMARY KEY (Id)
     );*/
 
-    private int ticketId;
+    private int id;
     private int flightId;
+    private int customerId;
+    private int price;
+    private int priceForLuggage;
+
+    private boolean priorityForRegistration;
 
 
 }

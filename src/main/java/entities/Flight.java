@@ -3,55 +3,53 @@ package entities;
 import java.time.*;
 
 public class Flight {
-
-    /* model:
-
-     CREATE TABLE Flight
+    /*
+    CREATE TABLE Flight
     (
-       idFlight             INT NOT NULL AUTO_INCREMENT,
-       DateTime             DATETIME(6) NOT NULL,
-       Airport_Source       INT NOT NULL,
-       Airport_Destination  INT NOT NULL,
-       idPlane              INT NOT NULL,
-       PRIMARY KEY (idFlight)
+      Id                   INT AUTO_INCREMENT,
+      TimeOfDeparture      DATETIME(10),
+      AirportOfDeparture   INT,
+      AirportOfArrival     INT,
+      PlaneId              INT,
+      PRIMARY KEY (Id)
     );*/
 
     /*UNIQUE*/
-    private LocalDateTime dateTime;
+    private LocalDateTime departureTime;
 
     /*RELATIONAL*/
-    private int idFlight;
-    private String airportDeparture;
-    private String airportArrival;
+    private int id;
+    private String airportOfDeparture;
+    private String airportOfArrival;
     private int planeId;
 
 
-    public int getIdFlight() {
-        return idFlight;
+    public int getId() {
+        return id;
     }
-    public void setIdFlight(int idFlight) {
-        this.idFlight = idFlight;
-    }
-
-    public LocalDateTime getDateTime() {
-        return dateTime;
-    }
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getAirportDeparture() {
-        return airportDeparture;
+    public LocalDateTime getDepartureTime() {
+        return departureTime;
     }
-    public void setAirportDeparture(String airportDeparture) {
-        this.airportDeparture = airportDeparture;
+    public void setDepartureTime(LocalDateTime departureTime) {
+        this.departureTime = departureTime;
     }
 
-    public String getAirportArrival() {
-        return airportArrival;
+    public String getAirportOfDeparture() {
+        return airportOfDeparture;
     }
-    public void setAirportArrival(String airportArrival) {
-        this.airportArrival = airportArrival;
+    public void setAirportOfDeparture(String airportOfDeparture) {
+        this.airportOfDeparture = airportOfDeparture;
+    }
+
+    public String getAirportOfArrival() {
+        return airportOfArrival;
+    }
+    public void setAirportOfArrival(String airportOfArrival) {
+        this.airportOfArrival = airportOfArrival;
     }
 
     public int getPlaneId() {

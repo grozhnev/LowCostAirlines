@@ -11,10 +11,10 @@ public class CustomerDAOImpl implements DAO<Customer>{
 
     private Customer extractCustomerFromResultSet(ResultSet rs) throws SQLException {
         Customer customer = new Customer();
-        customer.setCustomerId(rs.getInt("idCustomer"));
-        customer.setCustomerFirstName(rs.getString("Name"));
-        customer.setCustomerLastName(rs.getString("LastName"));
-        customer.setCustomerPersonId(rs.getString("PersonID"));
+        customer.setId(rs.getInt("idCustomer"));
+        customer.setFirstName(rs.getString("Name"));
+        customer.setLastName(rs.getString("LastName"));
+        customer.setPersonId(rs.getString("PersonID"));
         return customer;
     }
 
@@ -50,10 +50,10 @@ public class CustomerDAOImpl implements DAO<Customer>{
         Connection connection = ConnectionFactory.getConnection();
 
         PreparedStatement ps = connection.prepareStatement("INSERT INTO customer VALUES (?, ?, ?, ?)");
-        ps.setInt(1, customer.getCustomerId());
-        ps.setString(2, customer.getCustomerFirstName());
-        ps.setString(3, customer.getCustomerLastName());
-        ps.setString(4, customer.getCustomerPersonId());
+        ps.setInt(1, customer.getId());
+        ps.setString(2, customer.getFirstName());
+        ps.setString(3, customer.getLastName());
+        ps.setString(4, customer.getPersonId());
 
         int i = ps.executeUpdate();
         if(i == 1) {
@@ -69,10 +69,10 @@ public class CustomerDAOImpl implements DAO<Customer>{
                 "SET Name=?, LastName=?, PersonID=?" +
                 " WHERE idCustomer=?");
 
-        ps.setInt(1, customer.getCustomerId());
-        ps.setString(2, customer.getCustomerFirstName());
-        ps.setString(3, customer.getCustomerLastName());
-        ps.setString(4, customer.getCustomerPersonId());
+        ps.setInt(1, customer.getId());
+        ps.setString(2, customer.getFirstName());
+        ps.setString(3, customer.getLastName());
+        ps.setString(4, customer.getPersonId());
          int i = ps.executeUpdate();
         if(i == 1) {
             return true;
@@ -85,7 +85,7 @@ public class CustomerDAOImpl implements DAO<Customer>{
         Connection connection = ConnectionFactory.getConnection();
         Statement stmt = connection.createStatement();
         int i = stmt.executeUpdate("DELETE FROM customer " +
-                "WHERE idCustomer=" + customer.getCustomerId());
+                "WHERE idCustomer=" + customer.getId());
         if(i == 1) {
             return true;
         }

@@ -14,66 +14,66 @@ DROP TABLE IF EXISTS Airport;
 
 CREATE TABLE Customer
 (
-  CustomerId             INT AUTO_INCREMENT,
-  CustomerIsAdmin        BOOL,
-  CustomerFirstName      VARCHAR(45),
-  CustomerLastName       VARCHAR(45),
-  CustomerPassportId     VARCHAR(45),
-  PRIMARY KEY (CustomerId)
+  Id             INT AUTO_INCREMENT,
+  IsAdmin        BOOL,
+  FirstName      VARCHAR(45),
+  LastName       VARCHAR(45),
+  PassportId     VARCHAR(45),
+  PRIMARY KEY (Id)
 );
 
 CREATE TABLE Ticket
 (
-  TicketId                 INT AUTO_INCREMENT,
+  Id                 INT AUTO_INCREMENT,
   FlightId                 INT,
   CustomerId               INT,
   PriceForTicket           INT,
-  PriceForLugagge          INT,
+  PriceForLuggage          INT,
   PriorityForRegistration  BOOL,
-  PRIMARY KEY (TicketId)
+  PRIMARY KEY (Id)
 );
 
 CREATE TABLE Flight
 (
-  FlightId             INT AUTO_INCREMENT,
-  DateTime             DATETIME(6),
+  Id                   INT AUTO_INCREMENT,
+  TimeOfDeparture      DATETIME(10),
   AirportOfDeparture   INT,
   AirportOfArrival     INT,
   PlaneId              INT,
-  PRIMARY KEY (FlightId)
+  PRIMARY KEY (Id)
 );
 
 CREATE TABLE Plane
 (
-   PlaneId              INT AUTO_INCREMENT,
-   PlaneMaxLoad         INT,
-   PlaneCurrentLoad     INT,
-   PRIMARY KEY (PlaneId)
+   id              INT AUTO_INCREMENT,
+   maxLoad         INT,
+   currentLoad     INT,
+   PRIMARY KEY (id)
 );
 
 CREATE TABLE Airport
 (
-   AirportId       INT AUTO_INCREMENT,
-   AIrportName     VARCHAR(45),
-   PRIMARY KEY (AirportId)
+   Id       INT AUTO_INCREMENT,
+   Name     VARCHAR(45),
+   PRIMARY KEY (Id)
 );
 
 /*==============================================================*/
 /*                      Constraints                             */
 /*==============================================================*/
 ALTER TABLE Flight ADD CONSTRAINT FK_Reference_1 FOREIGN KEY (AirportOfDeparture)
-      REFERENCES Airport (AirportId);
+      REFERENCES Airport (Id);
 
 ALTER TABLE Flight ADD CONSTRAINT FK_Reference_2 FOREIGN KEY (AirportOfArrival)
-      REFERENCES Airport (AirportId);
+      REFERENCES Airport (Id);
 
 ALTER TABLE Flight ADD CONSTRAINT FK_Reference_3 FOREIGN KEY (PlaneId)
-      REFERENCES Plane (PlaneId);
+      REFERENCES Plane (id);
 
 
 
 ALTER TABLE Ticket ADD CONSTRAINT FK_Reference_4 FOREIGN KEY (FlightId)
-      REFERENCES Flight (FlightId);
+      REFERENCES Flight (Id);
 
 ALTER TABLE Ticket ADD CONSTRAINT FK_Reference_5 FOREIGN KEY (CustomerId)
-      REFERENCES Customer (CustomerId);
+      REFERENCES Customer (Id);

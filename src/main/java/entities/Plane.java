@@ -1,28 +1,33 @@
 package entities;
 
-/**
- * Plane entity implementation
- * @author klysov
- */
 public class Plane {
-    private int idPlane;
+    /*
+    CREATE TABLE Plane
+    (
+       id              INT AUTO_INCREMENT,
+       maxLoad         INT,
+       currentLoad     INT,
+       PRIMARY KEY (id)
+    );*/
+
+    private int id;
     private int maxLoad;
     private int currentLoad;
 
     public Plane() {}
 
-    public Plane(int idPlane, int maxLoad, int currentLoad) {
-        this.idPlane = idPlane;
+    public Plane(int id, int maxLoad, int currentLoad) {
+        this.id = id;
         this.maxLoad = maxLoad;
         this.currentLoad = currentLoad;
     }
 
-    public int getIdPlane() {
-        return idPlane;
+    public int getId() {
+        return id;
     }
 
-    public void setIdPlane(int idPlane) {
-        this.idPlane = idPlane;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getMaxLoad() {
@@ -44,7 +49,7 @@ public class Plane {
     @Override
     public String toString() {
         return "Plane{" +
-                "planeId=" + idPlane +
+                "planeId=" + id +
                 ", maxLoad=" + maxLoad +
                 ", currentLoad=" + currentLoad +
                 '}';

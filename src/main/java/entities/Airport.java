@@ -1,10 +1,13 @@
 package entities;
 
-/**
- * Airport entity implementation
- * @author klysov
- */
 public class Airport {
+    /*
+    CREATE TABLE Airport
+    (
+       Id       INT AUTO_INCREMENT,
+       Name     VARCHAR(45),
+       PRIMARY KEY (Id)
+    );*/
     private int idAirport;
     private String Name;
 
