@@ -49,4 +49,24 @@ public class Plane {
                 ", currentLoad=" + currentLoad +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Plane)) return false;
+
+        Plane plane = (Plane) o;
+
+        if (getIdPlane() != plane.getIdPlane()) return false;
+        if (getMaxLoad() != plane.getMaxLoad()) return false;
+        return getCurrentLoad() == plane.getCurrentLoad();
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getIdPlane();
+        result = 31 * result + getMaxLoad();
+        result = 31 * result + getCurrentLoad();
+        return result;
+    }
 }

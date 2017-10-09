@@ -11,9 +11,9 @@ import java.util.Set;
  * Implementation of airport DAO
  * @author klysov
  */
-public class AirportDaoImpl implements AirportDao{
-    @Override
-    public Airport extractAirportFromResultSet(ResultSet rs) throws SQLException {
+public class AirportDaoImpl implements AirportDao {
+
+    private Airport extractAirportFromResultSet(ResultSet rs) throws SQLException {
         Airport airport = new Airport();
         airport.setIdAirport( rs.getInt("idAirport") );
         airport.setName( rs.getString("Name") );
@@ -36,7 +36,7 @@ public class AirportDaoImpl implements AirportDao{
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return null;
+        return new HashSet<>();
     }
 
     @Override
@@ -53,7 +53,7 @@ public class AirportDaoImpl implements AirportDao{
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return null;
+        return new Airport();
     }
 
     @Override

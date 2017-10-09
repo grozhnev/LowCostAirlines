@@ -12,8 +12,8 @@ import java.util.Set;
  * @author klysov
  */
 public class PlaneDaoImpl implements PlaneDao {
-    @Override
-    public Plane extractPlaneFromResultSet(ResultSet rs) throws SQLException {
+
+    private Plane extractPlaneFromResultSet(ResultSet rs) throws SQLException {
         Plane plane = new Plane();
         plane.setIdPlane( rs.getInt("idPlane") );
         plane.setMaxLoad( rs.getInt("MaxLoad") );
@@ -37,7 +37,7 @@ public class PlaneDaoImpl implements PlaneDao {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return null;
+        return new HashSet<>();
     }
 
     @Override
@@ -54,7 +54,7 @@ public class PlaneDaoImpl implements PlaneDao {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return null;
+        return new Plane();
     }
 
     @Override

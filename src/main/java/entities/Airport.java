@@ -5,23 +5,23 @@ package entities;
  * @author klysov
  */
 public class Airport {
-    private int idAirport;
+    private int airportId;
     private String Name;
 
     public Airport() {
     }
 
     public Airport(int idAirport, String name) {
-        this.idAirport = idAirport;
+        this.airportId = idAirport;
         Name = name;
     }
 
     public int getIdAirport() {
-        return idAirport;
+        return airportId;
     }
 
     public void setIdAirport(int idAirport) {
-        this.idAirport = idAirport;
+        this.airportId = idAirport;
     }
 
     public String getName() {
@@ -35,8 +35,26 @@ public class Airport {
     @Override
     public String toString() {
         return "Airport{" +
-                "airportId=" + idAirport +
+                "airportId=" + airportId +
                 ", Name='" + Name + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Airport)) return false;
+
+        Airport airport = (Airport) o;
+
+        if (airportId != airport.airportId) return false;
+        return getName().equals(airport.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = airportId;
+        result = 31 * result + getName().hashCode();
+        return result;
     }
 }
