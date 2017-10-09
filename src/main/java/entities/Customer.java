@@ -2,14 +2,13 @@ package entities;
 
 public class Customer {
 
+    private boolean isAdmin;
+
     private int customerId;
+
     private String customerFirstName;
     private String customerLastName;
     private String customerPersonId;
-
-
-
-    private boolean isAdmin;
 
     public Customer() {
     }
@@ -56,7 +55,7 @@ public class Customer {
     public void setAdmin(boolean admin) {
         isAdmin = admin;
     }
-    
+
 
     @Override
     public String toString() {
