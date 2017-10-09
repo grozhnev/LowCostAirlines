@@ -45,7 +45,7 @@ public class PlaneDaoImpl implements PlaneDao {
         Connection connection = ConnectionFactory.getConnection();
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Plane WHERE idPlane=" + id);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Plane WHERE id=" + id);
             if(rs.next())
             {
                 Plane plane = extractPlaneFromResultSet(rs);
@@ -61,6 +61,7 @@ public class PlaneDaoImpl implements PlaneDao {
     public boolean insertPlane(Plane plane) {
         Connection connection = ConnectionFactory.getConnection();
         try {
+            /*Customer actions logic is required here*/
             PreparedStatement ps = connection.prepareStatement("INSERT INTO Plane VALUES (?, ?, ?)");
             ps.setInt(1, plane.getId());
             ps.setInt(2, plane.getMaxLoad());
@@ -79,6 +80,7 @@ public class PlaneDaoImpl implements PlaneDao {
     public boolean updatePlane(Plane plane) {
         Connection connection = ConnectionFactory.getConnection();
         try {
+            /*Customer actions logic is required here*/
             PreparedStatement ps = connection.prepareStatement("UPDATE Plane SET MaxLoad=?, CurrentLoad=? WHERE idPlane=?");
             ps.setInt(1, plane.getId());
             ps.setInt(2, plane.getMaxLoad());
@@ -98,7 +100,7 @@ public class PlaneDaoImpl implements PlaneDao {
         Connection connection = ConnectionFactory.getConnection();
         try {
             Statement stmt = connection.createStatement();
-            int i = stmt.executeUpdate("DELETE FROM Plane WHERE idPlane=" + plane.getId());
+            int i = stmt.executeUpdate("DELETE FROM Plane WHERE id=" + plane.getId());
             if(i == 1) {
                 return true;
             }

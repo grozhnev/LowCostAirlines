@@ -9,13 +9,13 @@ INSERT INTO Plane (id, MaxLoad, CurrentLoad)
 INSERT INTO Plane (id, MaxLoad, CurrentLoad)
  VALUES('3','50','0');
  
-INSERT INTO Airport (idAirport, Name)
+INSERT INTO Airport (id, Name)
  VALUES('1','Berlin');
-INSERT INTO Airport (idAirport, Name)
+INSERT INTO Airport (id, Name)
  VALUES('2','London');
-INSERT INTO Airport (idAirport, Name)
+INSERT INTO Airport (id, Name)
  VALUES('3','Paris');
-INSERT INTO Airport (idAirport, Name)
+INSERT INTO Airport (id, Name)
  VALUES('4','Rome');
  
 INSERT INTO Customer (idCustomer, isAdmin, Name, LastName, PersonID)

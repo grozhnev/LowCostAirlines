@@ -11,10 +11,10 @@ public class CustomerDAOImpl implements DAO<Customer>{
 
     private Customer extractCustomerFromResultSet(ResultSet rs) throws SQLException {
         Customer customer = new Customer();
-        customer.setId(rs.getInt("idCustomer"));
-        customer.setFirstName(rs.getString("Name"));
-        customer.setLastName(rs.getString("LastName"));
-        customer.setPersonId(rs.getString("PersonID"));
+        customer.setId(rs.getInt("id"));
+        customer.setFirstName(rs.getString("firstName"));
+        customer.setLastName(rs.getString("lastName"));
+        customer.setPersonId(rs.getString("personId"));
         return customer;
     }
 
@@ -36,7 +36,7 @@ public class CustomerDAOImpl implements DAO<Customer>{
     public Customer getById(int id) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
         Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM customer WHERE idCustomer=" + id);
+        ResultSet rs = stmt.executeQuery("SELECT * FROM customer WHERE Id=" + id);
         if(rs.next())
         {
             Customer customer = extractCustomerFromResultSet(rs);
@@ -49,6 +49,7 @@ public class CustomerDAOImpl implements DAO<Customer>{
     public boolean insert(Customer customer) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
 
+         /*Customer actions logic is required here*/
         PreparedStatement ps = connection.prepareStatement("INSERT INTO customer VALUES (?, ?, ?, ?)");
         ps.setInt(1, customer.getId());
         ps.setString(2, customer.getFirstName());
@@ -65,6 +66,7 @@ public class CustomerDAOImpl implements DAO<Customer>{
     @Override
     public boolean update(Customer customer) throws SQLException{
         Connection connection = ConnectionFactory.getConnection();
+         /*Customer actions logic is required here*/
         PreparedStatement ps = connection.prepareStatement("UPDATE customer " +
                 "SET Name=?, LastName=?, PersonID=?" +
                 " WHERE idCustomer=?");
@@ -85,7 +87,7 @@ public class CustomerDAOImpl implements DAO<Customer>{
         Connection connection = ConnectionFactory.getConnection();
         Statement stmt = connection.createStatement();
         int i = stmt.executeUpdate("DELETE FROM customer " +
-                "WHERE idCustomer=" + customer.getId());
+                "WHERE Id=" + customer.getId());
         if(i == 1) {
             return true;
         }

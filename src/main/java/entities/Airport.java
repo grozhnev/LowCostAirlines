@@ -5,41 +5,41 @@ public class Airport {
     CREATE TABLE Airport
     (
        Id       INT AUTO_INCREMENT,
-       Name     VARCHAR(45),
+       name     VARCHAR(45),
        PRIMARY KEY (Id)
     );*/
-    private int idAirport;
-    private String Name;
+    private int id;
+    private String name;
 
     public Airport() {
     }
 
-    public Airport(int idAirport, String name) {
-        this.idAirport = idAirport;
-        Name = name;
+    public Airport(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
-    public int getIdAirport() {
-        return idAirport;
+    public int getId() {
+        return id;
     }
 
-    public void setIdAirport(int idAirport) {
-        this.idAirport = idAirport;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     @Override
     public String toString() {
         return "Airport{" +
-                "airportId=" + idAirport +
-                ", Name='" + Name + '\'' +
+                "airportId=" + id +
+                ", name='" + name + '\'' +
                 '}';
     }
 }
