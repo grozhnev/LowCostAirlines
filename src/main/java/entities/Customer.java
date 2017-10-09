@@ -1,11 +1,22 @@
 package entities;
 
 public class Customer {
+
     private int customerId;
-    private boolean isAdmin;
-    private String customerName;
-    private String LastName;
-    private String personId;
+    private String customerFirstName;
+    private String customerLastName;
+    private String customerPersonId;
+
+    public Customer() {
+    }
+
+    public Customer(int customerId, String customerFirstName,
+                    String customerLastName, String customerPersonId) {
+        this.customerId = customerId;
+        this.customerFirstName = customerFirstName;
+        this.customerLastName = customerLastName;
+        this.customerPersonId = customerPersonId;
+    }
 
     public int getCustomerId() {
         return customerId;
@@ -15,46 +26,37 @@ public class Customer {
         this.customerId = customerId;
     }
 
-    public boolean isAdmin() {
-        return isAdmin;
+    public String getCustomerFirstName() {
+        return customerFirstName;
     }
 
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
+    public void setCustomerFirstName(String customerFirstName) {
+        this.customerFirstName = customerFirstName;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public String getCustomerLastName() {
+        return customerLastName;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setCustomerLastName(String customerLastName) {
+        this.customerLastName = customerLastName;
     }
 
-    public String getLastName() {
-        return LastName;
+    public String getCustomerPersonId() {
+        return customerPersonId;
     }
 
-    public void setLastName(String lastName) {
-        LastName = lastName;
-    }
-
-    public String getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(String personId) {
-        this.personId = personId;
+    public void setCustomerPersonId(String customerPersonId) {
+        this.customerPersonId = customerPersonId;
     }
 
     @Override
     public String toString() {
         return "Customer{" +
                 "customerId=" + customerId +
-                ", isAdmin=" + isAdmin +
-                ", customerName='" + customerName + '\'' +
-                ", LastName='" + LastName + '\'' +
-                ", personId='" + personId + '\'' +
+                ", customerFirstName='" + customerFirstName + '\'' +
+                ", customerLastName='" + customerLastName + '\'' +
+                ", customerPersonId='" + customerPersonId + '\'' +
                 '}';
     }
 }
