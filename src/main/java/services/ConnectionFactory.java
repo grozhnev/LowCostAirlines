@@ -10,9 +10,9 @@ import java.sql.SQLException;
  * @author klysov
  */
 public class ConnectionFactory {
-    private static final String URL = "jdbc:mysql://localhost:3306/plane";
-    private static final String USER = "root";
-    private static final String PASS = "root";
+    private static final String URL = "jdbc:mysql://localhost:3306/lowcostairlines";
+    private static final String USER = "testuser";
+    private static final String PASS = "testpassword";
 
     /**
      * Get a connection to database
