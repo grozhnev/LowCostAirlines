@@ -9,19 +9,19 @@ public class Ticket {
     private int LuggagePrice;
     private boolean RegistrationPriority;
 
-    public int getIdTicket() {
-        return customerId; 
+    public int getTicketId() {
+        return ticketId;
     }
 
-    public void setIdTicket(int idTicket) {
+    public void setTicketId(int idTicket) {
         this.ticketId = idTicket;
     }
 
-    public void setIdFlight(int idFlight) {
+    public void setFlightId(int idFlight) {
         this.flightId = idFlight;
     }
 
-    public void setIdCustomer(int idCustomer) {
+    public void setCustomerId(int idCustomer) {
         this.customerId = idCustomer;
     }
 
@@ -37,13 +37,13 @@ public class Ticket {
         RegistrationPriority = registrationPriority;
     }
 
-    public int getIdFlight() {
+    public int getFlightId() {
 
-        return LuggagePrice;
+        return flightId;
     }
 
-    public int getIdCustomer() {
-        return ticketId;
+    public int getCustomerId() {
+        return customerId;
     }
 
     public long getPrice() {
