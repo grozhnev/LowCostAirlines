@@ -3,19 +3,17 @@ package entities;
 public class Customer {
 
     private int customerId;
-    private boolean isAdmin;
-    private String customerName;
+    private String customerFirstName;
     private String customerLastName;
     private String customerPersonId;
 
     public Customer() {
     }
 
-    public Customer(int customerId, boolean isAdmin, String customerName,
+    public Customer(int customerId, String customerFirstName,
                     String customerLastName, String customerPersonId) {
         this.customerId = customerId;
-        this.isAdmin = isAdmin;
-        this.customerName = customerName;
+        this.customerFirstName = customerFirstName;
         this.customerLastName = customerLastName;
         this.customerPersonId = customerPersonId;
     }
@@ -28,20 +26,12 @@ public class Customer {
         this.customerId = customerId;
     }
 
-    public boolean isAdmin() {
-        return isAdmin;
+    public String getCustomerFirstName() {
+        return customerFirstName;
     }
 
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setCustomerFirstName(String customerFirstName) {
+        this.customerFirstName = customerFirstName;
     }
 
     public String getCustomerLastName() {
@@ -64,8 +54,7 @@ public class Customer {
     public String toString() {
         return "Customer{" +
                 "customerId=" + customerId +
-                ", isAdmin=" + isAdmin +
-                ", customerName='" + customerName + '\'' +
+                ", customerFirstName='" + customerFirstName + '\'' +
                 ", customerLastName='" + customerLastName + '\'' +
                 ", customerPersonId='" + customerPersonId + '\'' +
                 '}';

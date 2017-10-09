@@ -12,8 +12,7 @@ public class CustomerDAOImpl implements DAO<Customer>{
     private Customer extractCustomerFromResultSet(ResultSet rs) throws SQLException {
         Customer customer = new Customer();
         customer.setCustomerId(rs.getInt("idCustomer"));
-        customer.setAdmin(rs.getBoolean("isAdmin"));
-        customer.setCustomerName(rs.getString("Name"));
+        customer.setCustomerFirstName(rs.getString("Name"));
         customer.setCustomerLastName(rs.getString("LastName"));
         customer.setCustomerPersonId(rs.getString("PersonID"));
         return customer;
@@ -50,12 +49,11 @@ public class CustomerDAOImpl implements DAO<Customer>{
     public boolean insert(Customer customer) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
 
-        PreparedStatement ps = connection.prepareStatement("INSERT INTO customer VALUES (?, ?, ?, ?, ?)");
+        PreparedStatement ps = connection.prepareStatement("INSERT INTO customer VALUES (?, ?, ?, ?)");
         ps.setInt(1, customer.getCustomerId());
-        ps.setBoolean(2, customer.isAdmin());
-        ps.setString(3, customer.getCustomerName());
-        ps.setString(4, customer.getCustomerLastName());
-        ps.setString(5, customer.getCustomerPersonId());
+        ps.setString(2, customer.getCustomerFirstName());
+        ps.setString(3, customer.getCustomerLastName());
+        ps.setString(4, customer.getCustomerPersonId());
 
         int i = ps.executeUpdate();
         if(i == 1) {
@@ -68,14 +66,13 @@ public class CustomerDAOImpl implements DAO<Customer>{
     public boolean update(Customer customer) throws SQLException{
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement ps = connection.prepareStatement("UPDATE customer " +
-                "SET isAdmin=?, Name=?, LastName=?, PersonID=?" +
+                "SET Name=?, LastName=?, PersonID=?" +
                 " WHERE idCustomer=?");
 
         ps.setInt(1, customer.getCustomerId());
-        ps.setBoolean(2, customer.isAdmin());
-        ps.setString(3, customer.getCustomerName());
-        ps.setString(4, customer.getCustomerLastName());
-        ps.setString(5, customer.getCustomerPersonId());
+        ps.setString(2, customer.getCustomerFirstName());
+        ps.setString(3, customer.getCustomerLastName());
+        ps.setString(4, customer.getCustomerPersonId());
          int i = ps.executeUpdate();
         if(i == 1) {
             return true;
