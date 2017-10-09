@@ -16,10 +16,11 @@ public class Flight {
        PRIMARY KEY (idFlight)
     );*/
 
-
-
-    private int idFlight;
+    /*UNIQUE*/
     private LocalDateTime dateTime;
+
+    /*RELATIONAL*/
+    private int idFlight;
     private String airportDeparture;
     private String airportArrival;
     private int planeId;
