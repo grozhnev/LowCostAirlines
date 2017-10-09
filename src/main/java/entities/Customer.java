@@ -7,6 +7,10 @@ public class Customer {
     private String customerLastName;
     private String customerPersonId;
 
+
+
+    private boolean isAdmin;
+
     public Customer() {
     }
 
@@ -21,7 +25,6 @@ public class Customer {
     public int getCustomerId() {
         return customerId;
     }
-
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
@@ -29,7 +32,6 @@ public class Customer {
     public String getCustomerFirstName() {
         return customerFirstName;
     }
-
     public void setCustomerFirstName(String customerFirstName) {
         this.customerFirstName = customerFirstName;
     }
@@ -37,7 +39,6 @@ public class Customer {
     public String getCustomerLastName() {
         return customerLastName;
     }
-
     public void setCustomerLastName(String customerLastName) {
         this.customerLastName = customerLastName;
     }
@@ -45,10 +46,17 @@ public class Customer {
     public String getCustomerPersonId() {
         return customerPersonId;
     }
-
     public void setCustomerPersonId(String customerPersonId) {
         this.customerPersonId = customerPersonId;
     }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+    
 
     @Override
     public String toString() {
