@@ -2,75 +2,78 @@
 /*                      Dropping tables                         */
 /*==============================================================*/
 
+DROP TABLE IF EXISTS Customer;
 DROP TABLE IF EXISTS Ticket;
 DROP TABLE IF EXISTS Flight;
 DROP TABLE IF EXISTS Plane;
 DROP TABLE IF EXISTS Airport;
-DROP TABLE IF EXISTS Customer;
 
 /*==============================================================*/
 /*                      Creating tables                         */
 /*==============================================================*/
-CREATE TABLE Plane
-(
-   idPlane              INT NOT NULL AUTO_INCREMENT,
-   MaxLoad              INT NOT NULL,
-   CurrentLoad          INT NOT NULL,
-   PRIMARY KEY (idPlane)
-);
-
-CREATE TABLE Airport
-(
-   idAirport            INT NOT NULL AUTO_INCREMENT,
-   Name                 VARCHAR(45) NOT NULL,
-   PRIMARY KEY (idAirport)
-);
 
 CREATE TABLE Customer
 (
-   idCustomer           INT NOT NULL AUTO_INCREMENT,
-   isAdmin              BOOL NOT NULL,   
-   Name                 VARCHAR(45) NOT NULL,
-   LastName             VARCHAR(45) NOT NULL,
-   PersonID             VARCHAR(45) NOT NULL,
-   PRIMARY KEY (idCustomer)
-);
-
-CREATE TABLE Flight
-(
-   idFlight             INT NOT NULL AUTO_INCREMENT,
-   DateTime             DATETIME(6) NOT NULL,   
-   Airport_Source       INT NOT NULL,
-   Airport_Destination  INT NOT NULL,
-   idPlane              INT NOT NULL,
-   PRIMARY KEY (idFlight)
+  Id             INT AUTO_INCREMENT,
+  IsAdmin        BOOL,
+  FirstName      VARCHAR(45),
+  LastName       VARCHAR(45),
+  PassportId     VARCHAR(45),
+  PRIMARY KEY (Id)
 );
 
 CREATE TABLE Ticket
 (
-   idTicket             INT NOT NULL AUTO_INCREMENT,
-   idFlight             INT NOT NULL,
-   idCustomer           INT NOT NULL,
-   Price                INT NOT NULL,
-   LuggagePrice         INT NOT NULL,
-   RegistrationPriority BOOL NOT NULL,
-   PRIMARY KEY (idTicket)
+  Id                 INT AUTO_INCREMENT,
+  FlightId                 INT,
+  CustomerId               INT,
+  PriceForTicket           INT,
+  PriceForLuggage          INT,
+  PriorityForRegistration  BOOL,
+  PRIMARY KEY (Id)
+);
+
+CREATE TABLE Flight
+(
+  Id                   INT AUTO_INCREMENT,
+  TimeOfDeparture      DATETIME(10),
+  AirportOfDeparture   INT,
+  AirportOfArrival     INT,
+  PlaneId              INT,
+  PRIMARY KEY (Id)
+);
+
+CREATE TABLE Plane
+(
+   id              INT AUTO_INCREMENT,
+   maxLoad         INT,
+   currentLoad     INT,
+   PRIMARY KEY (id)
+);
+
+CREATE TABLE Airport
+(
+   Id       INT AUTO_INCREMENT,
+   Name     VARCHAR(45),
+   PRIMARY KEY (Id)
 );
 
 /*==============================================================*/
 /*                      Constraints                             */
 /*==============================================================*/
-ALTER TABLE Flight ADD CONSTRAINT FK_Reference_1 FOREIGN KEY (Airport_Source)
-      REFERENCES Airport (idAirport) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE Flight ADD CONSTRAINT FK_Reference_1 FOREIGN KEY (AirportOfDeparture)
+      REFERENCES Airport (Id);
 
-ALTER TABLE Flight ADD CONSTRAINT FK_Reference_2 FOREIGN KEY (Airport_Destination)
-      REFERENCES Airport (idAirport) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE Flight ADD CONSTRAINT FK_Reference_2 FOREIGN KEY (AirportOfArrival)
+      REFERENCES Airport (Id);
 
-ALTER TABLE Flight ADD CONSTRAINT FK_Reference_3 FOREIGN KEY (idPlane)
-      REFERENCES Plane (idPlane) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE Flight ADD CONSTRAINT FK_Reference_3 FOREIGN KEY (PlaneId)
+      REFERENCES Plane (id);
 
-ALTER TABLE Ticket ADD CONSTRAINT FK_Reference_4 FOREIGN KEY (idFlight)
-      REFERENCES Flight (idFlight) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
-ALTER TABLE Ticket ADD CONSTRAINT FK_Reference_5 FOREIGN KEY (idCustomer)
-      REFERENCES Customer (idCustomer) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE Ticket ADD CONSTRAINT FK_Reference_4 FOREIGN KEY (FlightId)
+      REFERENCES Flight (Id);
+
+ALTER TABLE Ticket ADD CONSTRAINT FK_Reference_5 FOREIGN KEY (CustomerId)
+      REFERENCES Customer (Id);

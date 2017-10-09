@@ -1,42 +1,45 @@
 package entities;
 
-/**
- * Airport entity implementation
- * @author klysov
- */
 public class Airport {
-    private int idAirport;
-    private String Name;
+    /*
+    CREATE TABLE Airport
+    (
+       Id       INT AUTO_INCREMENT,
+       name     VARCHAR(45),
+       PRIMARY KEY (Id)
+    );*/
+    private int id;
+    private String name;
 
     public Airport() {
     }
 
-    public Airport(int idAirport, String name) {
-        this.idAirport = idAirport;
-        Name = name;
+    public Airport(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
-    public int getIdAirport() {
-        return idAirport;
+    public int getId() {
+        return id;
     }
 
-    public void setIdAirport(int idAirport) {
-        this.idAirport = idAirport;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     @Override
     public String toString() {
         return "Airport{" +
-                "airportId=" + idAirport +
-                ", Name='" + Name + '\'' +
+                "airportId=" + id +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

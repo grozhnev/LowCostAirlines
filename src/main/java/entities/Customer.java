@@ -1,62 +1,77 @@
 package entities;
 
 public class Customer {
+    /*
+    CREATE TABLE Customer
+    (
+      Id             INT AUTO_INCREMENT,
+      IsAdmin        BOOL,
+      FirstName      VARCHAR(45),
+      LastName       VARCHAR(45),
+      PassportId     VARCHAR(45),
+      PRIMARY KEY (Id)
+    );*/
 
-    private int customerId;
-    private String customerFirstName;
-    private String customerLastName;
-    private String customerPersonId;
+    private int id;
+    private boolean isAdmin;
+    private String firstName;
+    private String lastName;
+    private String personId;
 
     public Customer() {
     }
 
-    public Customer(int customerId, String customerFirstName,
-                    String customerLastName, String customerPersonId) {
-        this.customerId = customerId;
-        this.customerFirstName = customerFirstName;
-        this.customerLastName = customerLastName;
-        this.customerPersonId = customerPersonId;
+    public Customer(int id, String firstName,
+                    String lastName, String personId) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.personId = personId;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public String getFirstName() {
+        return firstName;
+    }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getCustomerFirstName() {
-        return customerFirstName;
+    public String getLastName() {
+        return lastName;
+    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public void setCustomerFirstName(String customerFirstName) {
-        this.customerFirstName = customerFirstName;
+    public String getPersonId() {
+        return personId;
+    }
+    public void setPersonId(String personId) {
+        this.personId = personId;
     }
 
-    public String getCustomerLastName() {
-        return customerLastName;
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 
-    public void setCustomerLastName(String customerLastName) {
-        this.customerLastName = customerLastName;
-    }
-
-    public String getCustomerPersonId() {
-        return customerPersonId;
-    }
-
-    public void setCustomerPersonId(String customerPersonId) {
-        this.customerPersonId = customerPersonId;
-    }
 
     @Override
     public String toString() {
         return "Customer{" +
-                "customerId=" + customerId +
-                ", customerFirstName='" + customerFirstName + '\'' +
-                ", customerLastName='" + customerLastName + '\'' +
-                ", customerPersonId='" + customerPersonId + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", personId='" + personId + '\'' +
                 '}';
     }
 }
