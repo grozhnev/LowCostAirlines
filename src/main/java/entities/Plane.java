@@ -1,52 +1,17 @@
 package entities;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 /**
  * Plane entity implementation
  * @author klysov
  */
+
+@Data
+@EqualsAndHashCode(exclude={"currentLoad"})
 public class Plane {
-    private int idPlane;
+    private int planeId;
     private int maxLoad;
     private int currentLoad;
-
-    public Plane() {}
-
-    public Plane(int idPlane, int maxLoad, int currentLoad) {
-        this.idPlane = idPlane;
-        this.maxLoad = maxLoad;
-        this.currentLoad = currentLoad;
-    }
-
-    public int getIdPlane() {
-        return idPlane;
-    }
-
-    public void setIdPlane(int idPlane) {
-        this.idPlane = idPlane;
-    }
-
-    public int getMaxLoad() {
-        return maxLoad;
-    }
-
-    public void setMaxLoad(int maxLoad) {
-        this.maxLoad = maxLoad;
-    }
-
-    public int getCurrentLoad() {
-        return currentLoad;
-    }
-
-    public void setCurrentLoad(int currentLoad) {
-        this.currentLoad = currentLoad;
-    }
-
-    @Override
-    public String toString() {
-        return "Plane{" +
-                "planeId=" + idPlane +
-                ", maxLoad=" + maxLoad +
-                ", currentLoad=" + currentLoad +
-                '}';
-    }
 }
