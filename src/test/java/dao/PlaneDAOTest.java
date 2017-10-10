@@ -1,8 +1,6 @@
 package dao;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import entities.Plane;
 import services.ConnectionFactory;
 
@@ -16,8 +14,8 @@ import static org.junit.Assert.*;
 public class PlaneDAOTest {
     private static final int NUMBER_OF_ENTRIES = 10;
 
-    @Before
-    public void setupDatabase() throws SQLException {
+    @BeforeClass
+    public static void setupDatabase() throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
         for (int i = 0; i < NUMBER_OF_ENTRIES; i++) {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Plane (MaxLoad, CurrentLoad) VALUES (50, 10)");
@@ -73,8 +71,8 @@ public class PlaneDAOTest {
         assertTrue(planeDAO.delete(plane));
     }
 
-    @After
-    public void cleanDatabase() throws SQLException {
+    @AfterClass
+    public static void cleanDatabase() throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
         for (int i = 0; i < NUMBER_OF_ENTRIES; i++) {
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Plane WHERE MaxLoad=50 AND CurrentLoad=10");

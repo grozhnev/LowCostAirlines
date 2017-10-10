@@ -2,7 +2,9 @@ import dao.AirportDAO;
 import dao.CustomerDAO;
 import dao.DAO;
 import dao.PlaneDAO;
+import entities.Airport;
 import entities.Customer;
+import entities.Plane;
 import services.ConnectionFactory;
 
 import javax.servlet.ServletException;
@@ -22,8 +24,8 @@ public class MainServlet extends HttpServlet {
             throws ServletException, IOException {
 
         Connection connection = ConnectionFactory.getConnection();
-        AirportDAO airport = new AirportDAO();
-        PlaneDAO plane = new PlaneDAO();
+        DAO<Airport> airport = new AirportDAO();
+        DAO<Plane> plane = new PlaneDAO();
         DAO<Customer> customer = new CustomerDAO();
 
         try {

@@ -1,9 +1,8 @@
 package dao;
 
 import entities.Airport;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
+
 import static org.junit.Assert.*;
 import services.ConnectionFactory;
 
@@ -17,14 +16,11 @@ public class AirportDAOTest {
     private static ArrayList<String> testEntries = new ArrayList<>();
     private static final int NUMBER_OF_ENTRIES = 10;
 
-    static {
+    @BeforeClass
+    public static void setupDatabase() throws SQLException {
         for (int i = 0; i < NUMBER_OF_ENTRIES; i++) {
             testEntries.add("ENTRY#" + i);
         }
-    }
-
-    @Before
-    public void setupDatabase() throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
         for (String testEntry:
                 testEntries) {
@@ -72,9 +68,7 @@ public class AirportDAOTest {
         Airport airport = new Airport();
         airport.setAirportId(0);
         airport.setName("TEST_AIRPORT");
-        airportDAO.insert(airport);
-        Set<Airport> airports = airportDAO.getAll();
-        assertTrue(airports.contains(airport));
+        assertTrue(airportDAO.insert(airport));
     }
 
     @Test
@@ -83,24 +77,21 @@ public class AirportDAOTest {
         Airport airport = new Airport();
         airport.setAirportId(1);
         airport.setName("TEST_AIRPORT_UPDATE");
-        airportDAO.update(airport);
-        Set<Airport> airports = airportDAO.getAll();
-        assertTrue(airports.contains(airport));
+        assertTrue(airportDAO.update(airport));
     }
 
     @Test
     public void testDelete() throws SQLException {
         AirportDAO airportDAO = new AirportDAO();
-        Airport airport = new Airport();
-        airport.setAirportId(4);
-        airport.setName("TEST_AIRPORT");
-        airportDAO.delete(airport);
         Set<Airport> airports = airportDAO.getAll();
-        assertTrue(!airports.contains(airport));
+        Airport airport = new Airport();
+        airport.setAirportId(airports.iterator().next().getAirportId());
+        airport.setName("TEST_AIRPORT");
+        assertTrue(airportDAO.delete(airport));
     }
 
-    @After
-    public void cleanDatabase() throws SQLException {
+    @AfterClass
+    public static void cleanDatabase() throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
         for (String testEntry:
                 testEntries) {
