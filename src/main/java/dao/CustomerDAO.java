@@ -12,7 +12,7 @@ public class CustomerDAO implements DAO<Customer>{
     private Customer extractCustomerFromResultSet(ResultSet resultSet) throws SQLException {
         Customer customer = new Customer();
         customer.setCustomerId(resultSet.getInt("idCustomer"));
-        customer.setCustomerFirstName(resultSet.getString("Name"));
+        customer.setCustomerFirstName(resultSet.getString("FirstName"));
         customer.setCustomerLastName(resultSet.getString("LastName"));
         customer.setCustomerPersonId(resultSet.getString("PersonID"));
         return customer;
@@ -54,7 +54,7 @@ public class CustomerDAO implements DAO<Customer>{
     @Override
     public boolean insert(Customer customer) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Customer (Name, LastName, PersonID) VALUES (?, ?, ?)");
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Customer (FirstName, LastName, PersonID) VALUES (?, ?, ?)");
         preparedStatement.setString(1, customer.getCustomerFirstName());
         preparedStatement.setString(2, customer.getCustomerLastName());
         preparedStatement.setString(3, customer.getCustomerPersonId());
@@ -65,14 +65,11 @@ public class CustomerDAO implements DAO<Customer>{
     @Override
     public boolean update(Customer customer) throws SQLException{
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE customer " +
-                "SET Name=?, LastName=?, PersonID=?" +
-                " WHERE idCustomer=?");
-
-        preparedStatement.setInt(1, customer.getCustomerId());
-        preparedStatement.setString(2, customer.getCustomerFirstName());
-        preparedStatement.setString(3, customer.getCustomerLastName());
-        preparedStatement.setString(4, customer.getCustomerPersonId());
+        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Customer SET FirstName=?, LastName=?, PersonID=? WHERE idCustomer=?");
+        preparedStatement.setString(1, customer.getCustomerFirstName());
+        preparedStatement.setString(2, customer.getCustomerLastName());
+        preparedStatement.setString(3, customer.getCustomerPersonId());
+        preparedStatement.setInt(4, customer.getCustomerId());
         int i = preparedStatement.executeUpdate();
         return i == 1;
     }
@@ -81,8 +78,7 @@ public class CustomerDAO implements DAO<Customer>{
     public boolean delete(Customer customer) throws SQLException{
         Connection connection = ConnectionFactory.getConnection();
         Statement statement = connection.createStatement();
-        int i = statement.executeUpdate("DELETE FROM customer " +
-                "WHERE idCustomer=" + customer.getCustomerId());
+        int i = statement.executeUpdate("DELETE FROM Customer WHERE idCustomer=" + customer.getCustomerId());
         return i == 1;
     }
 }

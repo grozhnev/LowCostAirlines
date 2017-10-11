@@ -32,7 +32,7 @@ public class AirportDAOTest {
 
     @Test
     public void testGetAll() throws SQLException {
-        AirportDAO airportDAO = new AirportDAO();
+        DAO<Airport> airportDAO = new AirportDAO();
         Set<Airport> airports = airportDAO.getAll();
         int counter = 0;
         for (Airport airport:
@@ -46,7 +46,7 @@ public class AirportDAOTest {
 
     @Test
     public void testGetById() throws SQLException {
-        AirportDAO airportDAO = new AirportDAO();
+        DAO<Airport> airportDAO = new AirportDAO();
         Set<Airport> airports = airportDAO.getAll();
         int firstId = 1;
 
@@ -64,7 +64,7 @@ public class AirportDAOTest {
 
     @Test
     public void testInsert() throws SQLException {
-        AirportDAO airportDAO = new AirportDAO();
+        DAO<Airport> airportDAO = new AirportDAO();
         Airport airport = new Airport();
         airport.setAirportId(0);
         airport.setName("TEST_AIRPORT");
@@ -73,7 +73,7 @@ public class AirportDAOTest {
 
     @Test
     public void testUpdate() throws SQLException {
-        AirportDAO airportDAO = new AirportDAO();
+        DAO<Airport> airportDAO = new AirportDAO();
         Airport airport = new Airport();
         airport.setAirportId(1);
         airport.setName("TEST_AIRPORT_UPDATE");
@@ -82,11 +82,10 @@ public class AirportDAOTest {
 
     @Test
     public void testDelete() throws SQLException {
-        AirportDAO airportDAO = new AirportDAO();
+        DAO<Airport> airportDAO = new AirportDAO();
         Set<Airport> airports = airportDAO.getAll();
         Airport airport = new Airport();
         airport.setAirportId(airports.iterator().next().getAirportId());
-        airport.setName("TEST_AIRPORT");
         assertTrue(airportDAO.delete(airport));
     }
 
