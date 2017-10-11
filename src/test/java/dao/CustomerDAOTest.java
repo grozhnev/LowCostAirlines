@@ -32,13 +32,13 @@ public class CustomerDAOTest {
 
     @Test
     public void testGetAll() throws SQLException {
-        CustomerDAO customerDAO = new CustomerDAO();
+        DAO<Customer> customerDAO = new CustomerDAO();
         assertNotNull(customerDAO.getAll());
     }
 
     @Test
     public void testGetById() throws SQLException {
-        CustomerDAO customerDAO = new CustomerDAO();
+        DAO<Customer> customerDAO = new CustomerDAO();
         Set<Customer> customers = customerDAO.getAll();
         for (Customer customer:
                 customers) {
@@ -48,7 +48,7 @@ public class CustomerDAOTest {
 
     @Test
     public void testInsert() throws SQLException {
-        CustomerDAO customerDAO = new CustomerDAO();
+        DAO<Customer> customerDAO = new CustomerDAO();
         Customer customer = new Customer();
         customer.setCustomerId(123);
         customer.setCustomerFirstName("FIRSTNAME_INSERT");
@@ -59,7 +59,7 @@ public class CustomerDAOTest {
 
     @Test
     public void testUpdate() throws SQLException {
-        CustomerDAO customerDAO = new CustomerDAO();
+        DAO<Customer> customerDAO = new CustomerDAO();
         Set<Customer> customers = customerDAO.getAll();
         Customer customer = new Customer();
         customer.setCustomerId(customers.iterator().next().getCustomerId());
@@ -71,13 +71,10 @@ public class CustomerDAOTest {
 
     @Test
     public void testDelete() throws SQLException {
-        CustomerDAO customerDAO = new CustomerDAO();
+        DAO<Customer> customerDAO = new CustomerDAO();
         Set<Customer> customers = customerDAO.getAll();
         Customer customer = new Customer();
         customer.setCustomerId(customers.iterator().next().getCustomerId());
-        customer.setCustomerFirstName("FIRSTNAME_INSERT");
-        customer.setCustomerLastName("LASTNAME_INSERT");
-        customer.setCustomerPersonId("1213123QWE");
         assertTrue(customerDAO.delete(customer));
     }
 

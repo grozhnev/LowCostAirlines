@@ -4,6 +4,8 @@ import entities.Flight;
 import services.ConnectionFactory;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,8 +14,9 @@ public class FlightDAO implements DAO<Flight> {
     private Flight extractFlightFromResultSet(ResultSet resultSet) throws SQLException {
         Flight flight = new Flight();
         flight.setFlightId( resultSet.getInt("idFlight") );
-        flight.setDateTime( resultSet.getDate("DateTime"));
-        flight.setAirportSource( resultSet.getInt("Airport_Source ") );
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        flight.setDateTime(LocalDateTime.from(dateTimeFormatter.parse(resultSet.getString("DateTime").replaceAll("\\.0",""))));
+        flight.setAirportSource( resultSet.getInt("Airport_Source") );
         flight.setAirportDestination(resultSet.getInt("Airport_Destination"));
         flight.setPlaneId(resultSet.getInt("idPlane"));
         return flight;

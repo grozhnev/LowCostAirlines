@@ -25,13 +25,13 @@ public class PlaneDAOTest {
 
     @Test
     public void testGetAll() throws SQLException {
-        PlaneDAO planeDAO = new PlaneDAO();
+        DAO<Plane> planeDAO = new PlaneDAO();
         assertNotNull(planeDAO.getAll());
     }
 
     @Test
     public void testGetById() throws SQLException {
-        PlaneDAO planeDAO = new PlaneDAO();
+        DAO<Plane> planeDAO = new PlaneDAO();
         Set<Plane> planes = planeDAO.getAll();
         for (Plane plane:
              planes) {
@@ -41,7 +41,7 @@ public class PlaneDAOTest {
 
     @Test
     public void testInsert() throws SQLException {
-        PlaneDAO planeDAO = new PlaneDAO();
+        DAO<Plane> planeDAO = new PlaneDAO();
         Plane plane = new Plane();
         plane.setPlaneId(1);
         plane.setMaxLoad(123);
@@ -51,7 +51,7 @@ public class PlaneDAOTest {
 
     @Test
     public void testUpdate() throws SQLException {
-        PlaneDAO planeDAO = new PlaneDAO();
+        DAO<Plane> planeDAO = new PlaneDAO();
         Set<Plane> planes = planeDAO.getAll();
         Plane plane = new Plane();
         plane.setPlaneId(planes.iterator().next().getPlaneId());
@@ -62,12 +62,10 @@ public class PlaneDAOTest {
 
     @Test
     public void testDelete() throws SQLException {
-        PlaneDAO planeDAO = new PlaneDAO();
+        DAO<Plane> planeDAO = new PlaneDAO();
         Set<Plane> planes = planeDAO.getAll();
         Plane plane = new Plane();
         plane.setPlaneId(planes.iterator().next().getPlaneId());
-        plane.setMaxLoad(123);
-        plane.setCurrentLoad(31);
         assertTrue(planeDAO.delete(plane));
     }
 

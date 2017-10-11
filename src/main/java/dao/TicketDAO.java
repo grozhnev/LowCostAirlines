@@ -24,7 +24,7 @@ public class TicketDAO implements DAO<Ticket> {
     public Set<Ticket> getAll() throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM TIcket");
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM Ticket");
         Set<Ticket> tickets = new HashSet<>();
         while(resultSet.next()) {
             Ticket ticket = extractTicketFromResultSet(resultSet);
