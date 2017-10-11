@@ -29,7 +29,7 @@ CREATE TABLE Airport
 CREATE TABLE Customer
 (
    idCustomer           INT NOT NULL AUTO_INCREMENT,
-   Name                 VARCHAR(45) NOT NULL,
+   FirstName            VARCHAR(45) NOT NULL,
    LastName             VARCHAR(45) NOT NULL,
    PersonID             VARCHAR(45) NOT NULL,
    PRIMARY KEY (idCustomer)

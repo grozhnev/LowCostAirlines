@@ -91,7 +91,7 @@ public class TicketDAOTest {
                     connection.prepareStatement("DELETE FROM Ticket WHERE Price=? AND LuggagePrice=? AND RegistrationPriority=?");
             preparedStatement.setInt(1, i + 333);
             preparedStatement.setInt(2, i + 444);
-            preparedStatement.setBoolean(3,true);
+            preparedStatement.setBoolean(3, true);
             preparedStatement.executeUpdate();
         }
     }

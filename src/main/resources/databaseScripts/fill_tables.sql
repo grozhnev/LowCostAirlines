@@ -18,9 +18,9 @@ INSERT INTO Airport (Name)
 INSERT INTO Airport (Name)
  VALUES('Rome');
  
-INSERT INTO Customer (Name, LastName, PersonID)
+INSERT INTO Customer (FirstName, LastName, PersonID)
  VALUES('Jack', 'Jackson', '123-123-123');
-INSERT INTO Customer (Name, LastName, PersonID)
+INSERT INTO Customer (FirstName, LastName, PersonID)
  VALUES('John', 'Johnson', '321-321-321');
  
 INSERT INTO Flight (DateTime, Airport_Source, Airport_Destination, idPlane)

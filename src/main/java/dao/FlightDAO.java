@@ -15,7 +15,8 @@ public class FlightDAO implements DAO<Flight> {
         Flight flight = new Flight();
         flight.setFlightId( resultSet.getInt("idFlight") );
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        flight.setDateTime(LocalDateTime.from(dateTimeFormatter.parse(resultSet.getString("DateTime").replaceAll("\\.0",""))));
+        String dateToParse = resultSet.getString("DateTime").replaceAll("\\.0","");
+        flight.setDateTime(LocalDateTime.from(dateTimeFormatter.parse(dateToParse)));
         flight.setAirportSource( resultSet.getInt("Airport_Source") );
         flight.setAirportDestination(resultSet.getInt("Airport_Destination"));
         flight.setPlaneId(resultSet.getInt("idPlane"));

@@ -22,7 +22,7 @@ public class CustomerDAOTest {
         Connection connection = ConnectionFactory.getConnection();
         for (int i = 0; i < NUMBER_OF_ENTRIES; i++) {
             PreparedStatement preparedStatement =
-                    connection.prepareStatement("INSERT INTO Customer (Name, LastName, PersonID) VALUES(?, ?, ?)");
+                    connection.prepareStatement("INSERT INTO Customer (FirstName, LastName, PersonID) VALUES(?, ?, ?)");
             preparedStatement.setString(1, "NAME_ENTRY#" + i);
             preparedStatement.setString(2, "LASTNAME_ENTRY#" + i);
             preparedStatement.setString(3, "PERSONID_ENTRY#" + i);
@@ -83,7 +83,7 @@ public class CustomerDAOTest {
         Connection connection = ConnectionFactory.getConnection();
         for (int i = 0; i < NUMBER_OF_ENTRIES; i++) {
             PreparedStatement preparedStatement =
-                    connection.prepareStatement("DELETE FROM Customer WHERE Name=? AND LastName=? AND PersonID=?");
+                    connection.prepareStatement("DELETE FROM Customer WHERE FirstName=? AND LastName=? AND PersonID=?");
             preparedStatement.setString(1, "NAME_ENTRY#" + i);
             preparedStatement.setString(2, "LASTNAME_ENTRY#" + i);
             preparedStatement.setString(3, "PERSONID_ENTRY#" + i);
