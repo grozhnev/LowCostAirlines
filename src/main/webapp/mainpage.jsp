@@ -4,19 +4,22 @@
         <title>LowCostAirlines</title>
     </head>
     <body>
-        <h1>Metadata: ${metadata}</h1>
-        <h1>Error: ${error}</h1>
 
-        <h1>Airports: ${airports}</h1>
-        <h1>Planes: ${planes}</h1>
-        <h1>Customers: ${customers}</h1>
-        <h1>Metadata: $ {metadata}</h1>
-        <h1>Error: $ {error}</h1>
+    <form method="post" action="Login">
+        <h1>
+        <font size="5" color="black">Welcome to Lowcoster home</font>
+            <br>
+            <font size="3" color="gray">To continue please log in</font>
+        </h1>
+        <table border="2" width="2" bgcolor="#d3d3d3" style="color:black">
+            <tr><td><b>UserName</b></td> <td><input type="text" name="uname"></td></tr>
+            <tr><td><b>Password</b></td> <td><INPUT type="password" name="upass"></td></tr>
+            <tr><td><input type="submit" value="Login"></td>
+                <td><input type="reset" value="Reset"></td>
+        </table>
 
-        <h1>Airports: $ {airports}</h1>
-        <h1>Planes: $ {planes}</h1>
+    </form>
+
     </body>
 </html>
-        <h1>get rekt ${name}</h1>
-    </body>
-</html>
+
