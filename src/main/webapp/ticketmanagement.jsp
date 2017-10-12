@@ -5,10 +5,19 @@
     <title>Title</title>
 </head>
 <body>
-<select name="airport">
+
+<select name="airport_source">
     <c:forEach items="${airports}" var="airport">
         <option value="${airport.airportId}"><c:out value="${airport.name}" /></option>
     </c:forEach>
 </select>
+
+<select name="airport_destination">
+    <c:forEach items="${airports}" var="airport">
+        <option value="${airport.airportId}"><c:out value="${airport.name}" /></option>
+    </c:forEach>
+</select>
+
+
 </body>
 </html>
