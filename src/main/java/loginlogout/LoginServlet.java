@@ -5,10 +5,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 
 @WebServlet("/Login")
 public class LoginServlet extends HttpServlet {
@@ -16,7 +13,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        request.getRequestDispatcher("mainpage.jsp").include(request, response);
+        request.getRequestDispatcher("login.jsp").include(request, response);
 
         String name = request.getParameter("uname");
         String password = request.getParameter("upass");
@@ -31,5 +28,4 @@ public class LoginServlet extends HttpServlet {
         }
         out.close();
     }
-
 }

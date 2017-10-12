@@ -9,7 +9,7 @@
     <h1> <font size="3" color="black">Planes: ${planes}</font></h1>
     <h1> <font size="3" color="black">Customers: ${customers}</font></h1>
 
-    <a href="Lowcostairlines">Back to main page</a>
+    <a href="/">Back to main page</a>
 
 </body>
 </html>
