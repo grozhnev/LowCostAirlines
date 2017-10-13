@@ -33,6 +33,6 @@ public class MockitoTests {
 
         Ticket ticket = Mockito.mock(Ticket.class);
         when(ticket.getCustomerId()).thenReturn(1);
-        Assert.assertEquals(1, ticket.getCustomerId());\
+        Assert.assertEquals(1, ticket.getCustomerId());
     }
 }
