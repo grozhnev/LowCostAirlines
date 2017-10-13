@@ -25,4 +25,11 @@ public class TicketManagementController extends HttpServlet {
             request.getRequestDispatcher("/ticketmanagement.jsp").forward(request, response);
         } catch (SQLException e) {}
     }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        this.doGet(request, response);
+
+        System.out.println(request.getParameter("checkradio"));
+    }
 }
