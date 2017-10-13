@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<form method="post" action="Login">
+<form method="post" action="login">
     <h1>
         <font size="5" color="black">Welcome to login page</font>
         <br>

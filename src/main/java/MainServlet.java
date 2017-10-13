@@ -1,9 +1,3 @@
-import dao.AirportDaoImpl;
-import dao.CustomerDAOImpl;
-import dao.DAO;
-import dao.PlaneDaoImpl;
-import entities.Customer;
-import services.ConnectionFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,9 +5,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
 
+/**
+ * Main page with greeting Customer
+ */
 @WebServlet("/")
 public class MainServlet extends HttpServlet {
 

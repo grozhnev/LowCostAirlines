@@ -58,4 +58,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
         <url-pattern>/LogoutServlet</url-pattern>
     </servlet-mapping>
 
+
+    <servlet>
+        <display-name>RegisterServlet</display-name>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>loginlogout.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/RegisterServlet</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>

@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<form method="post" action="Login">
+<form method="post" action="registration">
     <h1>
         <font size="5" color="black">Welcome to registration</font>
         <br>
@@ -17,6 +17,8 @@
     </table>
 
 </form>
+
+     <a href="/">Back to main page</a>
 
 </body>
 </html>

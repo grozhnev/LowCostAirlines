@@ -6,11 +6,9 @@
             body{
                 background-color: lightgray;
             }
-
             table, th, td {
                 border: 4px solid black;
             }
-
             .button {
                 background-color: darkgray;
                 border: none;
@@ -22,28 +20,22 @@
                 font-size: 16px;
                 margin: 4px 2px;
                 cursor: pointer;
+                border-radius: 8px;
             }
         </style>
     </head>
-
     <body>
     <h1><font size="7" color="black">Lowcoster Airlines</font></h1>
     <br>
     <h1><font size="4" color="black">to continue choose:</font></h1>
     <br>
-
-
-    <form method="post" action="Login">
+    <form method="post" action="login">
             <td ><input class="button" type="submit" value="Login in system"></td>
     </form>
-
     <br>
-
-    <form method="post" action="Registration">
+    <form method="post" action="registration">
         <tr><td><input class="button" type="submit" value="Registration"></td>
     </form>
-
-
     </body>
 </html>
 

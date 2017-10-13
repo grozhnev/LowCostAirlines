@@ -14,7 +14,11 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-@WebServlet("/Data")
+/**
+ * Temporary class
+ * Shows all results from schema
+ */
+@WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
     @Override

@@ -7,10 +7,20 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-@WebServlet("/Login")
+/**
+ * Allows Customer enter to system and see information.
+ * Now to enter you can input any name and password 123.
+ */
+@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("login.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         request.getRequestDispatcher("login.jsp").include(request, response);
@@ -22,9 +32,9 @@ public class LoginServlet extends HttpServlet {
             out.print("Welcome, " + name);
             HttpSession session = request.getSession();
             session.setAttribute("uname", name);
-            response.sendRedirect("/Data");
+            response.sendRedirect("/data");
         } else {
-            request.getRequestDispatcher("unsucsessfulllogin.html").forward(request, response);
+            request.getRequestDispatcher("unsuccessfully.html").forward(request, response);
         }
         out.close();
     }
