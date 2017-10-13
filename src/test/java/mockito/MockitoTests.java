@@ -25,7 +25,7 @@ public class MockitoTests {
     }
 
     @Test
-    public void checkPrice(){
+    public void checkPrice()throws SQLException{
         Ticket ticket = mock(Ticket.class);
         when(ticket.getPrice()).thenReturn(50);
         Assert.assertEquals(50, ticket.getPrice());
