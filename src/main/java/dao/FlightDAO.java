@@ -2,6 +2,7 @@ package dao;
 
 import entities.Flight;
 import services.ConnectionFactory;
+import connectionpool.JDBCConnectionPool;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -25,7 +26,8 @@ public class FlightDAO implements DAO<Flight> {
 
     @Override
     public Set<Flight> getAll() throws SQLException {
-        Connection connection = ConnectionFactory.getConnection();
+        JDBCConnectionPool connectionThroughConnectPool = new JDBCConnectionPool();
+        Connection connection = connectionThroughConnectPool.getConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Flight");
         Set<Flight> flights = new HashSet<>();
