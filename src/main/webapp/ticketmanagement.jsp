@@ -30,7 +30,7 @@
                 <td align="left"><c:out value="${flight.planeId}"/></td>
                 <td align="center">
                     <input type="radio" name="checkradio"
-                           value="${flight.toString()}"/>
+                           value="${flight}"/>
                 </td>
             </tr>
         </c:forEach>
