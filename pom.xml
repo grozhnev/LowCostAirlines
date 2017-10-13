@@ -12,6 +12,7 @@
     <packaging>war</packaging>
 
     <build>
+        <finalName>LowCostAirlines</finalName>
         <sourceDirectory>${pom.basedir}/src/main/java</sourceDirectory>
         <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
         <plugins>
@@ -81,5 +82,12 @@
         </dependency>
 
 
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-catalina</artifactId>
+            <version>9.0.1</version>
+        </dependency>
+
     </dependencies>
+
 </project>
