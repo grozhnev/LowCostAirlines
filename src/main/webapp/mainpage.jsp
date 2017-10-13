@@ -13,8 +13,7 @@
         <h1>Metadata: ${metadata}</h1>
         <h1>Error: $ {error}</h1>
 
-    </body>
-</html>
         <h1>get rekt ${name}</h1>
     </body>
+
 </html>
