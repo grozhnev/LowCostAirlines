@@ -1,10 +1,8 @@
-import dao.AirportDAO;
-import dao.CustomerDAO;
-import dao.DAO;
-import dao.PlaneDAO;
+import dao.*;
 import entities.Airport;
 import entities.Customer;
 import entities.Plane;
+import entities.Ticket;
 import services.ConnectionFactory;
 
 import javax.servlet.ServletException;
@@ -27,12 +25,14 @@ public class MainServlet extends HttpServlet {
         DAO<Airport> airport = new AirportDAO();
         DAO<Plane> plane = new PlaneDAO();
         DAO<Customer> customer = new CustomerDAO();
+        DAO<Ticket> ticket = new TicketDAO();
 
         try {
             req.setAttribute("metadata", connection.getMetaData());
             req.setAttribute("airports", airport.getAll());
             req.setAttribute("planes", plane.getAll());
             req.setAttribute("customers", customer.getAll());
+            req.setAttribute("tickets", ticket.getAll());
             req.getRequestDispatcher("mainpage.jsp").forward(req, resp);
 
         } catch (SQLException e) {
