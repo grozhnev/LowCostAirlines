@@ -13,6 +13,8 @@
         <h1>Metadata: $ {metadata}</h1>
         <h1>Error: $ {error}</h1>
 
+        <h1> Ticket: ${ticket}</h1>
+
         <h1>Airports: $ {airports}</h1>
         <h1>Planes: $ {planes}</h1>
     </body>
