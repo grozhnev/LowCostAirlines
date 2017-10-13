@@ -1,5 +1,6 @@
 package dao;
 
+import connectionpool.JDBCConnectionPool;
 import entities.Ticket;
 import services.ConnectionFactory;
 
@@ -22,7 +23,8 @@ public class TicketDAO implements DAO<Ticket> {
 
     @Override
     public Set<Ticket> getAll() throws SQLException {
-        Connection connection = ConnectionFactory.getConnection();
+        JDBCConnectionPool connectionThroughConnectPool = new JDBCConnectionPool();
+        Connection connection = connectionThroughConnectPool.getConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Ticket");
         Set<Ticket> tickets = new HashSet<>();
