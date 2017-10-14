@@ -2,6 +2,7 @@ package logic;
 
 import dao.TicketDAO;
 import entities.Ticket;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,18 +19,25 @@ import java.util.Set;
  */
 
 
-public class PriceListConstructor{
+public @Data class PriceListConstructor{
     /**
      * TEST FIRST (Mock test to ensure that we have access to DB).
+     *
+     *
+     *  1) перечислить мета-данные на вход
+     *  2) написать логику их обработки
+     *  3) функция подсчета цены
+     *  4) написать логику их возврата
      * */
 
-    @Getter @Setter private int price; /* required to be Long */
+    private int price; /* required to be Long */
     private Date time;
     private boolean isHighPriority;
 
     private Set<Ticket> ticketContainer;
 
-    public void getTickets() throws SQLException {
+
+    public void getTicketsZZz() throws SQLException {
 
         ticketContainer = new HashSet<>();
         TicketDAO ticketDAO = new TicketDAO();

@@ -2,6 +2,7 @@ package dao;
 
 import entities.Airport;
 import services.ConnectionFactory;
+import connectionpool.JDBCConnectionPool;
 
 import java.sql.*;
 import java.util.HashSet;
@@ -19,10 +20,12 @@ public class AirportDAO implements DAO<Airport> {
         airport.setName( resultSet.getString("Name") );
         return airport;
     }
-
     @Override
     public Set<Airport> getAll() throws SQLException {
-        Connection connection = ConnectionFactory.getConnection();
+
+        JDBCConnectionPool connectionThroughConnectPool = new JDBCConnectionPool();
+        Connection connection = connectionThroughConnectPool.getConnection();
+
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Airport");
         Set<Airport> airports = new HashSet<>();
