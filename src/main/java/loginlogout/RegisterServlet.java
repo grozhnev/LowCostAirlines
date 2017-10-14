@@ -1,7 +1,5 @@
 package loginlogout;
 
-import mapWithNameAndPassword.CustomerNameAndPass;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Map;
 
 /**
  * Allows new Customer to register
@@ -24,8 +21,6 @@ import java.util.Map;
 @WebServlet("/registration")
 public class RegisterServlet extends HttpServlet {
 
-    private CustomerNameAndPass customerNameAndPass = new CustomerNameAndPass();
-
     /**
      * Get from registration page Customers parameters an put them in map
      */
@@ -37,18 +32,11 @@ public class RegisterServlet extends HttpServlet {
         String name = request.getParameter("uname");
         String password = request.getParameter("upass");
 
-        customerNameAndPass.customersNamesAndPasswords(name, password);
-        customerNameAndPass.mapToString();
-
-        //This cycle works in any case because name from request is the same
-        //entry.getKey(). Now I have not idea how solve this issue.
-        for (Map.Entry<String, String> entry : CustomerNameAndPass.map.entrySet()) {
-            if ((entry.getKey()).equals(name)) {
-                out.print("Welcome, " + name);
-                HttpSession session = request.getSession();
-                session.setAttribute("uname", name);
-                response.sendRedirect("/login");
-            }
+        if ("123".equals(password)) {
+            out.print("Welcome, " + name);
+            HttpSession session = request.getSession();
+            session.setAttribute("uname", name);
+            response.sendRedirect("/login");
         }
         out.close();
     }
