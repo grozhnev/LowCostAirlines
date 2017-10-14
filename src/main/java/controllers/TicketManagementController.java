@@ -41,8 +41,7 @@ public class TicketManagementController extends HttpServlet {
         if (!requestedFlightString.isEmpty()) {
             Flight requestedFlight = null;
 
-            for (Flight flight :
-                    flights) {
+            for (Flight flight : flights) {
                 if (flight.toString().equals(requestedFlightString)) {
                     requestedFlight = flight;
                     break;
@@ -50,12 +49,12 @@ public class TicketManagementController extends HttpServlet {
             }
 
             if (requestedFlight != null) {
-                Ticket requestedTicket = new Ticket();
-                requestedTicket.setRegistrationPriority(true);
-                requestedTicket.setPrice(359);
-                requestedTicket.setLuggagePrice(228);
-                requestedTicket.setCustomerId(1);
-                requestedTicket.setFlightId(requestedFlight.getFlightId());
+                Ticket requestedTicket = new Ticket()
+                        .setRegistrationPriority(true)
+                        .setPrice(359)
+                        .setLuggagePrice(228)
+                        .setCustomerId(1)
+                        .setFlightId(requestedFlight.getFlightId());
                 try {
                     ticketDAO.insert(requestedTicket);
                 } catch (SQLException e) {

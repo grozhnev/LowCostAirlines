@@ -12,15 +12,15 @@ import java.util.Set;
 public class FlightDAO implements DAO<Flight> {
 
     private Flight extractFlightFromResultSet(ResultSet resultSet) throws SQLException {
-        Flight flight = new Flight();
-        flight.setFlightId( resultSet.getInt("idFlight") );
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dateToParse = resultSet.getString("DateTime").replaceAll("\\.0","");
-        flight.setDateTime(LocalDateTime.from(dateTimeFormatter.parse(dateToParse)));
-        flight.setAirportSource( resultSet.getInt("Airport_Source") );
-        flight.setAirportDestination(resultSet.getInt("Airport_Destination"));
-        flight.setPlaneId(resultSet.getInt("idPlane"));
-        return flight;
+
+        return new Flight()
+                .setFlightId(resultSet.getInt("FlightID"))
+                .setDateTime(LocalDateTime.from(dateTimeFormatter.parse(dateToParse)))
+                .setAirportSource(resultSet.getInt("AirportSource"))
+                .setAirportDestination(resultSet.getInt("AirportDestination"))
+                .setPlaneId(resultSet.getInt("PlaneID"));
     }
 
     @Override
@@ -45,7 +45,7 @@ public class FlightDAO implements DAO<Flight> {
     public Flight getById(int id) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM Flight WHERE idFlight=" + id);
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM Flight WHERE FlightID=" + id);
 
         if(resultSet.next()) {
             return extractFlightFromResultSet(resultSet);
@@ -57,7 +57,7 @@ public class FlightDAO implements DAO<Flight> {
     @Override
     public boolean insert(Flight flight) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Flight (DateTime, Airport_Source, Airport_Destination, idPlane) VALUES (?, ?, ?, ?)");
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Flight (DateTime, AirportSource, AirportDestination, PlaneID) VALUES (?, ?, ?, ?)");
         preparedStatement.setString(1, String.valueOf(flight.getDateTime()));
         preparedStatement.setInt(2, flight.getAirportSource());
         preparedStatement.setInt(3, flight.getAirportDestination());
@@ -69,7 +69,7 @@ public class FlightDAO implements DAO<Flight> {
     @Override
     public boolean update(Flight flight) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Flight SET DateTime=?, Airport_Source=?, Airport_Destination=?, idPlane=? WHERE idFlight=?");
+        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Flight SET DateTime=?, AirportSource=?, AirportDestination=?, PlaneID=? WHERE FlightID=?");
         preparedStatement.setString(1, String.valueOf(flight.getDateTime()));
         preparedStatement.setInt(2, flight.getAirportSource());
         preparedStatement.setInt(3, flight.getAirportDestination());
@@ -83,7 +83,7 @@ public class FlightDAO implements DAO<Flight> {
     public boolean delete(Flight flight) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
         Statement statement = connection.createStatement();
-        int i = statement.executeUpdate("DELETE FROM Flight WHERE idFlight=" + flight.getFlightId());
+        int i = statement.executeUpdate("DELETE FROM Flight WHERE FLightID=" + flight.getFlightId());
         return i == 1;
     }
 }

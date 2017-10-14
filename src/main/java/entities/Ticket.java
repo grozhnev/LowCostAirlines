@@ -2,9 +2,11 @@ package entities;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 @Data
 @EqualsAndHashCode(exclude={"ticketId"})
+@Accessors(chain = true)
 public class Ticket {
     private int ticketId;
     private int flightId;

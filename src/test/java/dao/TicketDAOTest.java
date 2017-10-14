@@ -22,7 +22,7 @@ public class TicketDAOTest {
         Connection connection = ConnectionFactory.getConnection();
         for (int i = 1; i <= NUMBER_OF_ENTRIES; i++) {
             PreparedStatement preparedStatement =
-                    connection.prepareStatement("INSERT INTO Ticket (idFlight, idCustomer, Price, LuggagePrice, RegistrationPriority) VALUES (?, ?, ?, ?, ?)");
+                    connection.prepareStatement("INSERT INTO Ticket (FlightID, CustomerID, Price, LuggagePrice, RegistrationPriority) VALUES (?, ?, ?, ?, ?)");
             Set<Flight> flights = new FlightDAO().getAll();
             preparedStatement.setInt(1, flights.iterator().next().getFlightId());
             Set<Customer> customers = new CustomerDAO().getAll();
@@ -30,6 +30,7 @@ public class TicketDAOTest {
             preparedStatement.setInt(3, i + 333);
             preparedStatement.setInt(4, i + 444);
             preparedStatement.setBoolean(5, true);
+            preparedStatement.executeUpdate();
         }
     }
 
@@ -52,25 +53,29 @@ public class TicketDAOTest {
     @Test
     public void testInsert() throws SQLException {
         DAO<Ticket> ticketDAO = new TicketDAO();
-        Ticket ticket = new Ticket();
-        ticket.setFlightId(3);
-        ticket.setCustomerId(2);
-        ticket.setPrice(30);
-        ticket.setLuggagePrice(20);
-        ticket.setRegistrationPriority(true);
+        DAO<Flight> flightDAO = new FlightDAO();
+        DAO<Customer> customerDAO = new CustomerDAO();
+        Ticket ticket = new Ticket()
+                .setFlightId(flightDAO.getAll().iterator().next().getFlightId())
+                .setCustomerId(customerDAO.getAll().iterator().next().getCustomerId())
+                .setPrice(30)
+                .setLuggagePrice(20)
+                .setRegistrationPriority(true);
         assertTrue(ticketDAO.insert(ticket));
     }
 
     @Test
     public void testUpdate() throws SQLException {
         DAO<Ticket> ticketDAO = new TicketDAO();
-        Ticket ticket = new Ticket();
-        ticket.setTicketId(ticketDAO.getAll().iterator().next().getTicketId());
-        ticket.setFlightId(3);
-        ticket.setCustomerId(2);
-        ticket.setPrice(30);
-        ticket.setLuggagePrice(20);
-        ticket.setRegistrationPriority(true);
+        DAO<Flight> flightDAO = new FlightDAO();
+        DAO<Customer> customerDAO = new CustomerDAO();
+        Ticket ticket = new Ticket()
+                .setTicketId(ticketDAO.getAll().iterator().next().getTicketId())
+                .setFlightId(flightDAO.getAll().iterator().next().getFlightId())
+                .setCustomerId(customerDAO.getAll().iterator().next().getCustomerId())
+                .setPrice(30)
+                .setLuggagePrice(20)
+                .setRegistrationPriority(true);
         assertTrue(ticketDAO.update(ticket));
     }
 
@@ -78,8 +83,8 @@ public class TicketDAOTest {
     public void testDelete() throws SQLException {
         DAO<Ticket> ticketDAO = new TicketDAO();
         Set<Ticket> tickets = ticketDAO.getAll();
-        Ticket ticket = new Ticket();
-        ticket.setTicketId(tickets.iterator().next().getTicketId());
+        Ticket ticket = new Ticket()
+                .setTicketId(tickets.iterator().next().getTicketId());
         assertTrue(ticketDAO.delete(ticket));
     }
 

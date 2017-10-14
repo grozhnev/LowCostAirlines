@@ -7,17 +7,12 @@ import java.sql.*;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Implementation of airport DAO
- * @author klysov
- */
 public class AirportDAO implements DAO<Airport> {
 
     private Airport extractAirportFromResultSet(ResultSet resultSet) throws SQLException {
-        Airport airport = new Airport();
-        airport.setAirportId( resultSet.getInt("idAirport") );
-        airport.setName( resultSet.getString("Name") );
-        return airport;
+        return new Airport()
+                .setAirportId(resultSet.getInt("AirportID"))
+                .setName(resultSet.getString("Name"));
     }
 
     @Override
@@ -43,7 +38,7 @@ public class AirportDAO implements DAO<Airport> {
     public Airport getById(int id) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM Airport WHERE idAirport=" + id);
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM Airport WHERE AirportID=" + id);
 
         if(resultSet.next()) {
             return extractAirportFromResultSet(resultSet);
@@ -64,7 +59,7 @@ public class AirportDAO implements DAO<Airport> {
     @Override
     public boolean update(Airport airport) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Airport SET Name=? WHERE idAirport=?");
+        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Airport SET Name=? WHERE AirportID=?");
         preparedStatement.setString(1, airport.getName());
         preparedStatement.setInt(2, airport.getAirportId());
         int i = preparedStatement.executeUpdate();
@@ -75,7 +70,7 @@ public class AirportDAO implements DAO<Airport> {
     public boolean delete(Airport airport) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
         Statement statement = connection.createStatement();
-        int i = statement.executeUpdate("DELETE FROM Airport WHERE idAirport=" + airport.getAirportId());
+        int i = statement.executeUpdate("DELETE FROM Airport WHERE AirportID=" + airport.getAirportId());
         return i == 1;
     }
 }

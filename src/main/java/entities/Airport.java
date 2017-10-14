@@ -2,14 +2,11 @@ package entities;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-/**
- * Airport entity implementation
- * @author klysov
- */
+import lombok.experimental.Accessors;
 
 @Data
 @EqualsAndHashCode(exclude={"airportId"})
+@Accessors(chain = true)
 public class Airport {
     private int airportId;
     private String name;
