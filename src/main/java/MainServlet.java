@@ -1,11 +1,3 @@
-import dao.AirportDAO;
-import dao.CustomerDAO;
-import dao.DAO;
-import dao.PlaneDAO;
-import entities.Airport;
-import entities.Customer;
-import entities.Plane;
-import services.ConnectionFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,9 +5,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
 
+/**
+ * Main page with greeting Customer
+ */
 @WebServlet("/")
 public class MainServlet extends HttpServlet {
 
@@ -23,20 +16,10 @@ public class MainServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        Connection connection = ConnectionFactory.getConnection();
-        DAO<Airport> airport = new AirportDAO();
-        DAO<Plane> plane = new PlaneDAO();
-        DAO<Customer> customer = new CustomerDAO();
-
         try {
-            req.setAttribute("metadata", connection.getMetaData());
-            req.setAttribute("airports", airport.getAll());
-            req.setAttribute("planes", plane.getAll());
-            req.setAttribute("customers", customer.getAll());
             req.getRequestDispatcher("mainpage.jsp").forward(req, resp);
-
-        } catch (SQLException e) {
-            req.setAttribute("error", e.getErrorCode());
+        } catch (Exception e) {
+            req.setAttribute("error", e.getMessage());
             req.getRequestDispatcher("mainpage.jsp").forward(req, resp);
         }
     }

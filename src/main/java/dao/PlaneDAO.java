@@ -2,6 +2,7 @@ package dao;
 
 import entities.Plane;
 import services.ConnectionFactory;
+import connectionpool.JDBCConnectionPool;
 
 import java.sql.*;
 import java.util.HashSet;
@@ -18,7 +19,8 @@ public class PlaneDAO implements DAO<Plane> {
 
     @Override
     public Set<Plane> getAll() throws SQLException{
-        Connection connection = ConnectionFactory.getConnection();
+        JDBCConnectionPool connectionThroughConnectPool = new JDBCConnectionPool();
+        Connection connection = connectionThroughConnectPool.getConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Plane");
         Set<Plane> planes = new HashSet<>();

@@ -2,6 +2,7 @@ package dao;
 
 import entities.Customer;
 import services.ConnectionFactory;
+import connectionpool.JDBCConnectionPool;
 
 import java.sql.*;
 import java.util.HashSet;
@@ -21,7 +22,9 @@ public class CustomerDAO implements DAO<Customer>{
 
     @Override
     public Set<Customer> getAll() throws SQLException {
-        Connection connection = ConnectionFactory.getConnection();
+
+        JDBCConnectionPool connectionThroughConnectPool = new JDBCConnectionPool();
+        Connection connection = connectionThroughConnectPool.getConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Customer");
         Set<Customer> customers = new HashSet<>();
