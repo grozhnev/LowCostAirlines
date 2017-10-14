@@ -7,18 +7,13 @@ import java.sql.*;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Implementation of plane DAO
- * @author klysov
- */
 public class PlaneDAO implements DAO<Plane> {
 
     private Plane extractPlaneFromResultSet(ResultSet resultSet) throws SQLException {
-        Plane plane = new Plane();
-        plane.setPlaneId( resultSet.getInt("idPlane") );
-        plane.setMaxLoad( resultSet.getInt("MaxLoad") );
-        plane.setCurrentLoad( resultSet.getInt("CurrentLoad") );
-        return plane;
+        return new Plane()
+                .setPlaneId(resultSet.getInt("PlaneID"))
+                .setMaxLoad(resultSet.getInt("MaxLoad"))
+                .setCurrentLoad(resultSet.getInt("CurrentLoad"));
     }
 
     @Override
@@ -43,7 +38,7 @@ public class PlaneDAO implements DAO<Plane> {
     public Plane getById(int id) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM Plane WHERE idPlane=" + id);
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM Plane WHERE PlaneID=" + id);
 
         if(resultSet.next()) {
             return extractPlaneFromResultSet(resultSet);
@@ -65,7 +60,7 @@ public class PlaneDAO implements DAO<Plane> {
     @Override
     public boolean update(Plane plane) throws SQLException{
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Plane SET MaxLoad=?, CurrentLoad=? WHERE idPlane=?");
+        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Plane SET MaxLoad=?, CurrentLoad=? WHERE PlaneID=?");
         preparedStatement.setInt(1, plane.getMaxLoad());
         preparedStatement.setInt(2, plane.getCurrentLoad());
         preparedStatement.setInt(3, plane.getPlaneId());
@@ -77,7 +72,7 @@ public class PlaneDAO implements DAO<Plane> {
     public boolean delete(Plane plane) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
         Statement statement = connection.createStatement();
-        int i = statement.executeUpdate("DELETE FROM Plane WHERE idPlane=" + plane.getPlaneId());
+        int i = statement.executeUpdate("DELETE FROM Plane WHERE PlaneID=" + plane.getPlaneId());
         return i == 1;
     }
 }

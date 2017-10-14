@@ -22,10 +22,12 @@ public class CustomerDAOTest {
         Connection connection = ConnectionFactory.getConnection();
         for (int i = 0; i < NUMBER_OF_ENTRIES; i++) {
             PreparedStatement preparedStatement =
-                    connection.prepareStatement("INSERT INTO Customer (FirstName, LastName, PersonID) VALUES(?, ?, ?)");
+                    connection.prepareStatement("INSERT INTO Customer (FirstName, LastName, Passport, Email, Passwd) VALUES(?, ?, ?, ?, ?)");
             preparedStatement.setString(1, "NAME_ENTRY#" + i);
             preparedStatement.setString(2, "LASTNAME_ENTRY#" + i);
-            preparedStatement.setString(3, "PERSONID_ENTRY#" + i);
+            preparedStatement.setString(3, "PASSPORT_ENTRY#" + i);
+            preparedStatement.setString(4, "EMAIL_ENTRY#" + i);
+            preparedStatement.setString(5, "PASSWD_ENTRY#" + i);
             preparedStatement.executeUpdate();
         }
     }
@@ -49,11 +51,12 @@ public class CustomerDAOTest {
     @Test
     public void testInsert() throws SQLException {
         DAO<Customer> customerDAO = new CustomerDAO();
-        Customer customer = new Customer();
-        customer.setCustomerId(123);
-        customer.setCustomerFirstName("FIRSTNAME_INSERT");
-        customer.setCustomerLastName("LASTNAME_INSERT");
-        customer.setCustomerPersonId("1213123QWE");
+        Customer customer = new Customer()
+                .setFirstName("FIRSTNAME_INSERT")
+                .setLastName("LASTNAME_INSERT")
+                .setPassport("123-123-123")
+                .setEmail("INSERT_EMAIL")
+                .setPasswd("INSERT_PASSWD");
         assertTrue(customerDAO.insert(customer));
     }
 
@@ -61,11 +64,13 @@ public class CustomerDAOTest {
     public void testUpdate() throws SQLException {
         DAO<Customer> customerDAO = new CustomerDAO();
         Set<Customer> customers = customerDAO.getAll();
-        Customer customer = new Customer();
-        customer.setCustomerId(customers.iterator().next().getCustomerId());
-        customer.setCustomerFirstName("FIRSTNAME_INSERT");
-        customer.setCustomerLastName("LASTNAME_INSERT");
-        customer.setCustomerPersonId("1213123QWE");
+        Customer customer = new Customer()
+                .setCustomerId(customers.iterator().next().getCustomerId())
+                .setFirstName("UPDATE_FIRSTNAME")
+                .setLastName("UPDATE_LASTNAME")
+                .setPassport("132-132-132")
+                .setEmail("UPDATE_MAIL")
+                .setPasswd("UPDATE_PASSWD");
         assertTrue(customerDAO.update(customer));
     }
 
@@ -73,8 +78,8 @@ public class CustomerDAOTest {
     public void testDelete() throws SQLException {
         DAO<Customer> customerDAO = new CustomerDAO();
         Set<Customer> customers = customerDAO.getAll();
-        Customer customer = new Customer();
-        customer.setCustomerId(customers.iterator().next().getCustomerId());
+        Customer customer = new Customer()
+                .setCustomerId(customers.iterator().next().getCustomerId());
         assertTrue(customerDAO.delete(customer));
     }
 
@@ -83,10 +88,8 @@ public class CustomerDAOTest {
         Connection connection = ConnectionFactory.getConnection();
         for (int i = 0; i < NUMBER_OF_ENTRIES; i++) {
             PreparedStatement preparedStatement =
-                    connection.prepareStatement("DELETE FROM Customer WHERE FirstName=? AND LastName=? AND PersonID=?");
-            preparedStatement.setString(1, "NAME_ENTRY#" + i);
-            preparedStatement.setString(2, "LASTNAME_ENTRY#" + i);
-            preparedStatement.setString(3, "PERSONID_ENTRY#" + i);
+                    connection.prepareStatement("DELETE FROM Customer WHERE Email=?");
+            preparedStatement.setString(1, "EMAIL_ENTRY#" + i);
             preparedStatement.executeUpdate();
         }
     }
