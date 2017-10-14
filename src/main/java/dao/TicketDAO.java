@@ -11,14 +11,13 @@ import java.util.Set;
 public class TicketDAO implements DAO<Ticket> {
 
     private Ticket extractTicketFromResultSet(ResultSet resultSet) throws SQLException {
-        Ticket ticket = new Ticket();
-        ticket.setTicketId( resultSet.getInt("idTicket") );
-        ticket.setFlightId( resultSet.getInt("idFlight"));
-        ticket.setCustomerId( resultSet.getInt("idCustomer"));
-        ticket.setPrice( resultSet.getInt("Price") );
-        ticket.setLuggagePrice(resultSet.getInt("LuggagePrice"));
-        ticket.setRegistrationPriority(resultSet.getBoolean("RegistrationPriority"));
-        return ticket;
+        return new Ticket()
+                .setTicketId(resultSet.getInt("TicketID"))
+                .setFlightId(resultSet.getInt("FlightID"))
+                .setCustomerId(resultSet.getInt("CustomerID"))
+                .setPrice(resultSet.getInt("Price") )
+                .setLuggagePrice(resultSet.getInt("LuggagePrice"))
+                .setRegistrationPriority(resultSet.getBoolean("RegistrationPriority"));
     }
 
     @Override
@@ -44,7 +43,7 @@ public class TicketDAO implements DAO<Ticket> {
     public Ticket getById(int id) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM Ticket WHERE idTicket=" + id);
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM Ticket WHERE TicketID=" + id);
 
         if(resultSet.next()) {
             return extractTicketFromResultSet(resultSet);
@@ -56,7 +55,7 @@ public class TicketDAO implements DAO<Ticket> {
     @Override
     public boolean insert(Ticket ticket) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Ticket (idFlight, idCustomer, Price, LuggagePrice, RegistrationPriority) VALUES (?, ?, ?, ?, ?)");
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Ticket (FlightID, CustomerID, Price, LuggagePrice, RegistrationPriority) VALUES (?, ?, ?, ?, ?)");
         preparedStatement.setInt(1, ticket.getFlightId());
         preparedStatement.setInt(2, ticket.getCustomerId());
         preparedStatement.setInt(3, ticket.getPrice());
@@ -69,7 +68,7 @@ public class TicketDAO implements DAO<Ticket> {
     @Override
     public boolean update(Ticket ticket) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Ticket SET idCustomer=?, Price=?, LuggagePrice=?, RegistrationPriority=? WHERE idTicket=?");
+        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Ticket SET CustomerID=?, Price=?, LuggagePrice=?, RegistrationPriority=? WHERE TicketID=?");
         preparedStatement.setInt(1, ticket.getCustomerId());
         preparedStatement.setInt(2, ticket.getPrice());
         preparedStatement.setInt(3, ticket.getLuggagePrice());
@@ -83,7 +82,7 @@ public class TicketDAO implements DAO<Ticket> {
     public boolean delete(Ticket ticket) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
         Statement statement = connection.createStatement();
-        int i = statement.executeUpdate("DELETE FROM Ticket WHERE idTIcket=" + ticket.getTicketId());
+        int i = statement.executeUpdate("DELETE FROM Ticket WHERE TicketID=" + ticket.getTicketId());
         return i == 1;
     }
 }

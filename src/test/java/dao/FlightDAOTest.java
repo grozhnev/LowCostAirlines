@@ -26,7 +26,7 @@ public class FlightDAOTest {
         Connection connection = ConnectionFactory.getConnection();
         for (int i = 1; i <= NUMBER_OF_ENTRIES; i++) {
             PreparedStatement preparedStatement =
-                    connection.prepareStatement("INSERT INTO Flight (DateTime, Airport_Source, Airport_Destination, idPlane) VALUES (?, ?, ?, ?)");
+                    connection.prepareStatement("INSERT INTO Flight (DateTime, AirportSource, AirportDestination, PlaneID) VALUES (?, ?, ?, ?)");
             preparedStatement.setString(1, "2015-" + i + "-05 11:11:11");
             Set<Airport> airports = new AirportDAO().getAll();
             preparedStatement.setInt(2, airports.iterator().next().getAirportId());
@@ -56,27 +56,29 @@ public class FlightDAOTest {
     @Test
     public void testInsert() throws SQLException {
         DAO<Flight> flightDAO = new FlightDAO();
-        Flight flight = new Flight();
-        flight.setFlightId(4);
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        flight.setDateTime(LocalDateTime.from(dateTimeFormatter.parse("2015-11-05 14:29:36")));
-        flight.setAirportSource(2);
-        flight.setAirportDestination(3);
-        flight.setPlaneId(4);
+        DAO<Airport> airportDAO = new AirportDAO();
+        DAO<Plane> planeDAO = new PlaneDAO();
+        Flight flight = new Flight()
+                .setDateTime(LocalDateTime.from(dateTimeFormatter.parse("2015-11-05 14:29:36")))
+                .setAirportSource(airportDAO.getAll().iterator().next().getAirportId())
+                .setAirportDestination(airportDAO.getAll().iterator().next().getAirportId())
+                .setPlaneId(planeDAO.getAll().iterator().next().getPlaneId());
         assertTrue(flightDAO.insert(flight));
     }
 
     @Test
     public void testUpdate() throws SQLException {
         DAO<Flight> flightDAO = new FlightDAO();
-        Set<Flight> flights = flightDAO.getAll();
-        Flight flight = new Flight();
-        flight.setFlightId(flights.iterator().next().getFlightId());
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        flight.setDateTime(LocalDateTime.from(dateTimeFormatter.parse("2015-11-05 14:29:36")));
-        flight.setAirportSource(2);
-        flight.setAirportDestination(3);
-        flight.setPlaneId(4);
+        DAO<Airport> airportDAO = new AirportDAO();
+        DAO<Plane> planeDAO = new PlaneDAO();
+        Flight flight = new Flight()
+                .setFlightId(flightDAO.getAll().iterator().next().getFlightId())
+                .setDateTime(LocalDateTime.from(dateTimeFormatter.parse("2015-11-05 14:29:36")))
+                .setAirportSource(airportDAO.getAll().iterator().next().getAirportId())
+                .setAirportDestination(airportDAO.getAll().iterator().next().getAirportId())
+                .setPlaneId(planeDAO.getAll().iterator().next().getPlaneId());
         assertTrue(flightDAO.update(flight));
     }
 

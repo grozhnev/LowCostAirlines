@@ -2,14 +2,11 @@ package entities;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-/**
- * Plane entity implementation
- * @author klysov
- */
+import lombok.experimental.Accessors;
 
 @Data
 @EqualsAndHashCode(exclude={"currentLoad"})
+@Accessors(chain = true)
 public class Plane {
     private int planeId;
     private int maxLoad;
