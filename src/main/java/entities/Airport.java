@@ -1,42 +1,16 @@
 package entities;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 /**
  * Airport entity implementation
  * @author klysov
  */
+
+@Data
+@EqualsAndHashCode(exclude={"airportId"})
 public class Airport {
-    private int idAirport;
-    private String Name;
-
-    public Airport() {
-    }
-
-    public Airport(int idAirport, String name) {
-        this.idAirport = idAirport;
-        Name = name;
-    }
-
-    public int getIdAirport() {
-        return idAirport;
-    }
-
-    public void setIdAirport(int idAirport) {
-        this.idAirport = idAirport;
-    }
-
-    public String getName() {
-        return Name;
-    }
-
-    public void setName(String name) {
-        Name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "Airport{" +
-                "airportId=" + idAirport +
-                ", Name='" + Name + '\'' +
-                '}';
-    }
+    private int airportId;
+    private String name;
 }

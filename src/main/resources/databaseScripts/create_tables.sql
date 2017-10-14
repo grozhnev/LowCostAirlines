@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS Customer;
 /*==============================================================*/
 CREATE TABLE Plane
 (
-   idPlane              INT NOT NULL AUTO_INCREMENT,
+   idPlane              INT AUTO_INCREMENT,
    MaxLoad              INT NOT NULL,
    CurrentLoad          INT NOT NULL,
    PRIMARY KEY (idPlane)
@@ -29,8 +29,7 @@ CREATE TABLE Airport
 CREATE TABLE Customer
 (
    idCustomer           INT NOT NULL AUTO_INCREMENT,
-   isAdmin              BOOL NOT NULL,   
-   Name                 VARCHAR(45) NOT NULL,
+   FirstName            VARCHAR(45) NOT NULL,
    LastName             VARCHAR(45) NOT NULL,
    PersonID             VARCHAR(45) NOT NULL,
    PRIMARY KEY (idCustomer)
@@ -39,7 +38,7 @@ CREATE TABLE Customer
 CREATE TABLE Flight
 (
    idFlight             INT NOT NULL AUTO_INCREMENT,
-   DateTime             DATETIME(6) NOT NULL,   
+   DateTime             DATETIME(6),
    Airport_Source       INT NOT NULL,
    Airport_Destination  INT NOT NULL,
    idPlane              INT NOT NULL,
@@ -48,7 +47,7 @@ CREATE TABLE Flight
 
 CREATE TABLE Ticket
 (
-   idTicket             INT NOT NULL AUTO_INCREMENT,
+   idTicket             INT AUTO_INCREMENT,
    idFlight             INT NOT NULL,
    idCustomer           INT NOT NULL,
    Price                INT NOT NULL,
@@ -61,16 +60,16 @@ CREATE TABLE Ticket
 /*                      Constraints                             */
 /*==============================================================*/
 ALTER TABLE Flight ADD CONSTRAINT FK_Reference_1 FOREIGN KEY (Airport_Source)
-      REFERENCES Airport (idAirport) ON DELETE RESTRICT ON UPDATE RESTRICT;
+      REFERENCES Airport (idAirport) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE Flight ADD CONSTRAINT FK_Reference_2 FOREIGN KEY (Airport_Destination)
-      REFERENCES Airport (idAirport) ON DELETE RESTRICT ON UPDATE RESTRICT;
+      REFERENCES Airport (idAirport) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE Flight ADD CONSTRAINT FK_Reference_3 FOREIGN KEY (idPlane)
-      REFERENCES Plane (idPlane) ON DELETE RESTRICT ON UPDATE RESTRICT;
+      REFERENCES Plane (idPlane) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE Ticket ADD CONSTRAINT FK_Reference_4 FOREIGN KEY (idFlight)
-      REFERENCES Flight (idFlight) ON DELETE RESTRICT ON UPDATE RESTRICT;
+      REFERENCES Flight (idFlight) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE Ticket ADD CONSTRAINT FK_Reference_5 FOREIGN KEY (idCustomer)
-      REFERENCES Customer (idCustomer) ON DELETE RESTRICT ON UPDATE RESTRICT;
+      REFERENCES Customer (idCustomer) ON UPDATE CASCADE ON DELETE CASCADE;
