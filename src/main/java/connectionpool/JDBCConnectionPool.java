@@ -13,7 +13,7 @@ public class JDBCConnectionPool implements Runnable {
     private String userPassword;
     public JDBCConnectionPool() throws SQLException {
         try {
-            this.connectionUrl = "jdbc:mysql://localhost:3306/ticketsystem";
+            this.connectionUrl = "jdbc:mysql://localhost:3306/lowcostairlines";
             this.userName = "testuser";
             this.userPassword = "testpassword";
             Class.forName("com.mysql.jdbc.Driver");

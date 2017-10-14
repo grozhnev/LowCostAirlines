@@ -1,8 +1,11 @@
-import dao.AirportDaoImpl;
-import dao.CustomerDAOImpl;
+import dao.AirportDAO;
+import dao.CustomerDAO;
 import dao.DAO;
-import dao.PlaneDaoImpl;
+import dao.PlaneDAO;
+
+import entities.Airport;
 import entities.Customer;
+import entities.Plane;
 import services.ConnectionFactory;
 
 import javax.servlet.ServletException;
@@ -26,18 +29,18 @@ public class DataServlet extends HttpServlet {
             throws ServletException, IOException {
 
         Connection connection = ConnectionFactory.getConnection();
-        AirportDaoImpl airport = new AirportDaoImpl();
-        PlaneDaoImpl plane = new PlaneDaoImpl();
-        DAO<Customer> customer = new CustomerDAOImpl();
+        DAO<Airport> airport = new AirportDAO();
+        DAO<Plane> plane = new PlaneDAO();
+        DAO<Customer> customer = new CustomerDAO();
 
         try {
-            req.setAttribute("metadata", connection.getMetaData());
-            req.setAttribute("airports", airport.getAllAirports());
-            req.setAttribute("planes", plane.getAllPlanes());
+            req.setAttribute("airports", airport.getAll());
+            req.setAttribute("planes", plane.getAll());
             req.setAttribute("customers", customer.getAll());
-            req.getRequestDispatcher("datafromshema.jsp").forward(req, resp);
+            req.getRequestDispatcher("sucsesslogin.jsp").forward(req, resp);
 
         } catch (SQLException e) {
+            System.out.println("not connect");
             req.setAttribute("error", e.getErrorCode());
             req.getRequestDispatcher("mainpage.jsp").forward(req, resp);
         }
