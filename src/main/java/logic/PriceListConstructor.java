@@ -1,6 +1,7 @@
 package logic;
 
 import dao.TicketDAO;
+import entities.Flight;
 import entities.Ticket;
 import lombok.Data;
 import lombok.Getter;
@@ -9,6 +10,7 @@ import lombok.Setter;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -38,11 +40,22 @@ public @Data class PriceListConstructor{
     * 4) priceCalculation() method gets _____, _____, ____ as input from flight and changes the price
     * 5) as a result PriceCalculation class transfers the updated list of tickets to the output of the user.
     * */
+    private static int basicPrice = 100;
+    private static int basicLuggageFee = 50;
+
     private int price; /* required to be Long */
-    private Date time;
+    private int daysBeforeFlight;
+
+    private double luggageWeight;
+    private double planeLoadRate;
+
     private boolean isHighPriority;
+    private boolean hasLuggage;
+
+    private Date time;
 
     private Set<Ticket> ticketContainer;
+    private Map<Ticket, Flight> flights;
 
 
     public void getTicketsZZz() throws SQLException {
@@ -58,6 +71,26 @@ public @Data class PriceListConstructor{
         }
     }
 
+    /*
+	- какая базовая цена? long (Double ?)
+	- прописать параметры её изменения
+				а1)время DateTime
+
+					время1
+					время покупки - систменое время запроса
+									DateThu, 12 Oct 2017 11:19:16 GMT
+
+					время2 мета-время из запроса
+
+					время Итог: время2-время1
+
+					дни до вылета (функция подсчета времени)
+					а2) функция коэффициента (price - (days * (price/20)) )
+						String.parseDate?()
+
+				б) вес багажа (weight w <=10 *1; (10< w) = (w-10)*(price/100))   long
+				в) приоритет (bool) * 1,6
+*/
     public void calculatePrice(){
 
     }
