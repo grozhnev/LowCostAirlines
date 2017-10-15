@@ -34,6 +34,7 @@ User=<%=user %>
 <h1><font size="3" color="black">Customers: ${customers}</font></h1>
 
 <a href="/">Back to main page</a>
+
 </body>
 </html>
 

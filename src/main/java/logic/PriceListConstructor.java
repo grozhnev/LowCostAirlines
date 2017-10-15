@@ -23,13 +23,21 @@ public @Data class PriceListConstructor{
     /**
      * TEST FIRST (Mock test to ensure that we have access to DB).
      *
-     *
-     *  1) перечислить мета-данные на вход
-     *  2) написать логику их обработки
-     *  3) функция подсчета цены
-     *  4) написать логику их возврата
+     *  0) if respond == true
+     *  1) read request data (luggage) and respond
+     *  2) count the price from respond, calculate changes based on properties ->
+     *  3) function of price calculation
+     *  4) return price / or FLight object
      * */
 
+
+    /*ISOLATED LOGIC:
+    * 1) from list of tickets, received from the HttpRespond
+    * 2) from each ticket in received ticket list we take the flight.
+    * 3) each flight has the parameters that are being used in priceCalculation for the flight in ticket
+    * 4) priceCalculation() method gets _____, _____, ____ as input from flight and changes the price
+    * 5) as a result PriceCalculation class transfers the updated list of tickets to the output of the user.
+    * */
     private int price; /* required to be Long */
     private Date time;
     private boolean isHighPriority;

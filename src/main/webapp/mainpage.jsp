@@ -37,6 +37,7 @@
     <form method="post" action="registration">
         <input class="button" style="width: 30%" type="submit" value="Registration">
     </form>
+
     </body>
 </html>
 
