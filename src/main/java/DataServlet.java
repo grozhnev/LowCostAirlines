@@ -37,7 +37,7 @@ public class DataServlet extends HttpServlet {
             req.setAttribute("airports", airport.getAll());
             req.setAttribute("planes", plane.getAll());
             req.setAttribute("customers", customer.getAll());
-            req.getRequestDispatcher("sucsesslogin.jsp").forward(req, resp);
+            req.getRequestDispatcher("successlogin.jsp").forward(req, resp);
 
         } catch (SQLException e) {
             System.out.println("not connect");
