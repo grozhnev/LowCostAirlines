@@ -52,7 +52,7 @@ public class RegisterServlet extends HttpServlet {
             out.print("Welcome, " + email);
             HttpSession session = request.getSession();
             session.setAttribute("email", email);
-            response.sendRedirect("/login");
+            response.sendRedirect("/");
         } catch (SQLException e) {
             System.err.println(e);
         }
