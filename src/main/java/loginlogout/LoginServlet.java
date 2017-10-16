@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
 
                 response.sendRedirect("/ticketmanagement");
             } else {
-                response.sendRedirect("/login");
+                response.sendRedirect("/");
             }
         } catch (SQLException e) {
             System.err.println(e);

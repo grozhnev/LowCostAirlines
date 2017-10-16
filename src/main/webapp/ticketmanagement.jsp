@@ -36,13 +36,13 @@
 
 <%
     //allow access only if session exists
-    String user = (String) session.getAttribute("uname");
+    String user = (String) session.getAttribute("email");
     String userName = null;
     String sessionID = null;
     Cookie[] cookies = request.getCookies();
     if (cookies != null) {
         for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("uname")) userName = cookie.getValue();
+            if (cookie.getName().equals("email")) userName = cookie.getValue();
             if (cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
         }
     }
@@ -50,7 +50,7 @@
 <h3>Hi <%=userName %>, Login successful. Your Session ID=<%=sessionID %>
 </h3>
 <br>
-User=<%=user %>
+User=<%=userName %>
 <br>
 <form action="logout" method="post">
     <input type="submit" value="Logout">
