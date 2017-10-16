@@ -28,11 +28,10 @@
 <br>
 User=<%=user %>
 <br>
-<form action="logout" method="post">
-    <input type="submit" value="Logout">
+<form method="post" action="logout">
+    <input class="button" type="submit" value="Logout">
 </form>
 
-<a href="/">Back to main page</a>
 
 <form action="ticketmanagement" method="POST">
     <table>

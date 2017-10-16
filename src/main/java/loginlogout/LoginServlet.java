@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
             out.print("Welcome, " + name);
             HttpSession session = request.getSession();
             session.setAttribute("uname", name);
-            session.setMaxInactiveInterval(15);
+            session.setMaxInactiveInterval(60);
             Cookie userName = new Cookie("uname", name);
             response.addCookie(userName);
 
