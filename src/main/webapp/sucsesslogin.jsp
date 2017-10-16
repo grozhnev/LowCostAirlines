@@ -33,6 +33,40 @@ User=<%=user %>
 <h1><font size="3" color="black">Planes: ${planes}</font></h1>
 <h1><font size="3" color="black">Customers: ${customers}</font></h1>
 
+<form action="ticketmanagement" method="POST">
+    <table>
+        <thead>
+        <tr>
+            <td width="20%">flightId</td>
+            <td width="20%">dateTime</td>
+            <td width="20%">airportSource</td>
+            <td width="20%">airportDestination</td>
+            <td width="20%">planeId</td>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <c:forEach items="${flights}" var="flight">
+            <tr>
+                <td align="left"><c:out value="${flight.flightId}"/></td>
+                <td align="left"><c:out value="${flight.dateTime}"/></td>
+                <td align="left"><c:out value="${flight.airportSource}"/></td>
+                <td align="left"><c:out value="${flight.airportDestination}"/></td>
+                <td align="left"><c:out value="${flight.planeId}"/></td>
+                <td align="center">
+                    <input type="radio" name="checkradio"
+                           value="${flight}"/>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+
+        <input type = "submit" value = "Request ticket" />
+    </table>
+
+
+</form>
 <a href="/">Back to main page</a>
 </body>
 </html>
