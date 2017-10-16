@@ -1,4 +1,4 @@
-package logic;
+package services;
 
 import dao.FlightDAO;
 import dao.PlaneDAO;
@@ -7,8 +7,6 @@ import entities.Flight;
 import entities.Plane;
 import entities.Ticket;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.sql.SQLException;
 import java.util.*;
