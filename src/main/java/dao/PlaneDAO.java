@@ -1,8 +1,7 @@
 package dao;
 
+import connectionpool.ConnectionPool;
 import entities.Plane;
-import services.ConnectionFactory;
-import connectionpool.JDBCConnectionPool;
 
 import java.sql.*;
 import java.util.HashSet;
@@ -17,10 +16,11 @@ public class PlaneDAO implements DAO<Plane> {
                 .setCurrentLoad(resultSet.getInt("CurrentLoad"));
     }
 
+    public ConnectionPool connectionThroughConnectPool = ConnectionPool.getInstance();
+
     @Override
     public Set<Plane> getAll() throws SQLException{
-        JDBCConnectionPool connectionThroughConnectPool = new JDBCConnectionPool();
-        Connection connection = connectionThroughConnectPool.getConnection();
+        Connection connection = connectionThroughConnectPool.takeConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Plane");
         Set<Plane> planes = new HashSet<>();
@@ -38,7 +38,7 @@ public class PlaneDAO implements DAO<Plane> {
 
     @Override
     public Plane getById(int id) throws SQLException {
-        Connection connection = ConnectionFactory.getConnection();
+        Connection connection = connectionThroughConnectPool.takeConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Plane WHERE PlaneID=" + id);
 
@@ -51,7 +51,7 @@ public class PlaneDAO implements DAO<Plane> {
 
     @Override
     public boolean insert(Plane plane) throws SQLException{
-        Connection connection = ConnectionFactory.getConnection();
+        Connection connection = connectionThroughConnectPool.takeConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Plane (MaxLoad, CurrentLoad) VALUES (?, ?)");
         preparedStatement.setInt(1, plane.getMaxLoad());
         preparedStatement.setInt(2, plane.getCurrentLoad());
@@ -61,7 +61,7 @@ public class PlaneDAO implements DAO<Plane> {
 
     @Override
     public boolean update(Plane plane) throws SQLException{
-        Connection connection = ConnectionFactory.getConnection();
+        Connection connection = connectionThroughConnectPool.takeConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Plane SET MaxLoad=?, CurrentLoad=? WHERE PlaneID=?");
         preparedStatement.setInt(1, plane.getMaxLoad());
         preparedStatement.setInt(2, plane.getCurrentLoad());
@@ -72,7 +72,7 @@ public class PlaneDAO implements DAO<Plane> {
 
     @Override
     public boolean delete(Plane plane) throws SQLException {
-        Connection connection = ConnectionFactory.getConnection();
+        Connection connection = connectionThroughConnectPool.takeConnection();
         Statement statement = connection.createStatement();
         int i = statement.executeUpdate("DELETE FROM Plane WHERE PlaneID=" + plane.getPlaneId());
         return i == 1;

@@ -1,8 +1,7 @@
 package dao;
 
+import connectionpool.ConnectionPool;
 import entities.Customer;
-import services.ConnectionFactory;
-import connectionpool.JDBCConnectionPool;
 
 import java.sql.*;
 import java.util.HashSet;
@@ -20,11 +19,12 @@ public class CustomerDAO implements DAO<Customer>{
                 .setPasswd(resultSet.getString("Passwd"));
     }
 
+    public ConnectionPool connectionThroughConnectPool = ConnectionPool.getInstance();
+
     @Override
     public Set<Customer> getAll() throws SQLException {
 
-        JDBCConnectionPool connectionThroughConnectPool = new JDBCConnectionPool();
-        Connection connection = connectionThroughConnectPool.getConnection();
+        Connection connection = connectionThroughConnectPool.takeConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Customer");
         Set<Customer> customers = new HashSet<>();
@@ -43,7 +43,7 @@ public class CustomerDAO implements DAO<Customer>{
 
     @Override
     public Customer getById(int id) throws SQLException {
-        Connection connection = ConnectionFactory.getConnection();
+        Connection connection = connectionThroughConnectPool.takeConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Customer WHERE CustomerID=" + id);
 
@@ -57,7 +57,7 @@ public class CustomerDAO implements DAO<Customer>{
 
     @Override
     public boolean insert(Customer customer) throws SQLException {
-        Connection connection = ConnectionFactory.getConnection();
+        Connection connection = connectionThroughConnectPool.takeConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Customer (FirstName, LastName, Passport, Email, Passwd) VALUES (?, ?, ?, ?, ?)");
         preparedStatement.setString(1, customer.getFirstName());
         preparedStatement.setString(2, customer.getLastName());
@@ -70,7 +70,7 @@ public class CustomerDAO implements DAO<Customer>{
 
     @Override
     public boolean update(Customer customer) throws SQLException{
-        Connection connection = ConnectionFactory.getConnection();
+        Connection connection = connectionThroughConnectPool.takeConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Customer SET FirstName=?, LastName=?, Passport=?, Email=?, Passwd=? WHERE CustomerID=?");
         preparedStatement.setString(1, customer.getFirstName());
         preparedStatement.setString(2, customer.getLastName());
@@ -84,7 +84,7 @@ public class CustomerDAO implements DAO<Customer>{
 
     @Override
     public boolean delete(Customer customer) throws SQLException{
-        Connection connection = ConnectionFactory.getConnection();
+        Connection connection = connectionThroughConnectPool.takeConnection();
         Statement statement = connection.createStatement();
         int i = statement.executeUpdate("DELETE FROM Customer WHERE CustomerID=" + customer.getCustomerId());
         return i == 1;

@@ -1,8 +1,7 @@
 package dao;
 
+import connectionpool.ConnectionPool;
 import entities.Flight;
-import services.ConnectionFactory;
-import connectionpool.JDBCConnectionPool;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -24,10 +23,11 @@ public class FlightDAO implements DAO<Flight> {
                 .setPlaneId(resultSet.getInt("PlaneID"));
     }
 
+    public ConnectionPool connectionThroughConnectPool = ConnectionPool.getInstance();
+
     @Override
     public Set<Flight> getAll() throws SQLException {
-        JDBCConnectionPool connectionThroughConnectPool = new JDBCConnectionPool();
-        Connection connection = connectionThroughConnectPool.getConnection();
+        Connection connection = connectionThroughConnectPool.takeConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Flight");
         Set<Flight> flights = new HashSet<>();
@@ -45,7 +45,7 @@ public class FlightDAO implements DAO<Flight> {
 
     @Override
     public Flight getById(int id) throws SQLException {
-        Connection connection = ConnectionFactory.getConnection();
+        Connection connection = connectionThroughConnectPool.takeConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Flight WHERE FlightID=" + id);
 
@@ -58,7 +58,7 @@ public class FlightDAO implements DAO<Flight> {
 
     @Override
     public boolean insert(Flight flight) throws SQLException {
-        Connection connection = ConnectionFactory.getConnection();
+        Connection connection = connectionThroughConnectPool.takeConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Flight (DateTime, AirportSource, AirportDestination, PlaneID) VALUES (?, ?, ?, ?)");
         preparedStatement.setString(1, String.valueOf(flight.getDateTime()));
         preparedStatement.setInt(2, flight.getAirportSource());
@@ -70,7 +70,7 @@ public class FlightDAO implements DAO<Flight> {
 
     @Override
     public boolean update(Flight flight) throws SQLException {
-        Connection connection = ConnectionFactory.getConnection();
+        Connection connection = connectionThroughConnectPool.takeConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Flight SET DateTime=?, AirportSource=?, AirportDestination=?, PlaneID=? WHERE FlightID=?");
         preparedStatement.setString(1, String.valueOf(flight.getDateTime()));
         preparedStatement.setInt(2, flight.getAirportSource());
@@ -83,7 +83,7 @@ public class FlightDAO implements DAO<Flight> {
 
     @Override
     public boolean delete(Flight flight) throws SQLException {
-        Connection connection = ConnectionFactory.getConnection();
+        Connection connection = connectionThroughConnectPool.takeConnection();
         Statement statement = connection.createStatement();
         int i = statement.executeUpdate("DELETE FROM Flight WHERE FLightID=" + flight.getFlightId());
         return i == 1;

@@ -1,8 +1,7 @@
 package dao;
 
 import entities.Airport;
-import services.ConnectionFactory;
-import connectionpool.JDBCConnectionPool;
+import connectionpool.ConnectionPool;
 
 import java.sql.*;
 import java.util.HashSet;
@@ -15,12 +14,13 @@ public class AirportDAO implements DAO<Airport> {
                 .setAirportId(resultSet.getInt("AirportID"))
                 .setName(resultSet.getString("Name"));
     }
+
+    public ConnectionPool connectionThroughConnectPool = ConnectionPool.getInstance();
+
     @Override
     public Set<Airport> getAll() throws SQLException {
 
-        JDBCConnectionPool connectionThroughConnectPool = new JDBCConnectionPool();
-        Connection connection = connectionThroughConnectPool.getConnection();
-
+        Connection connection = connectionThroughConnectPool.takeConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Airport");
         Set<Airport> airports = new HashSet<>();
@@ -39,7 +39,7 @@ public class AirportDAO implements DAO<Airport> {
 
     @Override
     public Airport getById(int id) throws SQLException {
-        Connection connection = ConnectionFactory.getConnection();
+        Connection connection = connectionThroughConnectPool.takeConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Airport WHERE AirportID=" + id);
 
@@ -52,7 +52,7 @@ public class AirportDAO implements DAO<Airport> {
 
     @Override
     public boolean insert(Airport airport) throws SQLException {
-        Connection connection = ConnectionFactory.getConnection();
+        Connection connection = connectionThroughConnectPool.takeConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Airport (Name) VALUES (?)");
         preparedStatement.setString(1, airport.getName());
         int i = preparedStatement.executeUpdate();
@@ -61,7 +61,7 @@ public class AirportDAO implements DAO<Airport> {
 
     @Override
     public boolean update(Airport airport) throws SQLException {
-        Connection connection = ConnectionFactory.getConnection();
+        Connection connection = connectionThroughConnectPool.takeConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Airport SET Name=? WHERE AirportID=?");
         preparedStatement.setString(1, airport.getName());
         preparedStatement.setInt(2, airport.getAirportId());
@@ -71,7 +71,7 @@ public class AirportDAO implements DAO<Airport> {
 
     @Override
     public boolean delete(Airport airport) throws SQLException {
-        Connection connection = ConnectionFactory.getConnection();
+        Connection connection = connectionThroughConnectPool.takeConnection();
         Statement statement = connection.createStatement();
         int i = statement.executeUpdate("DELETE FROM Airport WHERE AirportID=" + airport.getAirportId());
         return i == 1;
