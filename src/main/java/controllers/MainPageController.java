@@ -1,3 +1,4 @@
+package controllers;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +11,7 @@ import java.io.IOException;
  * Main page with greeting Customer
  */
 @WebServlet("/")
-public class MainServlet extends HttpServlet {
+public class MainPageController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

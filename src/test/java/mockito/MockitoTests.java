@@ -6,7 +6,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import services.ConnectionFactory;
 
+import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import static org.mockito.Mockito.*;
@@ -29,5 +31,16 @@ public class MockitoTests {
         Ticket ticket = mock(Ticket.class);
         when(ticket.getPrice()).thenReturn(50);
         Assert.assertEquals(50, ticket.getPrice());
+    }
+
+    @Test
+    public void testConnectionFactory()throws SQLException{
+
+        final String URL = "jdbc:mysql://localhost:3306/lowcostairlines"; /*lowcostairlines*/ /*ticketsystem*/
+        final String USER = "testuser";
+        final String PASS = "testpassword";
+
+        when(ConnectionFactory.getConnection()).thenReturn(DriverManager.getConnection(URL, USER, PASS));
+        Assert.assertEquals(DriverManager.getConnection(URL, USER, PASS), ConnectionFactory.getConnection());
     }
 }

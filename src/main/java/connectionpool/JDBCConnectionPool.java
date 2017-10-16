@@ -60,8 +60,6 @@ public class JDBCConnectionPool implements Runnable {
             }
         } catch (SQLException sqle) {
             sqle.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }

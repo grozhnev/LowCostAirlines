@@ -25,7 +25,7 @@ INSERT INTO Customer (FirstName, LastName, Passport, Email, Passwd)
  
 INSERT INTO Flight (DateTime, AirportSource, AirportDestination, PlaneID)
  VALUES('2015-11-05 14:29:36', '1', '2', '1');
-INSERT INTO Flight (DateTime, Airport_Source, Airport_Destination, PlaneID)
+INSERT INTO Flight (DateTime, AirportSource, AirportDestination, PlaneID)
  VALUES('2016-11-06 13:03:21', '2', '3', '2');
  
 INSERT INTO Ticket (FlightID, CustomerID, Price, LuggagePrice, RegistrationPriority)
