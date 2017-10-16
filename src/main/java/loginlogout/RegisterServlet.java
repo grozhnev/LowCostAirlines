@@ -1,5 +1,9 @@
 package loginlogout;
 
+import dao.CustomerDAO;
+import dao.DAO;
+import entities.Customer;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 /**
  * Allows new Customer to register
@@ -29,14 +34,27 @@ public class RegisterServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         request.getRequestDispatcher("registration.jsp").include(request, response);
 
-        String name = request.getParameter("uname");
-        String password = request.getParameter("upass");
+        String firstName = request.getParameter("firstname");
+        String lastName = request.getParameter("lastname");
+        String passport = request.getParameter("passport");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
 
-        if ("123".equals(password)) {
-            out.print("Welcome, " + name);
+        try {
+            DAO<Customer> customerDAO = new CustomerDAO();
+            Customer newCustomer = new Customer()
+                    .setFirstName(firstName)
+                    .setLastName(lastName)
+                    .setEmail(email)
+                    .setPassport(passport)
+                    .setPasswd(password);
+            customerDAO.insert(newCustomer);
+            out.print("Welcome, " + email);
             HttpSession session = request.getSession();
-            session.setAttribute("uname", name);
-            response.sendRedirect("/login");
+            session.setAttribute("email", email);
+            response.sendRedirect("/");
+        } catch (SQLException e) {
+            System.err.println(e);
         }
         out.close();
     }
