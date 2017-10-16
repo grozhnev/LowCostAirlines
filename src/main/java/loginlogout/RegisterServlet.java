@@ -29,13 +29,16 @@ public class RegisterServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         request.getRequestDispatcher("registration.jsp").include(request, response);
 
-        String name = request.getParameter("uname");
-        String password = request.getParameter("upass");
+        String firstName = request.getParameter("firstname");
+        String lastName = request.getParameter("lastname");
+        String passport = request.getParameter("passport");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
 
         if ("123".equals(password)) {
-            out.print("Welcome, " + name);
+            out.print("Welcome, " + email);
             HttpSession session = request.getSession();
-            session.setAttribute("uname", name);
+            session.setAttribute("email", email);
             response.sendRedirect("/login");
         }
         out.close();
