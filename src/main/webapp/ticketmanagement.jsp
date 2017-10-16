@@ -90,6 +90,12 @@ User=<%=user %>
     <a>Registration priority</a>
     <br>
 
+    <a><b>Weight:</b></a>
+    <input type="radio" name="weight" value="20" checked="checked"><a>20</a>
+    <input type="radio" name="weight" value="50"><a>50</a>
+    <input type="radio" name="weight" value="100"><a>100</a>
+    <br>
+
     <input type = "submit" value = "Request ticket" />
 
 </form>
