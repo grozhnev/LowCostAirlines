@@ -1,17 +1,17 @@
 package logic;
 
+import dao.FlightDAO;
+import dao.PlaneDAO;
 import dao.TicketDAO;
 import entities.Flight;
+import entities.Plane;
 import entities.Ticket;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Description:
@@ -55,15 +55,24 @@ public @Data class PriceListConstructor{
     private Date time;
 
     private Set<Ticket> ticketContainer;
-    private Map<Ticket, Flight> flights;
+    private Map<Ticket, Flight> flightsMap;
+    private Map<Ticket, Plane> planesMap;
 
+    TicketDAO ticketDAO = new TicketDAO();
+    FlightDAO flightDAO = new FlightDAO();
+    PlaneDAO planeDAO = new PlaneDAO();
 
     /*
+    * NEEDS to tune connection with real db-data.
+    * (then, divide into couple methods).
+    *
     * The method for parsing tickets list in single entities for the further work with price in each*/
     public void getTickets() throws SQLException {
 
         ticketContainer = new HashSet<>();
-        TicketDAO ticketDAO = new TicketDAO();
+        flightsMap = new HashMap<>();
+        planesMap = new HashMap<>();
+
         try {
             if (ticketDAO.getAll().size() != 0) {
                 ticketContainer.addAll(new TicketDAO().getAll());
@@ -74,7 +83,7 @@ public @Data class PriceListConstructor{
                 if(ticket.isRegistrationPriority()){
                     ticket.setPrice(ticket.getPrice() * 2);
                 }
-                
+
                 if (ticket.getLuggagePrice() > 0){
                     ticket.setPrice(ticket.getPrice() + ticket.getLuggagePrice() + PriceListConstructor.basicLuggageFee);
                 } else {
@@ -83,6 +92,9 @@ public @Data class PriceListConstructor{
 
                 /*we need plane load and time to flight*/
 
+                //connect ticket with flight (for Date)
+                //connect ticket with plane (for load)
+                
             }
         }catch(SQLException e){
             e.printStackTrace();
