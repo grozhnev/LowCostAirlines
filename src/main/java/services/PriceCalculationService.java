@@ -13,13 +13,13 @@ import java.util.*;
 
 /**
  * Description:
- *  This class "PriceListConstructor" construct the list of Tickets that matches customer request.
+ *  This class "PriceCalculationService" construct the list of Tickets that matches customer request.
  *  List of Tickets that match Customer request with individual price will be sent to Browser as final respond of
  *  LowCostService.
  */
 
 @Data
-public class PriceListConstructor{
+public class PriceCalculationService {
     /**
      * TEST FIRST (Mock test to ensure that we have access to DB).
      *
@@ -105,9 +105,9 @@ public class PriceListConstructor{
                 }
 
                 if (ticket.getLuggagePrice() > 0){
-                    ticket.setPrice(ticket.getPrice() + ticket.getLuggagePrice() + PriceListConstructor.basicLuggageFee);
+                    ticket.setPrice(ticket.getPrice() + ticket.getLuggagePrice() + PriceCalculationService.basicLuggageFee);
                 } else {
-                    ticket.setPrice(ticket.getPrice() + PriceListConstructor.basicPrice);
+                    ticket.setPrice(ticket.getPrice() + PriceCalculationService.basicPrice);
                 }
 
             }
