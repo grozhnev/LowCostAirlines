@@ -1,5 +1,9 @@
 package loginlogout;
 
+import dao.CustomerDAO;
+import dao.DAO;
+import entities.Customer;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 /**
  * Allows new Customer to register
@@ -35,11 +40,21 @@ public class RegisterServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        if ("123".equals(password)) {
+        try {
+            DAO<Customer> customerDAO = new CustomerDAO();
+            Customer newCustomer = new Customer()
+                    .setFirstName(firstName)
+                    .setLastName(lastName)
+                    .setEmail(email)
+                    .setPassport(passport)
+                    .setPasswd(password);
+            customerDAO.insert(newCustomer);
             out.print("Welcome, " + email);
             HttpSession session = request.getSession();
             session.setAttribute("email", email);
             response.sendRedirect("/login");
+        } catch (SQLException e) {
+            System.err.println(e);
         }
         out.close();
     }
