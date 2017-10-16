@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
             Cookie userName = new Cookie("uname", name);
             response.addCookie(userName);
 
-            response.sendRedirect("/data");
+            response.sendRedirect("/ticketmanagement");
         } else {
             response.sendRedirect("/login");
         }
