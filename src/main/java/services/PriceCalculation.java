@@ -36,14 +36,14 @@ public class PriceCalculation {
                 ticketPrice *= 2;
             }
             if (luggageWeight >= 0L) {
-                ticketPrice += luggagePricePerKilo * luggageWeight;
+                ticketPrice += luggagePricePerKilo * luggageWeight + basicLuggageFee;
             }
             if (daysBeforeDeparture <= 14L) {
                 ticketPrice += daysBeforeDeparture * approachingDepartureDailyFee;
             }
-            ticketPrice *= Math.round(planeLoadRate * 100);
+            ticketPrice *= Math.round(planeLoadRate * 100) + basicPrice;
         }
         return ticketPrice;
     }
-    
+
 }
