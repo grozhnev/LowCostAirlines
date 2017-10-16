@@ -18,8 +18,8 @@ import java.util.*;
  *  LowCostService.
  */
 
-
-public @Data class PriceListConstructor{
+@Data
+public class PriceListConstructor{
     /**
      * TEST FIRST (Mock test to ensure that we have access to DB).
      *
