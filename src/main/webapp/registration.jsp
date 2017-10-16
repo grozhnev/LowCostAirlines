@@ -36,13 +36,30 @@
     </h1>
     <table border="2" width="2" bgcolor="#d3d3d3" style="color:black">
         <tr>
-            <td><b>UserName</b></td>
-            <td><input class="button" type="text" name="uname"></td>
+            <td><b>First name</b></td>
+            <td><input class="button" type="text" name="firstname"></td>
         </tr>
+
+        <tr>
+            <td><b>Last name</b></td>
+            <td><input class="button" type="text" name="lastname"></td>
+        </tr>
+
+        <tr>
+            <td><b>Passport</b></td>
+            <td><input class="button" type="text" name="passport"></td>
+        </tr>
+
+        <tr>
+            <td><b>Email</b></td>
+            <td><input class="button" type="text" name="email"></td>
+        </tr>
+
         <tr>
             <td><b>Password</b></td>
-            <td><input class="button" type="password" name="upass"></td>
+            <td><input class="button" type="password" name="password"></td>
         </tr>
+
         <tr>
             <td><input class="button" type="submit" value="Registration"></td>
         </tr>
