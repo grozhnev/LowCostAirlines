@@ -1,12 +1,7 @@
 package loginlogout;
 
-import dao.CustomerDAO;
-import entities.Customer;
-
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,6 +11,9 @@ import javax.servlet.http.*;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
+
+    private final String userID = "admin";
+    private final String password = "123";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,33 +26,21 @@ public class LoginServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         request.getRequestDispatcher("login.jsp").include(request, response);
 
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        String name = request.getParameter("uname");
+        String password = request.getParameter("upass");
 
-        try {
-            Customer customer = new CustomerDAO()
-                    .getAll()
-                    .stream()
-                    .filter(o -> o.getEmail().equals(email) && o.getPasswd().equals(password))
-                    .findFirst()
-                    .get();
-            if (customer != null) {
-                out.print("Welcome, " + email);
-                HttpSession session = request.getSession();
-                session.setAttribute("email", email);
-                session.setMaxInactiveInterval(15);
-                Cookie userName = new Cookie("email", email);
-                response.addCookie(userName);
+        if (name.equals(userID) && password.equals(this.password)) {
+            out.print("Welcome, " + name);
+            HttpSession session = request.getSession();
+            session.setAttribute("uname", name);
+            session.setMaxInactiveInterval(60);
+            Cookie userName = new Cookie("uname", name);
+            response.addCookie(userName);
 
-                response.sendRedirect("/ticketmanagement");
-            } else {
-                response.sendRedirect("/");
-            }
-        } catch (SQLException e) {
-            System.err.println(e);
+            response.sendRedirect("/ticketmanagement");
+        } else {
+            response.sendRedirect("/login");
         }
-
-
         out.close();
     }
 }
