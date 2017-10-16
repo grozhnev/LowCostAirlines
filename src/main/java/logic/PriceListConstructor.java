@@ -46,7 +46,7 @@ public @Data class PriceListConstructor{
     private int price; /* required to be Long */
     private int daysBeforeFlight;
 
-    private double luggageWeight;
+    private int luggageWeight;
     private double planeLoadRate;
 
     private boolean isHighPriority;
@@ -58,13 +58,31 @@ public @Data class PriceListConstructor{
     private Map<Ticket, Flight> flights;
 
 
-    public void getTicketsZZz() throws SQLException {
+    /*
+    * The method for parsing tickets list in single entities for the further work with price in each*/
+    public void getTickets() throws SQLException {
 
         ticketContainer = new HashSet<>();
         TicketDAO ticketDAO = new TicketDAO();
         try {
             if (ticketDAO.getAll().size() != 0) {
                 ticketContainer.addAll(new TicketDAO().getAll());
+            }
+
+            for (Ticket ticket: ticketContainer) {
+
+                if(ticket.isRegistrationPriority()){
+                    ticket.setPrice(ticket.getPrice() * 2);
+                }
+                
+                if (ticket.getLuggagePrice() > 0){
+                    ticket.setPrice(ticket.getPrice() + ticket.getLuggagePrice() + PriceListConstructor.basicLuggageFee);
+                } else {
+                    ticket.setPrice(ticket.getPrice() + PriceListConstructor.basicPrice);
+                }
+
+                /*we need plane load and time to flight*/
+
             }
         }catch(SQLException e){
             e.printStackTrace();
