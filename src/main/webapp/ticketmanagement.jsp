@@ -83,9 +83,15 @@ User=<%=user %>
             </tr>
         </c:forEach>
         </tbody>
-        
+
     </table>
+
+    <input type="checkbox" name="registrationpriority" value="true">
+    <a>Registration priority</a>
+    <br>
+
     <input type = "submit" value = "Request ticket" />
+
 </form>
 
 <a href="/">Back to main page</a>

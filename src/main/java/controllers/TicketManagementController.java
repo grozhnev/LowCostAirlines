@@ -38,6 +38,7 @@ public class TicketManagementController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.doGet(request, response);
         String requestedFlightString = request.getParameter("checkradio");
+        String requestedRegistrationPriority = request.getParameter("registrationpriority");
         if (!requestedFlightString.isEmpty()) {
             Flight requestedFlight = null;
 
@@ -50,7 +51,7 @@ public class TicketManagementController extends HttpServlet {
 
             if (requestedFlight != null) {
                 Ticket requestedTicket = new Ticket()
-                        .setRegistrationPriority(true)
+                        .setRegistrationPriority(requestedRegistrationPriority != null)
                         .setPrice(359)
                         .setLuggagePrice(228)
                         .setCustomerId(1)
