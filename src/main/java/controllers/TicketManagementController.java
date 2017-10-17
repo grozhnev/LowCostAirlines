@@ -5,6 +5,7 @@ import dao.TicketDAO;
 import entities.Airport;
 import entities.Flight;
 import entities.Ticket;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +23,7 @@ public class TicketManagementController extends HttpServlet {
     private Set<Flight> flights;
     private FlightDAO flightDAO = new FlightDAO();
     private TicketDAO ticketDAO = new TicketDAO();
+    static final Logger LOGGER = Logger.getLogger(TicketManagementController.class);
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,7 +32,7 @@ public class TicketManagementController extends HttpServlet {
             request.setAttribute("flights", flights);
             request.getRequestDispatcher("/ticketmanagement.jsp").forward(request, response);
         } catch (SQLException e) {
-            System.err.println(e);
+            LOGGER.warn(e);
         }
     }
 
@@ -60,7 +62,7 @@ public class TicketManagementController extends HttpServlet {
                 try {
                     ticketDAO.insert(requestedTicket);
                 } catch (SQLException e) {
-                    System.err.println(e);
+                    LOGGER.warn(e);
                 }
             }
         }

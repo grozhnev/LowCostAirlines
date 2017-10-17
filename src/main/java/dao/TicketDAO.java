@@ -2,6 +2,7 @@ package dao;
 
 import connectionpool.JDBCConnectionPool;
 import entities.Ticket;
+import org.apache.log4j.Logger;
 import services.ConnectionFactory;
 
 import java.sql.*;
@@ -9,6 +10,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TicketDAO implements DAO<Ticket> {
+
+    static final Logger LOGGER = Logger.getLogger(TicketDAO.class);
 
     private Ticket extractTicketFromResultSet(ResultSet resultSet) throws SQLException {
         return new Ticket()
@@ -36,6 +39,7 @@ public class TicketDAO implements DAO<Ticket> {
             return tickets;
         }
 
+        LOGGER.warn("No tickets has been found.");
         throw new SQLException("No tickets has been found.");
     }
 
@@ -49,6 +53,7 @@ public class TicketDAO implements DAO<Ticket> {
             return extractTicketFromResultSet(resultSet);
         }
 
+        LOGGER.warn("No ticket has been found.");
         throw new SQLException("No ticket has been found.");
     }
 

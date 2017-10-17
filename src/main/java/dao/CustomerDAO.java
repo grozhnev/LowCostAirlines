@@ -1,6 +1,7 @@
 package dao;
 
 import entities.Customer;
+import org.apache.log4j.Logger;
 import services.ConnectionFactory;
 import connectionpool.JDBCConnectionPool;
 
@@ -9,6 +10,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class CustomerDAO implements DAO<Customer>{
+
+    static final Logger LOGGER = Logger.getLogger(CustomerDAO.class);
 
     private Customer extractCustomerFromResultSet(ResultSet resultSet) throws SQLException {
         return new Customer()
@@ -38,6 +41,7 @@ public class CustomerDAO implements DAO<Customer>{
             return customers;
         }
 
+        LOGGER.warn("No customers found.");
         throw new SQLException("No customers found.");
     }
 
@@ -49,9 +53,11 @@ public class CustomerDAO implements DAO<Customer>{
 
         if(resultSet.next()) {
             Customer customer = extractCustomerFromResultSet(resultSet);
+            LOGGER.info("Getting customer=" + customer);
             return customer;
         }
 
+        LOGGER.warn("No customer found.");
         throw new SQLException("No customer found.");
     }
 

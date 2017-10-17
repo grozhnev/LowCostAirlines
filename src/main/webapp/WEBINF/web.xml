@@ -7,7 +7,9 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
         <welcome-file>MainPageController</welcome-file>
     </welcome-file-list>
 
-
+    <listener>
+        <listener-class>services.ContextListener</listener-class>
+    </listener>
 
     <filter>
         <filter-name>RequestLoggingFilter</filter-name>
@@ -31,7 +33,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
 
 
     <servlet>
-        <description></description>
         <display-name>LoginServlet</display-name>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>loginlogout.LoginServlet</servlet-class>
