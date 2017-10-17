@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    static final Logger LOGGER = Logger.getLogger(LoginServlet.class);
+    static final Logger LOGGER = Logger.getLogger(LogoutServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -33,14 +33,14 @@ public class LogoutServlet extends HttpServlet {
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("JSESSIONID")) {
-                    System.out.println("JSESSIONID=" + cookie.getValue());
+                    LOGGER.info("JSESSIONID=" + cookie.getValue());
                     break;
                 }
             }
         }
         //invalidate the session if exists
         HttpSession session = request.getSession(false);
-        System.out.println("User=" + session.getAttribute("email"));
+        LOGGER.info("User=" + session.getAttribute("email"));
         if (session != null) {
             session.invalidate();
         }

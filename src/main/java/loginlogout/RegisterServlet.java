@@ -27,7 +27,7 @@ import java.sql.SQLException;
 @WebServlet("/registration")
 public class RegisterServlet extends HttpServlet {
 
-    static final Logger LOGGER = Logger.getLogger(LoginServlet.class);
+    static final Logger LOGGER = Logger.getLogger(RegisterServlet.class);
 
     /**
      * Get from registration page Customers parameters an put them in map
@@ -51,13 +51,14 @@ public class RegisterServlet extends HttpServlet {
                     .setEmail(email)
                     .setPassport(passport)
                     .setPassword(password);
+            LOGGER.info("Added customer=" + newCustomer);
             customerDAO.insert(newCustomer);
             out.print("Welcome, " + email);
             HttpSession session = request.getSession();
             session.setAttribute("email", email);
             response.sendRedirect("/");
         } catch (SQLException e) {
-            System.err.println(e);
+            LOGGER.warn(e);
         }
         out.close();
     }

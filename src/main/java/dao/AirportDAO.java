@@ -1,6 +1,7 @@
 package dao;
 
 import entities.Airport;
+import org.apache.log4j.Logger;
 import services.ConnectionFactory;
 import connectionpool.JDBCConnectionPool;
 
@@ -9,6 +10,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class AirportDAO implements DAO<Airport> {
+
+    static final Logger LOGGER = Logger.getLogger(AirportDAO.class);
 
     private Airport extractAirportFromResultSet(ResultSet resultSet) throws SQLException {
         return new Airport()
@@ -27,6 +30,7 @@ public class AirportDAO implements DAO<Airport> {
 
         while(resultSet.next()) {
             Airport airport = extractAirportFromResultSet(resultSet);
+            LOGGER.info("Airport=" + airport);
             airports.add(airport);
         }
 
@@ -34,6 +38,7 @@ public class AirportDAO implements DAO<Airport> {
             return airports;
         }
 
+        LOGGER.warn("No airports has been found.");
         throw new SQLException("No airports has been found.");
     }
 
@@ -47,6 +52,7 @@ public class AirportDAO implements DAO<Airport> {
             return extractAirportFromResultSet(resultSet);
         }
 
+        LOGGER.warn("No airport has been found.");
         throw new SQLException("No airport has been found.");
     }
 

@@ -1,6 +1,7 @@
 package dao;
 
 import entities.Flight;
+import org.apache.log4j.Logger;
 import services.ConnectionFactory;
 import connectionpool.JDBCConnectionPool;
 
@@ -11,6 +12,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class FlightDAO implements DAO<Flight> {
+
+    static final Logger LOGGER = Logger.getLogger(FlightDAO.class);
 
     private Flight extractFlightFromResultSet(ResultSet resultSet) throws SQLException {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -40,6 +43,7 @@ public class FlightDAO implements DAO<Flight> {
             return flights;
         }
 
+        LOGGER.warn("No flights has been found.");
         throw new SQLException("No flights has been found.");
     }
 
@@ -53,6 +57,7 @@ public class FlightDAO implements DAO<Flight> {
             return extractFlightFromResultSet(resultSet);
         }
 
+        LOGGER.warn("No flight has been found.");
         throw new SQLException("No flight has been found.");
     }
 

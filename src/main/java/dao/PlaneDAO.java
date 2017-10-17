@@ -1,6 +1,7 @@
 package dao;
 
 import entities.Plane;
+import org.apache.log4j.Logger;
 import services.ConnectionFactory;
 import connectionpool.JDBCConnectionPool;
 
@@ -9,6 +10,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class PlaneDAO implements DAO<Plane> {
+
+    static final Logger LOGGER = Logger.getLogger(PlaneDAO.class);
 
     private Plane extractPlaneFromResultSet(ResultSet resultSet) throws SQLException {
         return new Plane()
@@ -33,6 +36,7 @@ public class PlaneDAO implements DAO<Plane> {
             return planes;
         }
 
+        LOGGER.warn("No planes has been found.");
         throw new SQLException("No planes has been found.");
     }
 
@@ -46,6 +50,7 @@ public class PlaneDAO implements DAO<Plane> {
             return extractPlaneFromResultSet(resultSet);
         }
 
+        LOGGER.warn("No plane has been found.");
         throw new SQLException("No plane has been found.");
     }
 
