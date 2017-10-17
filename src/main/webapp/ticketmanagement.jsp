@@ -55,7 +55,6 @@ User=<%=userName %>
 <form method="post" action="logout">
     <input class="button" type="submit" value="Logout">
 </form>
-
 <form action="ticketmanagement" method="POST">
     <table>
         <thead>
