@@ -11,15 +11,15 @@ import java.util.Set;
 
 public class TicketDAO implements DAO<Ticket> {
 
-    static final Logger LOGGER = Logger.getLogger(TicketDAO.class);
+    private static final Logger LOGGER = Logger.getLogger(TicketDAO.class);
 
     private Ticket extractTicketFromResultSet(ResultSet resultSet) throws SQLException {
         return new Ticket()
-                .setTicketId(resultSet.getInt("TicketID"))
-                .setFlightId(resultSet.getInt("FlightID"))
-                .setCustomerId(resultSet.getInt("CustomerID"))
-                .setPrice(resultSet.getInt("Price") )
-                .setLuggagePrice(resultSet.getInt("LuggagePrice"))
+                .setTicketId(resultSet.getLong("TicketID"))
+                .setFlightId(resultSet.getLong("FlightID"))
+                .setCustomerId(resultSet.getLong("CustomerID"))
+                .setPrice(resultSet.getLong("Price") )
+                .setLuggagePrice(resultSet.getLong("LuggagePrice"))
                 .setRegistrationPriority(resultSet.getBoolean("RegistrationPriority"));
     }
 
@@ -44,7 +44,7 @@ public class TicketDAO implements DAO<Ticket> {
     }
 
     @Override
-    public Ticket getById(int id) throws SQLException {
+    public Ticket getById(Long id) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Ticket WHERE TicketID=" + id);
@@ -61,11 +61,11 @@ public class TicketDAO implements DAO<Ticket> {
     public boolean insert(Ticket ticket) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Ticket (FlightID, CustomerID, Price, LuggagePrice, RegistrationPriority) VALUES (?, ?, ?, ?, ?)");
-        preparedStatement.setInt(1, ticket.getFlightId());
-        preparedStatement.setInt(2, ticket.getCustomerId());
-        preparedStatement.setInt(3, ticket.getPrice());
-        preparedStatement.setInt(4, ticket.getLuggagePrice());
-        preparedStatement.setBoolean(5,ticket.isRegistrationPriority());
+        preparedStatement.setLong(1, ticket.getFlightId());
+        preparedStatement.setLong(2, ticket.getCustomerId());
+        preparedStatement.setLong(3, ticket.getPrice());
+        preparedStatement.setLong(4, ticket.getLuggagePrice());
+        preparedStatement.setBoolean(5,ticket.getRegistrationPriority());
         int i = preparedStatement.executeUpdate();
         return i == 1;
     }
@@ -74,11 +74,11 @@ public class TicketDAO implements DAO<Ticket> {
     public boolean update(Ticket ticket) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Ticket SET CustomerID=?, Price=?, LuggagePrice=?, RegistrationPriority=? WHERE TicketID=?");
-        preparedStatement.setInt(1, ticket.getCustomerId());
-        preparedStatement.setInt(2, ticket.getPrice());
-        preparedStatement.setInt(3, ticket.getLuggagePrice());
-        preparedStatement.setBoolean(4, ticket.isRegistrationPriority());
-        preparedStatement.setInt(5, ticket.getTicketId());
+        preparedStatement.setLong(1, ticket.getCustomerId());
+        preparedStatement.setLong(2, ticket.getPrice());
+        preparedStatement.setLong(3, ticket.getLuggagePrice());
+        preparedStatement.setBoolean(4, ticket.getRegistrationPriority());
+        preparedStatement.setLong(5, ticket.getTicketId());
         int i = preparedStatement.executeUpdate();
         return i == 1;
     }

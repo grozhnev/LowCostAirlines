@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
         "password"})
 @Accessors(chain = true)
 public class Customer {
-    private int customerId;
+    private Long customerId;
     private String firstName;
     private String lastName;
     private String passport;

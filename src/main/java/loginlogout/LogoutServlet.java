@@ -18,13 +18,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    static final Logger LOGGER = Logger.getLogger(LogoutServlet.class);
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        super.doGet(req, resp);
-    }
+    private static final Logger LOGGER = Logger.getLogger(LogoutServlet.class);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -41,9 +35,7 @@ public class LogoutServlet extends HttpServlet {
         //invalidate the session if exists
         HttpSession session = request.getSession(false);
         LOGGER.info("User=" + session.getAttribute("email"));
-        if (session != null) {
-            session.invalidate();
-        }
+        session.invalidate();
         request.getRequestDispatcher("logout.jsp").include(request, response);
     }
 

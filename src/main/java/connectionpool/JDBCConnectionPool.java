@@ -4,9 +4,9 @@ import java.util.*;
 import java.sql.*;
 
 public class JDBCConnectionPool implements Runnable {
-    private int initialConnections = 5;
-    private Vector connectionsAvailable = new Vector();
-    private Vector connectionsUsed = new Vector();
+    private final int initialConnections = 5;
+    private final Vector connectionsAvailable = new Vector();
+    private final Vector connectionsUsed = new Vector();
 
     private String connectionUrl;
     private String userName;

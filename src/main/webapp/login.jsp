@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>LowCostAirlines</title>
@@ -31,7 +31,7 @@
 
 <form method="post" action="login">
     <h1>
-        <font size="5" color="black">Welcome to login page</font>
+        <span style="font-size: large; color: black; ">Welcome to login page</span>
         <br>
     </h1>
     <table border="2" width="2" bgcolor="#d3d3d3" style="color:black">

@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 public class AuthenticationFilter implements Filter {
 
     private ServletContext context;
-    static final Logger LOGGER = Logger.getLogger(AuthenticationFilter.class);
+    private static final Logger LOGGER = Logger.getLogger(AuthenticationFilter.class);
 
     public void init(FilterConfig fConfig) throws ServletException {
         this.context = fConfig.getServletContext();

@@ -16,7 +16,7 @@ import javax.servlet.http.*;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
-    static final Logger LOGGER = Logger.getLogger(LoginServlet.class);
+    private static final Logger LOGGER = Logger.getLogger(LoginServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -41,21 +41,17 @@ public class LoginServlet extends HttpServlet {
                     .filter(o -> o.getEmail().equals(email) && o.getPassword().equals(password))
                     .findFirst()
                     .get();
-            if (customer != null) {
-                LOGGER.info("Got customer=" + customer);
-                out.print("Welcome, " + email);
-                HttpSession session = request.getSession();
-                session.setAttribute("email", email);
-                session.setMaxInactiveInterval(15);
-                Cookie userName = new Cookie("email", email);
-                response.addCookie(userName);
-                LOGGER.info("Added cookie="+userName);
+            LOGGER.info("Got customer=" + customer);
+            out.print("Welcome, " + email);
+            HttpSession session = request.getSession();
+            session.setAttribute("email", email);
+            session.setMaxInactiveInterval(15);
+            Cookie userName = new Cookie("email", email);
+            response.addCookie(userName);
+            LOGGER.info("Added cookie="+userName);
 
-                LOGGER.info("Redirecting to /ticketmanagement");
-                response.sendRedirect("/ticketmanagement");
-            } else {
-                response.sendRedirect("/");
-            }
+            LOGGER.info("Redirecting to /ticketmanagement");
+            response.sendRedirect("/ticketmanagement");
         } catch (SQLException e) {
             LOGGER.warn(e);
         }

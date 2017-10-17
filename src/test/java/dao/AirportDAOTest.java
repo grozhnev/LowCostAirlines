@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 public class AirportDAOTest {
-    private static ArrayList<String> testEntries = new ArrayList<>();
+    private static final ArrayList<String> testEntries = new ArrayList<>();
     private static final int NUMBER_OF_ENTRIES = 10;
 
     @BeforeClass
@@ -40,7 +40,7 @@ public class AirportDAOTest {
     public void testGetById() throws SQLException {
         DAO<Airport> airportDAO = new AirportDAO();
         Set<Airport> airports = airportDAO.getAll();
-        int firstId = 1;
+        Long firstId = 1L;
 
         for (Airport airport:
                 airports) {
@@ -49,7 +49,7 @@ public class AirportDAOTest {
             }
         }
 
-        for (int i = firstId; i < firstId + NUMBER_OF_ENTRIES; i++) {
+        for (Long i = firstId; i < firstId + NUMBER_OF_ENTRIES; i++) {
             assertTrue(testEntries.contains(airportDAO.getById(i).getName()));
         }
     }
@@ -58,7 +58,7 @@ public class AirportDAOTest {
     public void testInsert() throws SQLException {
         DAO<Airport> airportDAO = new AirportDAO();
         Airport airport = new Airport();
-        airport.setAirportId(0);
+        airport.setAirportId(0L);
         airport.setName("TEST_AIRPORT");
         assertTrue(airportDAO.insert(airport));
     }
@@ -67,7 +67,7 @@ public class AirportDAOTest {
     public void testUpdate() throws SQLException {
         DAO<Airport> airportDAO = new AirportDAO();
         Airport airport = new Airport();
-        airport.setAirportId(1);
+        airport.setAirportId(1L);
         airport.setName("TEST_AIRPORT_UPDATE");
         assertTrue(airportDAO.update(airport));
     }

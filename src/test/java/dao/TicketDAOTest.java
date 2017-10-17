@@ -24,11 +24,11 @@ public class TicketDAOTest {
             PreparedStatement preparedStatement =
                     connection.prepareStatement("INSERT INTO Ticket (FlightID, CustomerID, Price, LuggagePrice, RegistrationPriority) VALUES (?, ?, ?, ?, ?)");
             Set<Flight> flights = new FlightDAO().getAll();
-            preparedStatement.setInt(1, flights.iterator().next().getFlightId());
+            preparedStatement.setLong(1, flights.iterator().next().getFlightId());
             Set<Customer> customers = new CustomerDAO().getAll();
-            preparedStatement.setInt(2, customers.iterator().next().getCustomerId());
-            preparedStatement.setInt(3, i + 333);
-            preparedStatement.setInt(4, i + 444);
+            preparedStatement.setLong(2, customers.iterator().next().getCustomerId());
+            preparedStatement.setLong(3, i + 333);
+            preparedStatement.setLong(4, i + 444);
             preparedStatement.setBoolean(5, true);
             preparedStatement.executeUpdate();
         }
@@ -58,8 +58,8 @@ public class TicketDAOTest {
         Ticket ticket = new Ticket()
                 .setFlightId(flightDAO.getAll().iterator().next().getFlightId())
                 .setCustomerId(customerDAO.getAll().iterator().next().getCustomerId())
-                .setPrice(30)
-                .setLuggagePrice(20)
+                .setPrice(30L)
+                .setLuggagePrice(20L)
                 .setRegistrationPriority(true);
         assertTrue(ticketDAO.insert(ticket));
     }
@@ -73,8 +73,8 @@ public class TicketDAOTest {
                 .setTicketId(ticketDAO.getAll().iterator().next().getTicketId())
                 .setFlightId(flightDAO.getAll().iterator().next().getFlightId())
                 .setCustomerId(customerDAO.getAll().iterator().next().getCustomerId())
-                .setPrice(30)
-                .setLuggagePrice(20)
+                .setPrice(30L)
+                .setLuggagePrice(20L)
                 .setRegistrationPriority(true);
         assertTrue(ticketDAO.update(ticket));
     }

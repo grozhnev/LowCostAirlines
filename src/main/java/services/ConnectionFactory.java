@@ -1,7 +1,6 @@
 package services;
 
 import com.mysql.jdbc.Driver;
-import loginlogout.LoginServlet;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -16,7 +15,7 @@ public class ConnectionFactory {
     private static final String URL = "jdbc:mysql://localhost:3306/lowcostairlines"; /*ticketsystem*/
     private static final String USER = "testuser";
     private static final String PASS = "testpassword";
-    static final Logger LOGGER = Logger.getLogger(ConnectionFactory.class);
+    private static final Logger LOGGER = Logger.getLogger(ConnectionFactory.class);
 
     /**
      * Get a connection to database

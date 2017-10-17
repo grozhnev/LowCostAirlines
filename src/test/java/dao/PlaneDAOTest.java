@@ -43,9 +43,9 @@ public class PlaneDAOTest {
     public void testInsert() throws SQLException {
         DAO<Plane> planeDAO = new PlaneDAO();
         Plane plane = new Plane();
-        plane.setPlaneId(1);
-        plane.setMaxLoad(123);
-        plane.setCurrentLoad(31);
+        plane.setPlaneId(1L);
+        plane.setMaxLoad(123D);
+        plane.setCurrentLoad(31D);
         assertTrue(planeDAO.insert(plane));
     }
 
@@ -55,8 +55,8 @@ public class PlaneDAOTest {
         Set<Plane> planes = planeDAO.getAll();
         Plane plane = new Plane();
         plane.setPlaneId(planes.iterator().next().getPlaneId());
-        plane.setMaxLoad(123);
-        plane.setCurrentLoad(31);
+        plane.setMaxLoad(123D);
+        plane.setCurrentLoad(31D);
         assertTrue(planeDAO.update(plane));
     }
 

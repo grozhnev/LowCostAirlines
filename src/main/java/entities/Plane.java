@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(exclude={"currentLoad"})
 @Accessors(chain = true)
 public class Plane {
-    private int planeId;
-    private int maxLoad;
-    private int currentLoad;
+    private Long planeId;
+    private Double maxLoad;
+    private Double currentLoad;
 }
