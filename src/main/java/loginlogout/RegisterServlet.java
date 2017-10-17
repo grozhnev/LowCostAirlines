@@ -3,6 +3,7 @@ package loginlogout;
 import dao.CustomerDAO;
 import dao.DAO;
 import entities.Customer;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,6 +26,8 @@ import java.sql.SQLException;
  */
 @WebServlet("/registration")
 public class RegisterServlet extends HttpServlet {
+
+    static final Logger LOGGER = Logger.getLogger(LoginServlet.class);
 
     /**
      * Get from registration page Customers parameters an put them in map
