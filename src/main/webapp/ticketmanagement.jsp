@@ -43,11 +43,10 @@
     if (cookies != null) {
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("email")) userName = cookie.getValue();
-            if (cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
         }
     }
 %>
-<h3>Hi <%=userName %>, Login successful. Your Session ID=<%=sessionID %>
+<h3>Hi <%=userName %>, Login successful.
 </h3>
 <br>
 User=<%=userName %>

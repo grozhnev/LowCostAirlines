@@ -22,6 +22,11 @@ INSERT INTO Customer (FirstName, LastName, Passport, Email, Passwd)
  VALUES('Jack', 'Jackson', '123-123-123', 'memeguy228@gmail.com', 'qwerty');
 INSERT INTO Customer (FirstName, LastName, Passport, Email, Passwd)
  VALUES('John', 'Johnson', '321-321-321', 'de_ting_goes_skra@mail.ru', 'qwerty123');
+INSERT INTO Customer (FirstName, LastName, Passport, Email, Passwd)
+VALUES('John', 'Johnson', '321-321-321', 'qq', 'ww');
+INSERT INTO Customer (FirstName, LastName, Passport, Email, Passwd)
+VALUES('John', 'Johnson', '321-321-321', 'aa', 'ss');
+
  
 INSERT INTO Flight (DateTime, AirportSource, AirportDestination, PlaneID)
  VALUES('2015-11-05 14:29:36', '1', '2', '1');

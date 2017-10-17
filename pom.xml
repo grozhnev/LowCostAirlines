@@ -27,11 +27,17 @@
             </plugin>
 
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.1.1</version>
+                <version>2.3</version>
                 <configuration>
+                    <warSourceDirectory>web-resources</warSourceDirectory>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <webResources>
+                        <resource>
+                            <filtering>true</filtering>
+                            <directory>./web-resources/</directory>
+                        </resource>
+                    </webResources>
                 </configuration>
             </plugin>
 
@@ -97,6 +103,8 @@
             <version>1.2</version>
         </dependency>
 
+
     </dependencies>
+
 
 </project>

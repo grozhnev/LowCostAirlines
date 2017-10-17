@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Set;
 
-@WebServlet("/ticketmanagement")
+
 public class TicketManagementController extends HttpServlet {
 
     private Set<Flight> flights;

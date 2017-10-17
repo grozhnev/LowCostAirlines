@@ -17,7 +17,7 @@ public class CustomerDAO implements DAO<Customer>{
                 .setLastName(resultSet.getString("LastName"))
                 .setPassport(resultSet.getString("Passport"))
                 .setEmail(resultSet.getString("Email"))
-                .setPassword(resultSet.getString("Passwd"));
+                .setPasswd(resultSet.getString("Passwd"));
     }
 
     @Override
@@ -63,7 +63,7 @@ public class CustomerDAO implements DAO<Customer>{
         preparedStatement.setString(2, customer.getLastName());
         preparedStatement.setString(3, customer.getPassport());
         preparedStatement.setString(4, customer.getEmail());
-        preparedStatement.setString(5, customer.getPassword());
+        preparedStatement.setString(5, customer.getPasswd());
         int i = preparedStatement.executeUpdate();
         return i == 1;
     }
@@ -76,7 +76,7 @@ public class CustomerDAO implements DAO<Customer>{
         preparedStatement.setString(2, customer.getLastName());
         preparedStatement.setString(3, customer.getPassport());
         preparedStatement.setString(4, customer.getEmail());
-        preparedStatement.setString(5, customer.getPassword());
+        preparedStatement.setString(5, customer.getPasswd());
         preparedStatement.setInt(6, customer.getCustomerId());
         int i = preparedStatement.executeUpdate();
         return i == 1;

@@ -56,7 +56,7 @@ public class CustomerDAOTest {
                 .setLastName("LASTNAME_INSERT")
                 .setPassport("123-123-123")
                 .setEmail("INSERT_EMAIL")
-                .setPassword("INSERT_PASSWD");
+                .setPasswd("INSERT_PASSWD");
         assertTrue(customerDAO.insert(customer));
     }
 
@@ -70,7 +70,7 @@ public class CustomerDAOTest {
                 .setLastName("UPDATE_LASTNAME")
                 .setPassport("132-132-132")
                 .setEmail("UPDATE_MAIL")
-                .setPassword("UPDATE_PASSWD");
+                .setPasswd("UPDATE_PASSWD");
         assertTrue(customerDAO.update(customer));
     }
 
