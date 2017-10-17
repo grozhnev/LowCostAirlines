@@ -5,6 +5,7 @@ import dao.TicketDAO;
 import entities.Airport;
 import entities.Flight;
 import entities.Ticket;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,6 +26,8 @@ public class TicketManagementController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Logger log = (Logger)getServletContext().getAttribute("log4");
+        log.info("Enter to Servlet");
         try {
             flights = flightDAO.getAll();
             request.setAttribute("flights", flights);
