@@ -21,9 +21,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
        //req.getRequestDispatcher("login.jsp").forward(req, resp);
-        LOGGER.info("This is a logging statement from log4j");
-        String html = "<html><h2>Log4j has been initialized successfully!</h2></html>";
-        resp.getWriter().println(html);
+        LOGGER.info("Login page");
     }
 
     @Override
@@ -34,6 +32,7 @@ public class LoginServlet extends HttpServlet {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        LOGGER.info("Got parameters: email=" + email + " password=" + password);
 
         try {
             Customer customer = new CustomerDAO()
@@ -43,19 +42,22 @@ public class LoginServlet extends HttpServlet {
                     .findFirst()
                     .get();
             if (customer != null) {
+                LOGGER.info("Got customer=" + customer);
                 out.print("Welcome, " + email);
                 HttpSession session = request.getSession();
                 session.setAttribute("email", email);
                 session.setMaxInactiveInterval(15);
                 Cookie userName = new Cookie("email", email);
                 response.addCookie(userName);
+                LOGGER.info("Added cookie="+userName);
 
+                LOGGER.info("Redirecting to /ticketmanagement");
                 response.sendRedirect("/ticketmanagement");
             } else {
                 response.sendRedirect("/");
             }
         } catch (SQLException e) {
-            System.err.println(e);
+            LOGGER.warn(e);
         }
 
         out.close();

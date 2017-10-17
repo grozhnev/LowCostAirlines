@@ -1,5 +1,7 @@
 package loginlogout;
 
+import org.apache.log4j.Logger;
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    static final Logger LOGGER = Logger.getLogger(LoginServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
