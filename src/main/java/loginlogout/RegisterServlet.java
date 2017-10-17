@@ -47,7 +47,7 @@ public class RegisterServlet extends HttpServlet {
                     .setLastName(lastName)
                     .setEmail(email)
                     .setPassport(passport)
-                    .setPasswd(password);
+                    .setPassword(password);
             customerDAO.insert(newCustomer);
             out.print("Welcome, " + email);
             HttpSession session = request.getSession();
