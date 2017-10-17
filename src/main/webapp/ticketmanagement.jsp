@@ -47,10 +47,7 @@
         }
     }
 %>
-<h3>Hi <%=userName %>, Login successful. Your Session ID=<%=sessionID %>
-</h3>
-<br>
-User=<%=userName %>
+<h3>Hi <%=userName %>,</h3>
 <br>
 <form method="post" action="logout">
     <input class="button" type="submit" value="Logout">
