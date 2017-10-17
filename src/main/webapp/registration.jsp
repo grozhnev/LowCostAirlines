@@ -1,4 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>LowCostAirlines</title>
@@ -31,7 +32,7 @@
 
 <form method="post" action="registration">
     <h1>
-        <font size="5" color="black">Welcome to registration</font>
+        <span style="font-size: large; color: black; ">Welcome to registration</span>
         <br>
     </h1>
     <table border="2" width="2" bgcolor="#d3d3d3" style="color:black">
@@ -67,7 +68,7 @@
 
 </form>
 
-<a href="/">Back to main page</a>
+<a href="<c:url value="/"/>">Back to main page</a>
 
 
 </body>

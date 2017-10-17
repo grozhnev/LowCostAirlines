@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 public class RequestLoggingFilter implements Filter {
 
     private ServletContext context;
-    static final Logger LOGGER = Logger.getLogger(RequestLoggingFilter.class);
+    private static final Logger LOGGER = Logger.getLogger(RequestLoggingFilter.class);
 
     public void init(FilterConfig fConfig) throws ServletException {
         this.context = fConfig.getServletContext();

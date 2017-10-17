@@ -13,18 +13,18 @@ import java.util.Set;
 
 public class FlightDAO implements DAO<Flight> {
 
-    static final Logger LOGGER = Logger.getLogger(FlightDAO.class);
+    private static final Logger LOGGER = Logger.getLogger(FlightDAO.class);
 
     private Flight extractFlightFromResultSet(ResultSet resultSet) throws SQLException {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dateToParse = resultSet.getString("DateTime").replaceAll("\\.0","");
 
         return new Flight()
-                .setFlightId(resultSet.getInt("FlightID"))
+                .setFlightId(resultSet.getLong("FlightID"))
                 .setDateTime(LocalDateTime.from(dateTimeFormatter.parse(dateToParse)))
-                .setAirportSource(resultSet.getInt("AirportSource"))
-                .setAirportDestination(resultSet.getInt("AirportDestination"))
-                .setPlaneId(resultSet.getInt("PlaneID"));
+                .setAirportSource(resultSet.getLong("AirportSource"))
+                .setAirportDestination(resultSet.getLong("AirportDestination"))
+                .setPlaneId(resultSet.getLong("PlaneID"));
     }
 
     @Override
@@ -48,7 +48,7 @@ public class FlightDAO implements DAO<Flight> {
     }
 
     @Override
-    public Flight getById(int id) throws SQLException {
+    public Flight getById(Long id) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Flight WHERE FlightID=" + id);
@@ -66,9 +66,9 @@ public class FlightDAO implements DAO<Flight> {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Flight (DateTime, AirportSource, AirportDestination, PlaneID) VALUES (?, ?, ?, ?)");
         preparedStatement.setString(1, String.valueOf(flight.getDateTime()));
-        preparedStatement.setInt(2, flight.getAirportSource());
-        preparedStatement.setInt(3, flight.getAirportDestination());
-        preparedStatement.setInt(4, flight.getPlaneId());
+        preparedStatement.setLong(2, flight.getAirportSource());
+        preparedStatement.setLong(3, flight.getAirportDestination());
+        preparedStatement.setLong(4, flight.getPlaneId());
         int i = preparedStatement.executeUpdate();
         return i == 1;
     }
@@ -78,10 +78,10 @@ public class FlightDAO implements DAO<Flight> {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Flight SET DateTime=?, AirportSource=?, AirportDestination=?, PlaneID=? WHERE FlightID=?");
         preparedStatement.setString(1, String.valueOf(flight.getDateTime()));
-        preparedStatement.setInt(2, flight.getAirportSource());
-        preparedStatement.setInt(3, flight.getAirportDestination());
-        preparedStatement.setInt(4, flight.getPlaneId());
-        preparedStatement.setInt(5, flight.getFlightId());
+        preparedStatement.setLong(2, flight.getAirportSource());
+        preparedStatement.setLong(3, flight.getAirportDestination());
+        preparedStatement.setLong(4, flight.getPlaneId());
+        preparedStatement.setLong(5, flight.getFlightId());
         int i = preparedStatement.executeUpdate();
         return i == 1;
     }

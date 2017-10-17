@@ -11,11 +11,11 @@ import java.util.Set;
 
 public class AirportDAO implements DAO<Airport> {
 
-    static final Logger LOGGER = Logger.getLogger(AirportDAO.class);
+    private static final Logger LOGGER = Logger.getLogger(AirportDAO.class);
 
     private Airport extractAirportFromResultSet(ResultSet resultSet) throws SQLException {
         return new Airport()
-                .setAirportId(resultSet.getInt("AirportID"))
+                .setAirportId(resultSet.getLong("AirportID"))
                 .setName(resultSet.getString("Name"));
     }
     @Override
@@ -43,7 +43,7 @@ public class AirportDAO implements DAO<Airport> {
     }
 
     @Override
-    public Airport getById(int id) throws SQLException {
+    public Airport getById(Long id) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Airport WHERE AirportID=" + id);
@@ -70,7 +70,7 @@ public class AirportDAO implements DAO<Airport> {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Airport SET Name=? WHERE AirportID=?");
         preparedStatement.setString(1, airport.getName());
-        preparedStatement.setInt(2, airport.getAirportId());
+        preparedStatement.setLong(2, airport.getAirportId());
         int i = preparedStatement.executeUpdate();
         return i == 1;
     }

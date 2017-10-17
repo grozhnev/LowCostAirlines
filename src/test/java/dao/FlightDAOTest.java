@@ -29,10 +29,10 @@ public class FlightDAOTest {
                     connection.prepareStatement("INSERT INTO Flight (DateTime, AirportSource, AirportDestination, PlaneID) VALUES (?, ?, ?, ?)");
             preparedStatement.setString(1, "2015-" + i + "-05 11:11:11");
             Set<Airport> airports = new AirportDAO().getAll();
-            preparedStatement.setInt(2, airports.iterator().next().getAirportId());
-            preparedStatement.setInt(3, airports.iterator().next().getAirportId());
+            preparedStatement.setLong(2, airports.iterator().next().getAirportId());
+            preparedStatement.setLong(3, airports.iterator().next().getAirportId());
             Set<Plane> planes = new PlaneDAO().getAll();
-            preparedStatement.setInt(4, planes.iterator().next().getPlaneId());
+            preparedStatement.setLong(4, planes.iterator().next().getPlaneId());
             preparedStatement.executeUpdate();
         }
     }

@@ -10,9 +10,10 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(exclude={"flightId"})
 @Accessors(chain = true)
 public class Flight {
-    private int flightId;
+    private Long flightId;
     private LocalDateTime dateTime;
-    private int airportSource;
-    private int airportDestination;
-    private int planeId;
+    private Long airportSource;
+    private Long airportDestination;
+    private Long planeId;
+    private Long price;
 }

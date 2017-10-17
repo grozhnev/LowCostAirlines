@@ -1,5 +1,11 @@
 <%@ page import="entities.Flight" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%@ page import="entities.Ticket" %>
+<%@ page import="entities.Plane" %>
+<%@ page import="entities.Airport" %>
+<%@ page import="entities.Customer" %>
+
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 
@@ -47,7 +53,7 @@
         }
     }
 %>
-<h3>Hi <%=userName %>, Login successful. Your Session ID=<%=sessionID %>
+<h3>Hi <%=userName %>, Login successful. %>
 </h3>
 <br>
 User=<%=userName %>
@@ -60,29 +66,34 @@ User=<%=userName %>
     <table>
         <thead>
         <tr>
+            <td width="20%">flightId</td>
             <td width="25%"><b>Date & time</b></td>
             <td width="25%"><b>Source</b></td>
             <td width="25%"><b>Destination</b></td>
             <td width="25%"><b>Plane</b></td>
+            <td width="20%"><b>price</b></td>
+
             <td width="25%"><b>Selection</b></td>
         </tr>
         </thead>
 
         <tbody>
-
-        <c:forEach items="${flights}" var="flight">
+<%--suppress ELValidationInJSP --%>
+<c:forEach items="${flights}" var="flight">
             <tr>
+                <td align="left"><c:out value="${flight.flightId}"/></td>
                 <td align="left"><c:out value="${flight.dateTime}"/></td>
                 <td align="left"><c:out value="${flight.airportSource}"/></td>
                 <td align="left"><c:out value="${flight.airportDestination}"/></td>
                 <td align="left"><c:out value="${flight.planeId}"/></td>
+                <td align="left"><c:out value="${flight.price}"/></td>
+
                 <td align="center">
                     <input type="radio" name="checkradio"
                            value="${flight}"/>
                 </td>
             </tr>
         </c:forEach>
-        </tbody>
 
     </table>
 
@@ -100,7 +111,7 @@ User=<%=userName %>
 
 </form>
 
-<a href="/">Back to main page</a>
+<a href="<c:url value="/"/>">Back to main page</a>
 
 </body>
 </html>

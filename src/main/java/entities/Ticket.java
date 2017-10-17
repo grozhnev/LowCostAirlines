@@ -8,10 +8,10 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(exclude={"ticketId"})
 @Accessors(chain = true)
 public class Ticket {
-    private int ticketId;
-    private int flightId;
-    private int customerId;
-    private int price;
-    private int luggagePrice;
-    private boolean registrationPriority;
+    private Long ticketId;
+    private Long flightId;
+    private Long customerId;
+    private Long price;
+    private Long luggagePrice;
+    private Boolean registrationPriority;
 }

@@ -11,13 +11,13 @@ import java.util.Set;
 
 public class PlaneDAO implements DAO<Plane> {
 
-    static final Logger LOGGER = Logger.getLogger(PlaneDAO.class);
+    private static final Logger LOGGER = Logger.getLogger(PlaneDAO.class);
 
     private Plane extractPlaneFromResultSet(ResultSet resultSet) throws SQLException {
         return new Plane()
-                .setPlaneId(resultSet.getInt("PlaneID"))
-                .setMaxLoad(resultSet.getInt("MaxLoad"))
-                .setCurrentLoad(resultSet.getInt("CurrentLoad"));
+                .setPlaneId(resultSet.getLong("PlaneID"))
+                .setMaxLoad(resultSet.getDouble("MaxLoad"))
+                .setCurrentLoad(resultSet.getDouble("CurrentLoad"));
     }
 
     @Override
@@ -41,7 +41,7 @@ public class PlaneDAO implements DAO<Plane> {
     }
 
     @Override
-    public Plane getById(int id) throws SQLException {
+    public Plane getById(Long id) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Plane WHERE PlaneID=" + id);
@@ -58,8 +58,8 @@ public class PlaneDAO implements DAO<Plane> {
     public boolean insert(Plane plane) throws SQLException{
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Plane (MaxLoad, CurrentLoad) VALUES (?, ?)");
-        preparedStatement.setInt(1, plane.getMaxLoad());
-        preparedStatement.setInt(2, plane.getCurrentLoad());
+        preparedStatement.setDouble(1, plane.getMaxLoad());
+        preparedStatement.setDouble(2, plane.getCurrentLoad());
         int i = preparedStatement.executeUpdate();
         return i == 1;
     }
@@ -68,9 +68,9 @@ public class PlaneDAO implements DAO<Plane> {
     public boolean update(Plane plane) throws SQLException{
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Plane SET MaxLoad=?, CurrentLoad=? WHERE PlaneID=?");
-        preparedStatement.setInt(1, plane.getMaxLoad());
-        preparedStatement.setInt(2, plane.getCurrentLoad());
-        preparedStatement.setInt(3, plane.getPlaneId());
+        preparedStatement.setDouble(1, plane.getMaxLoad());
+        preparedStatement.setDouble(2, plane.getCurrentLoad());
+        preparedStatement.setDouble(3, plane.getPlaneId());
         int i = preparedStatement.executeUpdate();
         return i == 1;
     }

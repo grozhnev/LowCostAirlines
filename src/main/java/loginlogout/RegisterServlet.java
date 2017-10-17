@@ -27,7 +27,7 @@ import java.sql.SQLException;
 @WebServlet("/registration")
 public class RegisterServlet extends HttpServlet {
 
-    static final Logger LOGGER = Logger.getLogger(RegisterServlet.class);
+    private static final Logger LOGGER = Logger.getLogger(RegisterServlet.class);
 
     /**
      * Get from registration page Customers parameters an put them in map

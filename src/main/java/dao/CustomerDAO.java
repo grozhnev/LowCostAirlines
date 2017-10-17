@@ -11,11 +11,11 @@ import java.util.Set;
 
 public class CustomerDAO implements DAO<Customer>{
 
-    static final Logger LOGGER = Logger.getLogger(CustomerDAO.class);
+    private static final Logger LOGGER = Logger.getLogger(CustomerDAO.class);
 
     private Customer extractCustomerFromResultSet(ResultSet resultSet) throws SQLException {
         return new Customer()
-                .setCustomerId(resultSet.getInt("CustomerID"))
+                .setCustomerId(resultSet.getLong("CustomerID"))
                 .setFirstName(resultSet.getString("FirstName"))
                 .setLastName(resultSet.getString("LastName"))
                 .setPassport(resultSet.getString("Passport"))
@@ -46,6 +46,11 @@ public class CustomerDAO implements DAO<Customer>{
     }
 
     @Override
+    public Customer getById(Long id) throws SQLException {
+        return null;
+    }
+
+    /*@Override*/
     public Customer getById(int id) throws SQLException {
         Connection connection = ConnectionFactory.getConnection();
         Statement statement = connection.createStatement();
@@ -83,7 +88,7 @@ public class CustomerDAO implements DAO<Customer>{
         preparedStatement.setString(3, customer.getPassport());
         preparedStatement.setString(4, customer.getEmail());
         preparedStatement.setString(5, customer.getPassword());
-        preparedStatement.setInt(6, customer.getCustomerId());
+        preparedStatement.setLong(6, customer.getCustomerId());
         int i = preparedStatement.executeUpdate();
         return i == 1;
     }

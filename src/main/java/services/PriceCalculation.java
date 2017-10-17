@@ -1,49 +1,85 @@
 package services;
 
-import lombok.Data;
+import entities.Flight;
+import entities.Plane;
+import entities.Ticket;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
-@Data
+
 public class PriceCalculation {
-    private static Long basicPrice = 100L;
-    private static Long basicLuggageFee = 50L;
-    private static Long approachingDepartureDailyFee = 35L;
-    private static Long luggagePricePerKilo = 5L;
+    private final static Long BASIC_PRICE = 100L;
+    private final static Long BASIC_LUGGAGE_FEE = 50L;
+    private final static Long APPROACHING_DEPARTURE_DAILY_FEE = 35L;
+    private final static Long LUGGAGE_PRICE_PER_KILO = 5L;
 
-    private Long price;
-    private Long timeBeforeDeparture;
-    private Long daysBeforeDeparture;
+    public void setPriceInFlights(Set<Flight> flights,
+                                         Map<Flight, Ticket> ticketByFlight,
+                                         Map<Ticket, Long> luggageByTicket,
+                                         Map<Ticket, Boolean> priorityByTicket,
+                                         Map<Flight, Plane> planesByFlight,
+                                         /*Set<Ticket> setOfTickets,
+                                         Set<Plane> setOfPlanes,*/
+                                         Map<Plane, Double> loadByPlane) throws SQLException{
+        try {
 
-    public Long calculatePrice(Long inputPrice, Date departureDate, Boolean priority,
-                               Double planeLoadRate, Long luggageWeight) throws SQLException {
+            for (Flight flight : flights) {
+
+                Boolean ticketPriority = false;
+                Long luggageWeight = 0L;
+                Double loadRate = 0D;
+
+                if (!ticketByFlight.isEmpty()) {
+                    ticketPriority = priorityByTicket.get(ticketByFlight.get(flight));
+                }
+
+                if (!luggageByTicket.isEmpty()){
+                    luggageWeight = luggageByTicket.get(ticketByFlight.get(flight));
+                }
+
+                if(!loadByPlane.isEmpty()){
+                    loadRate = loadByPlane.get(planesByFlight.get(flight));
+                }
+
+                flight.setPrice(calculatePrice(
+                        flight.getPrice(), flight.getDateTime(), ticketPriority,loadRate, luggageWeight )
+                );
+            }
+        } catch (NullPointerException npe ){
+            npe.printStackTrace();
+        }
+    }
+
+
+    private Long calculatePrice(Long inputPrice, LocalDateTime departureDate, Boolean priority,
+                               Double planeLoadRate, Long luggageWeight) {
+
 
         Long ticketPrice = inputPrice;
 
-        Date currentDate = new Timestamp(System.currentTimeMillis());
+        /*should be LocalDateTime*/
+        //Date currentDate = new Timestamp(System.currentTimeMillis());
+        LocalDateTime currentDate = LocalDateTime.now();
 
-        timeBeforeDeparture = departureDate.getTime() - currentDate.getTime();
+        Long daysBeforeDeparture = (departureDate.getHour() - currentDate.getHour()) * 24L;
 
-        if (timeBeforeDeparture <= 0L) {
+        if (daysBeforeDeparture < 0L) {
             System.err.println("Departure time you've chosen has already passed! \nPlease, select valid date.");
             throw new IllegalArgumentException();
         } else {
-            daysBeforeDeparture = TimeUnit.MILLISECONDS.toDays(timeBeforeDeparture);
             if (priority) {
                 ticketPrice *= 2;
             }
             if (luggageWeight >= 0L) {
-                ticketPrice += luggagePricePerKilo * luggageWeight + basicLuggageFee;
+                ticketPrice += LUGGAGE_PRICE_PER_KILO * luggageWeight + BASIC_LUGGAGE_FEE;
             }
             if (daysBeforeDeparture <= 14L) {
-                ticketPrice += daysBeforeDeparture * approachingDepartureDailyFee;
+                ticketPrice += daysBeforeDeparture * APPROACHING_DEPARTURE_DAILY_FEE;
             }
-            ticketPrice *= Math.round(planeLoadRate * 100) + basicPrice;
+            ticketPrice *= Math.round(planeLoadRate * 100);
         }
-        return ticketPrice;
+        return ticketPrice + BASIC_PRICE;
     }
-
 }

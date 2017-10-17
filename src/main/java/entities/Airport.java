@@ -8,6 +8,6 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(exclude={"airportId"})
 @Accessors(chain = true)
 public class Airport {
-    private int airportId;
+    private Long airportId;
     private String name;
 }

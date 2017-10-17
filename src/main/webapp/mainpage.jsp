@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
     <head>
         <title>LowCostAirlines</title>
@@ -26,9 +26,9 @@
     </head>
     <body>
 
-    <h1><font size="7" color="black">Lowcoster Airlines</font></h1>
+    <h1><span style="font-size: xx-large; color: black; ">Lowcoster Airlines</span></h1>
 
-    <h1><font size="4" color="black">to continue choose:</font></h1>
+    <h1><span style="font-size: medium; color: black; ">to continue choose:</span></h1>
     <br>
     <form method="post" action="login">
             <input class="button" style="width: 30%" type="submit" value="Login in system">
