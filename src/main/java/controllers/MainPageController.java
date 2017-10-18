@@ -10,7 +10,6 @@ import java.io.IOException;
 /**
  * Main page with greeting Customer
  */
-@WebServlet("/")
 public class MainPageController extends HttpServlet {
 
     @Override

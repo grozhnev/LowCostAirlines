@@ -13,7 +13,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 
-@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
     static final Logger LOGGER = Logger.getLogger(LoginServlet.class);

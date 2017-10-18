@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
 
-@WebServlet("/ticketmanagement")
 public class TicketManagementController extends HttpServlet {
 
     private Set<Flight> flights;

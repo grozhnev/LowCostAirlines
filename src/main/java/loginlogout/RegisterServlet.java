@@ -24,7 +24,6 @@ import java.sql.SQLException;
  * If the Customer does not exist, it is first added to the map
  * and then transferred to the login page
  */
-@WebServlet("/registration")
 public class RegisterServlet extends HttpServlet {
 
     static final Logger LOGGER = Logger.getLogger(RegisterServlet.class);

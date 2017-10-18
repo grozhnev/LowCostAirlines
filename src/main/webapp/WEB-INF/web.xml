@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+
+    <welcome-file-list>
+        <welcome-file>MainPageController</welcome-file>
+    </welcome-file-list>
+
+    <servlet>
+        <servlet-name>MainPageController</servlet-name>
+        <servlet-class>controllers.MainPageController </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MainPageController</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>loginlogout.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>loginlogout.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>ExceptionHandler</filter-name>
+        <filter-class>filter.ExceptionHandler</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ExceptionHandler</filter-name>
+        <url-pattern>/</url-pattern>
+    </filter-mapping>
+
+    <!--<filter>-->
+    <!--<filter-name>LoginFilter</filter-name>-->
+    <!--<filter-class>filter.LoginFilter</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+    <!--<filter-name>LoginFilter</filter-name>-->
+    <!--<url-pattern>/login</url-pattern>-->
+    <!--</filter-mapping>-->
+
+    <filter>
+        <filter-name>SecurityFilter</filter-name>
+        <filter-class>filter.SecurityFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SecurityFilter</filter-name>
+        <url-pattern>/ticketmanagement</url-pattern>
+    </filter-mapping>
+
+    <servlet>
+        <servlet-name>TicketManagementController</servlet-name>
+        <servlet-class>controllers.TicketManagementController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TicketManagementController</servlet-name>
+        <url-pattern>/ticketmanagement</url-pattern>
+    </servlet-mapping>
+
+</web-app>
