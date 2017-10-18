@@ -18,7 +18,7 @@ public class PriceCalculatorTest {
     /*
     require adding arguments of Flight, priority weight at calculatePrice() to pass the test:
 
-    
+
     @Test
     public void calculatePrice(){
         when(calculator.calculatePrice().thenReturn(0);
