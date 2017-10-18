@@ -3,6 +3,7 @@ package loginlogout;
 import dao.CustomerDAO;
 import dao.DAO;
 import entities.Customer;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -13,7 +14,7 @@ import javax.servlet.http.*;
 
 
 public class LoginServlet extends HttpServlet {
-
+    static final Logger LOGGER = Logger.getLogger(LoginServlet.class);
     private DAO<Customer> customerDAO = new CustomerDAO();
 
     @Override
@@ -29,11 +30,12 @@ public class LoginServlet extends HttpServlet {
                 if (email.equals(customer.getEmail()) && password.equals(customer.getPassword())) {
                     Cookie userName = new Cookie("email", email);
                     response.addCookie(userName);
+                    LOGGER.info("Login sucess for email=" + email);
                     response.sendRedirect("/ticketmanagement");
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.warn(e);
         }
     }
 }
