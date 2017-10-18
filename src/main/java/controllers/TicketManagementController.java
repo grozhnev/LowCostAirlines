@@ -1,20 +1,22 @@
 package controllers;
 
+import dao.CustomerDAO;
 import dao.FlightDAO;
 import dao.TicketDAO;
 import entities.Airport;
+import entities.Customer;
 import entities.Flight;
 import entities.Ticket;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Optional;
 import java.util.Set;
 
 @WebServlet("/ticketmanagement")
@@ -23,6 +25,7 @@ public class TicketManagementController extends HttpServlet {
     private Set<Flight> flights;
     private FlightDAO flightDAO = new FlightDAO();
     private TicketDAO ticketDAO = new TicketDAO();
+    private CustomerDAO customerDAO = new CustomerDAO();
     static final Logger LOGGER = Logger.getLogger(TicketManagementController.class);
 
     @Override
@@ -39,6 +42,15 @@ public class TicketManagementController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.doGet(request, response);
+
+        String email = Arrays.stream(request.getCookies())
+                .filter(o -> o.getName().equals("email")).findFirst()
+                .get()
+                .getValue();
+        LOGGER.info("Cookie email=" + email);
+
+
+
         String requestedFlightString = request.getParameter("checkradio");
         String requestedRegistrationPriority = request.getParameter("registrationpriority");
         String requestedWeight = request.getParameter("weight");
@@ -53,11 +65,23 @@ public class TicketManagementController extends HttpServlet {
             }
 
             if (requestedFlight != null) {
+                int id = 0;
+                try {
+                    id = customerDAO.getAll()
+                            .stream()
+                            .filter(o -> o.getEmail().equals(email))
+                            .findFirst()
+                            .get()
+                            .getCustomerId();
+                } catch (SQLException e) {
+                    LOGGER.warn(e);
+                }
+
                 Ticket requestedTicket = new Ticket()
                         .setRegistrationPriority(requestedRegistrationPriority != null)
                         .setPrice(100)
                         .setLuggagePrice(Integer.valueOf(requestedWeight))
-                        .setCustomerId(1)
+                        .setCustomerId(id)
                         .setFlightId(requestedFlight.getFlightId());
                 try {
                     ticketDAO.insert(requestedTicket);
