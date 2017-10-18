@@ -47,11 +47,13 @@
         }
     }
 %>
+
 <h3>Hi <%=userName %>,</h3>
 <br>
 <form method="post" action="logout">
     <input class="button" type="submit" value="Logout">
 </form>
+
 <form action="ticketmanagement" method="POST">
     <table>
         <thead>
@@ -93,6 +95,36 @@
     <br>
 
     <input type = "submit" value = "Request ticket" />
+
+    <br>
+    <h3>Requested tickets:</h3>
+    <table>
+        <thead>
+        <tr>
+            <td width="25%"><b>Flight</b></td>
+            <td width="25%"><b>Price</b></td>
+            <td width="25%"><b>Luggage price</b></td>
+            <td width="25%"><b>Registration priority</b></td>
+            <td width="25%"><b>Selection</b></td>
+        </tr>
+        </thead>
+
+        <tbody>
+        <c:forEach items="${tickets}" var="ticket">
+            <tr>
+                <td align="left"><c:out value="${ticket.flightId}"/></td>
+                <td align="left"><c:out value="${ticket.price}"/></td>
+                <td align="left"><c:out value="${ticket.luggagePrice}"/></td>
+                <td align="left"><c:out value="${ticket.registrationPriority}"/></td>
+                <td align="center">
+                    <input type="radio" name="checkradio_ticket"
+                           value="${ticket}"/>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+
+    </table>
 
 </form>
 
