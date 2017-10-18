@@ -1,26 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=US-ASCII"
-         pageEncoding="US-ASCII"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
-    <title>Login Success Page</title>
+    <title>Logout page</title>
+    <style>
+        body {
+            background-color: lightgray;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            border-radius: 3px;
+        }
+    </style>
 </head>
 <body>
-<%
-    String userName = null;
-    String sessionID = null;
-    Cookie[] cookies = request.getCookies();
-    if(cookies !=null){
-        for(Cookie cookie : cookies){
-            if(cookie.getName().equals("uname")) userName = cookie.getValue();
-        }
-    }
-%>
-<h3>Hi <%=userName %>, do the checkout.</h3>
+<form method="post" action="logout"></form>
+<h3>You successfully logged out</h3>
 <br>
-<form action="/" method="post">
-    <input type="submit" value="Logout" >
-</form>
+<a href="/">Back to main page</a>
 </body>
 </html>

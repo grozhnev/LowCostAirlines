@@ -13,15 +13,23 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class LogoutServlet
  */
-@WebServlet("/logout")
+
 public class LogoutServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
+        req.getRequestDispatcher("logout.jsp").include(req, resp);
+
         Cookie cookie = new Cookie("email", "");
         cookie.setMaxAge(0);
         resp.addCookie(cookie);
         resp.sendRedirect("/");
+
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
     }
 }

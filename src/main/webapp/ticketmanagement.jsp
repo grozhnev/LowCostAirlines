@@ -46,10 +46,8 @@
         }
     }
 %>
-<h3>Hi <%=userName %>, Login successful.
+<h3>Hi <%=userName %>.
 </h3>
-<br>
-User=<%=userName %>
 <br>
 <form method="post" action="logout">
     <input class="button" type="submit" value="Logout">
@@ -95,7 +93,7 @@ User=<%=userName %>
     <input type="radio" name="weight" value="100"><a>100</a>
     <br>
 
-    <input type = "submit" value = "Request ticket" />
+    <input type="submit" value="Request ticket"/>
 
 </form>
 
