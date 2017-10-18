@@ -1,5 +1,7 @@
 package loginlogout;
 
+import org.apache.log4j.Logger;
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpSession;
  */
 
 public class LogoutServlet extends HttpServlet {
+    static final Logger LOGGER = Logger.getLogger(LogoutServlet.class);
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -22,6 +25,7 @@ public class LogoutServlet extends HttpServlet {
         req.getRequestDispatcher("logout.jsp").include(req, resp);
 
         Cookie cookie = new Cookie("email", "");
+        LOGGER.info("Logout");
         cookie.setMaxAge(0);
         resp.addCookie(cookie);
         resp.sendRedirect("/");
