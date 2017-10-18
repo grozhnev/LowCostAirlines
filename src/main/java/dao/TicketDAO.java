@@ -25,8 +25,7 @@ public class TicketDAO implements DAO<Ticket> {
 
     @Override
     public Set<Ticket> getAll() throws SQLException {
-        JDBCConnectionPool connectionThroughConnectPool = new JDBCConnectionPool();
-        Connection connection = connectionThroughConnectPool.getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Ticket");
         Set<Ticket> tickets = new HashSet<>();

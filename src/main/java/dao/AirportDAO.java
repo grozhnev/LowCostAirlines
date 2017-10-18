@@ -20,9 +20,7 @@ public class AirportDAO implements DAO<Airport> {
     }
     @Override
     public Set<Airport> getAll() throws SQLException {
-
-        JDBCConnectionPool connectionThroughConnectPool = new JDBCConnectionPool();
-        Connection connection = connectionThroughConnectPool.getConnection();
+        Connection connection = ConnectionFactory.getConnection();
 
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Airport");

@@ -94,7 +94,7 @@
     <input type="radio" name="weight" value="100"><a>100</a>
     <br>
 
-    <input type = "submit" value = "Request ticket" />
+    <input class="button" type="submit" value="Request ticket">
 
     <br>
     <h3>Requested tickets:</h3>
@@ -126,6 +126,8 @@
 
     </table>
 
+    <%--<br>--%>
+    <%--<input class="button" type="submit" value="Discard ticket">--%>
 </form>
 
 <a href="/">Back to main page</a>

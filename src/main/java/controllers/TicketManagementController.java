@@ -64,6 +64,19 @@ public class TicketManagementController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.doGet(request, response);
 
+//        String requestedTicketToDiscard = request.getParameter("checkradio_ticket");
+//        if (!requestedTicketToDiscard.isEmpty()) {
+//            try {
+//                Ticket ticketToDiscard = tickets.stream()
+//                        .filter(o -> o.toString().equals(requestedTicketToDiscard))
+//                        .findFirst()
+//                        .get();
+//                ticketDAO.delete(ticketToDiscard);
+//            } catch (SQLException e) {
+//                LOGGER.warn(e);
+//            }
+//        }
+
         String requestedFlightString = request.getParameter("checkradio");
         String requestedRegistrationPriority = request.getParameter("registrationpriority");
         String requestedWeight = request.getParameter("weight");

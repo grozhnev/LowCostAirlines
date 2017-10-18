@@ -22,8 +22,7 @@ public class PlaneDAO implements DAO<Plane> {
 
     @Override
     public Set<Plane> getAll() throws SQLException{
-        JDBCConnectionPool connectionThroughConnectPool = new JDBCConnectionPool();
-        Connection connection = connectionThroughConnectPool.getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Plane");
         Set<Plane> planes = new HashSet<>();

@@ -25,9 +25,7 @@ public class CustomerDAO implements DAO<Customer>{
 
     @Override
     public Set<Customer> getAll() throws SQLException {
-
-        JDBCConnectionPool connectionThroughConnectPool = new JDBCConnectionPool();
-        Connection connection = connectionThroughConnectPool.getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Customer");
         Set<Customer> customers = new HashSet<>();

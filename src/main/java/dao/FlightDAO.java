@@ -29,8 +29,7 @@ public class FlightDAO implements DAO<Flight> {
 
     @Override
     public Set<Flight> getAll() throws SQLException {
-        JDBCConnectionPool connectionThroughConnectPool = new JDBCConnectionPool();
-        Connection connection = connectionThroughConnectPool.getConnection();
+        Connection connection = ConnectionFactory.getConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM Flight");
         Set<Flight> flights = new HashSet<>();
